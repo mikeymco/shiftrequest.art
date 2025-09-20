@@ -127,7 +127,11 @@
 		
 		DOM.caption.innerHTML = images[index].caption + '. <a class="clearing-link" href="/contact/">Ask me about this work</a>';
 		DOM.overlay.classList.add('active');
+		DOM.overlay.setAttribute('aria-hidden', 'false');
 		document.body.style.overflow = 'hidden';
+		
+		// Focus management for accessibility
+		DOM.closeBtn.focus();
 		
 		if (updateHistory) {
 			updateUrl(index, true);
@@ -139,6 +143,7 @@
 		isOverlayOpen = false;
 		hideLoading(); // Ensure loading indicator is hidden
 		DOM.overlay.classList.remove('active');
+		DOM.overlay.setAttribute('aria-hidden', 'true');
 		document.body.style.overflow = '';
 		
 		if (updateHistory) {

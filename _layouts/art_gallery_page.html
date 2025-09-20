@@ -5,24 +5,24 @@ header:
     title: default
     background-color: "black"
 ---
-<div class="thumbnail-grid" data-clearing>
+<div class="thumbnail-grid" data-clearing role="grid" aria-label="Image gallery">
 	{% for image in page.images %}
-	<a href="#" class="gallery-link" data-image="{{ image }}" data-index="{{ forloop.index0 }}">
+	<a href="#" class="gallery-link" data-image="{{ image }}" data-index="{{ forloop.index0 }}" role="gridcell" aria-label="View {% if page.captions[image] %}{{ page.captions[image] }}{% else %}image {{ forloop.index }} of {{ page.images.size }}{% endif %}">
 		{% include video_detection.liquid filename=image %}
 		
 		{% if page.captions[image] == nil %}
 			{% if is_video %}
-				<img class="thumbnail video-thumb" src="thumbs/{% include thumbnail_path.liquid filename=image %}">
-				<div class="video-indicator">▶</div>
+				<img class="thumbnail video-thumb" src="thumbs/{% include thumbnail_path.liquid filename=image %}" alt="Video thumbnail {{ forloop.index }}" loading="lazy">
+				<div class="video-indicator" aria-hidden="true">▶</div>
 			{% else %}
-				<img class="thumbnail" src="thumbs/{% include thumbnail_path.liquid filename=image %}">
+				<img class="thumbnail" src="thumbs/{% include thumbnail_path.liquid filename=image %}" alt="Image {{ forloop.index }}" loading="lazy">
 			{% endif %}
 		{% else %}
 			{% if is_video %}
-				<img class="thumbnail video-thumb" data-caption="{{ page.captions[image] }}.  " src="thumbs/{% include thumbnail_path.liquid filename=image %}" alt="{{ page.captions[image] }}" title="{{ page.captions[image] }}">
-				<div class="video-indicator">▶</div>
+				<img class="thumbnail video-thumb" data-caption="{{ page.captions[image] }}.  " src="thumbs/{% include thumbnail_path.liquid filename=image %}" alt="{{ page.captions[image] }}" title="{{ page.captions[image] }}" loading="lazy">
+				<div class="video-indicator" aria-hidden="true">▶</div>
 			{% else %}
-				<img class="thumbnail" data-caption="{{ page.captions[image] }}.  " src="thumbs/{% include thumbnail_path.liquid filename=image %}" alt="{{ page.captions[image] }}" title="{{ page.captions[image] }}">
+				<img class="thumbnail" data-caption="{{ page.captions[image] }}.  " src="thumbs/{% include thumbnail_path.liquid filename=image %}" alt="{{ page.captions[image] }}" title="{{ page.captions[image] }}" loading="lazy">
 			{% endif %}
 		{% endif %}
 	</a>
@@ -30,20 +30,20 @@ header:
 </div>
 
 <!-- Full-screen image overlay -->
-<div id="image-overlay" class="image-overlay">
+<div id="image-overlay" class="image-overlay" role="dialog" aria-modal="true" aria-labelledby="overlay-caption" aria-hidden="true">
 	<div class="overlay-background"></div>
 	<div class="overlay-content">
 		<img id="overlay-image" src="" alt="" style="display: none;">
-		<video id="overlay-video" controls preload="metadata" style="display: none;">
+		<video id="overlay-video" controls preload="metadata" style="display: none;" aria-label="Gallery video">
 			<source src="" type="">
 			Your browser does not support the video tag.
 		</video>
-		<div class="loading-indicator" id="loading-indicator"></div>
+		<div class="loading-indicator" id="loading-indicator" aria-label="Loading content"></div>
 		<div class="overlay-caption" id="overlay-caption"></div>
 	</div>
-	<button class="overlay-close">&times;</button>
-	<button class="overlay-prev">&#8249;</button>
-	<button class="overlay-next">&#8250;</button>
+	<button class="overlay-close" aria-label="Close gallery overlay">&times;</button>
+	<button class="overlay-prev" aria-label="Previous image">&#8249;</button>
+	<button class="overlay-next" aria-label="Next image">&#8250;</button>
 </div>
 
 <script>
