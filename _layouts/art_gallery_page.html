@@ -5,9 +5,9 @@ header:
     title: default
     background-color: "black"
 ---
-<ul class="clearing-thumbs thumbnail-grid" data-clearing>
+<div class="thumbnail-grid" data-clearing>
 	{% for image in page.images %}
-	<a href="{{ image }}">
+	<a href="#" class="gallery-link" data-image="{{ image }}" data-index="{{ forloop.index0 }}">
 		{% if page.captions[image] == nil %}
 		<img class="thumbnail" data-caption="<a class='clearing-link' href='/contact/'>Ask me about this work</a>" src="thumbs/{{ image }}">
 		{% else %}
@@ -15,7 +15,32 @@ header:
 		{% endif %}
 	</a>
 	{% endfor %}
-</ul>
-<div id="spinner"></div>
+</div>
 
-{{ page.description }}
+<!-- Full-screen image overlay -->
+<div id="image-overlay" class="image-overlay">
+	<div class="overlay-background"></div>
+	<div class="overlay-content">
+		<img id="overlay-image" src="" alt="">
+		<div class="overlay-caption" id="overlay-caption"></div>
+	</div>
+	<button class="overlay-close">&times;</button>
+	<button class="overlay-prev">&#8249;</button>
+	<button class="overlay-next">&#8250;</button>
+</div>
+
+<script>
+// Define gallery images for the overlay script
+var galleryImages = [
+	{% for image in page.images %}
+	{
+		src: '{{ image }}',
+		thumb: 'thumbs/{{ image }}',
+		caption: '{% if page.captions[image] %}{{ page.captions[image] | escape }}{% else %}Ask me about this work{% endif %}'
+	}{% unless forloop.last %},{% endunless %}
+	{% endfor %}
+];
+</script>
+<script src="{{ '/assets/js/gallery-overlay.js' | relative_url }}"></script>
+
+<!-- {{ page.description }} -->
