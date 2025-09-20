@@ -4,7 +4,7 @@ description: UNKNOWN:connection.request
 url: "https://shiftrequest.art"
 baseurl: ""
 
-# GitHub Pages settings
+# Jekyll plugins
 plugins:
   - jekyll-feed
   - jekyll-sitemap
