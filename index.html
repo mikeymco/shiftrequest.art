@@ -1,9 +1,14 @@
 ---
-layout: art_gallery_index
+layout: default
 title: Home
 ---
 
-<div class="hero">
-  <h1>{{ site.title }}</h1>
-  <p>{{ site.description }}</p>
-</div>
+<script>
+  // Redirect to main gallery
+  window.location.href = "{{ site.baseurl }}/portfolio/main/";
+</script>
+
+<noscript>
+  <meta http-equiv="refresh" content="0;url={{ site.baseurl }}/portfolio/main/">
+  <p><a href="{{ site.baseurl }}/portfolio/main/">View Gallery</a></p>
+</noscript>
