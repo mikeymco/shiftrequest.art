@@ -1,0 +1,38 @@
+# Site settings
+title: ShiftRequest.art
+description: A digital art and creative platform
+url: "https://mikeymco.github.io"
+baseurl: "/shiftrequest.art"
+
+# GitHub Pages settings
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:title/
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .bundle/
+  - .sass-cache/
+  - .jekyll-cache/
+  - .jekyll-metadata
+
+# Social media and author info
+author:
+  name: ShiftRequest Art
+  email: contact@shiftrequest.art
+
+# Collection settings
+collections:
+  posts:
+    output: true
+    permalink: /:categories/:title/
