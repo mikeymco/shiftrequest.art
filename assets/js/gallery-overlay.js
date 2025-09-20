@@ -158,7 +158,19 @@
 		DOM.prevBtn.addEventListener('click', prevImage);
 		
 		// Media-specific interactions
-		DOM.image.addEventListener('click', nextImage);
+		DOM.image.addEventListener('click', (e) => {
+			// Calculate click position relative to image
+			const rect = DOM.image.getBoundingClientRect();
+			const clickX = e.clientX - rect.left;
+			const imageWidth = rect.width;
+			
+			// Left half goes to previous, right half goes to next
+			if (clickX < imageWidth / 2) {
+				prevImage();
+			} else {
+				nextImage();
+			}
+		});
 		DOM.video.addEventListener('click', (e) => {
 			e.stopPropagation();
 			if (DOM.video.paused) {
