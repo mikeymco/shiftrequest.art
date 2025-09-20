@@ -1,5 +1,5 @@
 # Site settings
-title: ShiftRequest.art
+title: shiftrequest.art
 description: UNKNOWN:connection.request
 url: "https://shiftrequest.art"
 baseurl: ""
@@ -14,6 +14,10 @@ plugins:
 markdown: kramdown
 highlighter: rouge
 permalink: /:title/
+
+# Include .well-known directory for Chrome DevTools
+include:
+  - .well-known
 
 # Exclude from processing
 exclude:

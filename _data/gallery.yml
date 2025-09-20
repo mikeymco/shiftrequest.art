@@ -18,6 +18,6 @@ size_limit: 1200 # maximum size, px in either dimension, to limit the images to
 galleries:
   main-collection:
     title: Main Collection # name used in the navigation bar and headers
-    description: ShiftRequest.art digital art collection
+    description: shiftrequest.art digital art collection
     sort_field: name # rule for sorting images within galleries
     scale_method: crop

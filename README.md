@@ -1,4 +1,4 @@
-# ShiftRequest.art
+# shiftrequest.art
 
 ## Development
 
