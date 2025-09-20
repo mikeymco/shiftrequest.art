@@ -6,6 +6,7 @@
 		image: document.getElementById('overlay-image'),
 		video: document.getElementById('overlay-video'),
 		caption: document.getElementById('overlay-caption'),
+		loadingIndicator: document.getElementById('loading-indicator'),
 		links: document.querySelectorAll('.gallery-link'),
 		closeBtn: document.querySelector('.overlay-close'),
 		background: document.querySelector('.overlay-background'),
@@ -49,14 +50,36 @@
 		window.history.pushState({ overlay: showOverlay, image: index }, '', url);
 	}
 	
+	// Loading indicator functions
+	function showLoading() {
+		DOM.loadingIndicator.classList.add('active');
+	}
+	
+	function hideLoading() {
+		DOM.loadingIndicator.classList.remove('active');
+	}
+	
 	// Media display functions
 	function showImage(src) {
+		showLoading();
 		DOM.video.style.display = 'none';
-		DOM.image.src = src;
-		DOM.image.style.display = 'block';
+		
+		// Create a new image to preload
+		const newImage = new Image();
+		newImage.onload = function() {
+			DOM.image.src = src;
+			DOM.image.style.display = 'block';
+			hideLoading();
+		};
+		newImage.onerror = function() {
+			hideLoading();
+			console.error('Failed to load image:', src);
+		};
+		newImage.src = src;
 	}
 	
 	function showVideo(src) {
+		showLoading();
 		DOM.image.style.display = 'none';
 		DOM.video.pause();
 		DOM.video.src = src;
@@ -64,6 +87,13 @@
 		DOM.video.style.setProperty('display', 'block');
 		DOM.video.style.maxWidth = '90vw';
 		DOM.video.style.maxHeight = '85vh';
+		
+		// Hide loading when video can play
+		const hideLoadingWhenReady = () => {
+			hideLoading();
+			DOM.video.removeEventListener('canplay', hideLoadingWhenReady);
+		};
+		DOM.video.addEventListener('canplay', hideLoadingWhenReady);
 		
 		// Auto-play video once it can play
 		const playVideoWhenReady = () => {
@@ -73,6 +103,14 @@
 			DOM.video.removeEventListener('canplay', playVideoWhenReady);
 		};
 		DOM.video.addEventListener('canplay', playVideoWhenReady);
+		
+		// Handle video loading errors
+		const handleVideoError = () => {
+			hideLoading();
+			console.error('Failed to load video:', src);
+			DOM.video.removeEventListener('error', handleVideoError);
+		};
+		DOM.video.addEventListener('error', handleVideoError);
 	}
 	
 	// Show overlay with specific image or video
@@ -99,6 +137,7 @@
 	// Hide overlay
 	function hideOverlay(updateHistory = true) {
 		isOverlayOpen = false;
+		hideLoading(); // Ensure loading indicator is hidden
 		DOM.overlay.classList.remove('active');
 		document.body.style.overflow = '';
 		
