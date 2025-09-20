@@ -36,3 +36,6 @@ collections:
   posts:
     output: true
     permalink: /:categories/:title/
+  galleries:
+    output: true
+    permalink: /portfolio/:name/
