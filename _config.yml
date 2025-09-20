@@ -1,11 +1,10 @@
 # Site settings
 title: ShiftRequest.art
-description: A digital art and creative platform
+description: UNKNOWN:connection.request
 url: "https://shiftrequest.art"
 baseurl: ""
 
 # GitHub Pages settings
-theme: minima
 plugins:
   - jekyll-feed
   - jekyll-sitemap
