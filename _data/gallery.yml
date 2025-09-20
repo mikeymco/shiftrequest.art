@@ -19,5 +19,5 @@ galleries:
   main:
     title: Main # name used in the navigation bar and headers
     description: UNKNOWN.shiftrequest
-    sort_field: name # rule for sorting images within galleries
+    sort_field: apple_photos # rule for sorting images within galleries - parses Apple Photos filename numbers
     scale_method: crop

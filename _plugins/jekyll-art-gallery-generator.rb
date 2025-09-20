@@ -1,7 +1,7 @@
 # Jekyll art gallery generator plugin
 # Distribiuted under MIT license with attribution
 # based on https://github.com/ggreer/jekyll-gallery-generator
-
+#
 require 'rmagick'
 include Magick
 
@@ -117,7 +117,7 @@ module Jekyll
         end
       gallery_config = galleries[gallery_name.downcase] || {}
       #puts "Generating #{gallery_name}: #{gallery_config}"
-      sort_field = config["sort_field"] || "name"
+      sort_field = gallery_config["sort_field"] || config["sort_field"] || "name"
 
       self.process(@name)
       gallery_page = File.join(base, "_layouts", "art_gallery_page.html")
@@ -248,19 +248,12 @@ module Jekyll
               date_times[a] <=> date_times[b]
             end
           }
-        else
-          # Natural sorting for filenames (handles numbers properly)
-          @images.sort! { |a, b|
-            a.split(/(\d+)/).zip(b.split(/(\d+)/)).each do |a_part, b_part|
-              if a_part =~ /\d/ && b_part =~ /\d/
-                result = a_part.to_i <=> b_part.to_i
-              else
-                result = a_part <=> b_part
-              end
-              return result if result != 0
-            end
-            0
+        elsif sort_field == "apple_photos"
+          @images.sort! {|a,b|
+            a[/\d+/].to_i <=> b[/\d+/].to_i
           }
+        else
+          @images.sort!
         end
         if gallery_config["sort_reverse"]
           @images.reverse!
