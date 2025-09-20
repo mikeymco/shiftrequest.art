@@ -8,7 +8,7 @@ include Magick
 include FileUtils
 
 $image_extensions = [".png", ".jpg", ".jpeg", ".gif"]
-$video_extensions = [".mov", ".mp4", ".m4v", ".avi", ".mkv"]
+$video_extensions = [".mp4", ".mov", ".m4v", ".avi", ".mkv"]
 $media_extensions = $image_extensions + $video_extensions
 
 unless File.respond_to?(:exists?)
@@ -177,9 +177,25 @@ module Jekyll
           dest_image_abs_path = site.in_dest_dir(File.join(@dir, dest_image))
         if File.file?(dest_image_abs_path) == false or File.mtime(image_path) > File.mtime(dest_image_abs_path)
           if is_video?(image_path)
-            # For videos: just copy the file as-is, no processing needed
-            puts "Copying video #{image_path} to #{dest_image}..."
-            FileUtils.cp(image_path, dest_image_abs_path)
+            # For videos: convert to web-compatible MP4 format
+            puts "Converting video #{image_path} to web-compatible MP4..."
+            
+            # Change extension to .mp4 for web compatibility
+            dest_video = dest_image.gsub(/\.(mov|m4v|avi|mkv)$/i, '.mp4')
+            dest_video_abs_path = site.in_dest_dir(File.join(@dir, dest_video))
+            
+            # Convert using FFmpeg to H.264 for maximum browser compatibility
+            success = system("ffmpeg -i \"#{image_path}\" -c:v libx264 -crf 23 -preset medium -c:a aac -b:a 128k -movflags +faststart -y \"#{dest_video_abs_path}\" 2>/dev/null")
+            
+            if success
+              puts "Successfully converted #{image_path} to #{dest_video}"
+              # Update the dest_image to use .mp4 extension for the rest of the processing
+              dest_image = dest_video
+              dest_image_abs_path = dest_video_abs_path
+            else
+              puts "Failed to convert video, copying original file..."
+              FileUtils.cp(image_path, dest_image_abs_path)
+            end
           elsif config["strip_exif"] or config["watermark"] or config["size_limit"] # can't simply copy or symlink, need to pre-process the image
             source_img=ImageList.new(image_path)
             print "Generating #{dest_image}..."

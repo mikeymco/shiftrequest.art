@@ -9,7 +9,7 @@ header:
 	{% for image in page.images %}
 	<a href="#" class="gallery-link" data-image="{{ image }}" data-index="{{ forloop.index0 }}">
 		{% assign is_video = false %}
-		{% assign video_extensions = 'mov,mp4,m4v,avi,mkv' | split: ',' %}
+		{% assign video_extensions = 'mp4,mov,m4v,avi,mkv' | split: ',' %}
 		{% for ext in video_extensions %}
 			{% assign image_ext = image | split: '.' | last | downcase %}
 			{% if image_ext == ext %}
@@ -42,7 +42,7 @@ header:
 	<div class="overlay-background"></div>
 	<div class="overlay-content">
 		<img id="overlay-image" src="" alt="" style="display: none;">
-		<video id="overlay-video" controls style="display: none;">
+		<video id="overlay-video" controls preload="metadata" style="display: none;">
 			<source src="" type="">
 			Your browser does not support the video tag.
 		</video>
@@ -58,7 +58,7 @@ header:
 var galleryImages = [
 	{% for image in page.images %}
 	{% assign is_video_js = false %}
-	{% assign video_extensions_js = 'mov,mp4,m4v,avi,mkv' | split: ',' %}
+	{% assign video_extensions_js = 'mp4,mov,m4v,avi,mkv' | split: ',' %}
 	{% for ext in video_extensions_js %}
 		{% assign image_ext_js = image | split: '.' | last | downcase %}
 		{% if image_ext_js == ext %}

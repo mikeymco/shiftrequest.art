@@ -51,15 +51,22 @@
 		
 		if (images[index].isVideo) {
 			// Show video
-			const source = overlayVideo.querySelector('source');
-			source.src = images[index].src;
-			// Set the type based on file extension
-			const ext = images[index].src.split('.').pop().toLowerCase();
-			source.type = `video/${ext === 'mov' ? 'quicktime' : ext}`;
-			overlayVideo.load(); // Reload the video element
+			overlayVideo.pause();
+			overlayVideo.src = images[index].src;
+			overlayVideo.load();
 			overlayVideo.style.setProperty('display', 'block');
 			overlayVideo.style.maxWidth = '90vw';
 			overlayVideo.style.maxHeight = '85vh';
+			
+			// Auto-play video once it can play
+			const playVideoWhenReady = () => {
+				overlayVideo.play().catch(error => {
+					// Handle autoplay restrictions gracefully
+					console.log('Auto-play prevented by browser policy');
+				});
+				overlayVideo.removeEventListener('canplay', playVideoWhenReady);
+			};
+			overlayVideo.addEventListener('canplay', playVideoWhenReady);
 		} else {
 			// Show image
 			overlayImage.src = images[index].src;

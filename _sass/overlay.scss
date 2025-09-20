@@ -41,6 +41,11 @@
       max-height: 85vh;
       object-fit: contain;
       cursor: pointer;
+      
+      &:focus {
+        outline: none;
+        border: none;
+      }
     }
     
     .overlay-caption {
