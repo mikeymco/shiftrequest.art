@@ -17,7 +17,7 @@ size_limit: 1200 # maximum size, px in either dimension, to limit the images to
 
 galleries:
   main:
-    title: Main # name used in the navigation bar and headers
+    title: TRACERT # name used in the navigation bar and headers
     description: UNKNOWN.shiftrequest
     sort_field: apple_photos # rule for sorting images within galleries - parses Apple Photos filename numbers
     scale_method: crop
