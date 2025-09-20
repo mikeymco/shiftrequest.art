@@ -26,11 +26,6 @@ exclude:
   - .jekyll-cache/
   - .jekyll-metadata
 
-# Social media and author info
-author:
-  name: ShiftRequest Art
-  email: contact@shiftrequest.art
-
 # Collection settings
 collections:
   posts:

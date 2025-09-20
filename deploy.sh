@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Build and deploy Jekyll site to S3 with CloudFront invalidation
-
 set -e
 
 echo "🔧 Installing dependencies..."
