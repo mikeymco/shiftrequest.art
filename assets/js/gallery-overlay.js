@@ -2,6 +2,7 @@
 (function() {
 	const overlay = document.getElementById('image-overlay');
 	const overlayImage = document.getElementById('overlay-image');
+	const overlayVideo = document.getElementById('overlay-video');
 	const overlayCaption = document.getElementById('overlay-caption');
 	const galleryLinks = document.querySelectorAll('.gallery-link');
 	
@@ -39,11 +40,32 @@
 		window.history.pushState({ overlay: showOverlay, image: index }, '', url);
 	}
 	
-	// Show overlay with specific image
+	// Show overlay with specific image or video
 	function showOverlay(index, updateHistory = true) {
 		currentIndex = index;
 		isOverlayOpen = true;
-		overlayImage.src = images[index].src;
+		
+		// Hide both image and video first
+		overlayImage.style.display = 'none';
+		overlayVideo.style.display = 'none';
+		
+		if (images[index].isVideo) {
+			// Show video
+			const source = overlayVideo.querySelector('source');
+			source.src = images[index].src;
+			// Set the type based on file extension
+			const ext = images[index].src.split('.').pop().toLowerCase();
+			source.type = `video/${ext === 'mov' ? 'quicktime' : ext}`;
+			overlayVideo.load(); // Reload the video element
+			overlayVideo.style.setProperty('display', 'block');
+			overlayVideo.style.maxWidth = '90vw';
+			overlayVideo.style.maxHeight = '85vh';
+		} else {
+			// Show image
+			overlayImage.src = images[index].src;
+			overlayImage.style.display = 'block';
+		}
+		
 		overlayCaption.innerHTML = images[index].caption + '. <a class="clearing-link" href="/contact/">Ask me about this work</a>';
 		overlay.classList.add('active');
 		document.body.style.overflow = 'hidden';
@@ -134,6 +156,16 @@
 	
 	// Click on image to go to next
 	overlayImage.addEventListener('click', nextImage);
+	
+	// Click on video to toggle play/pause
+	overlayVideo.addEventListener('click', (e) => {
+		e.stopPropagation(); // Prevent event bubbling
+		if (overlayVideo.paused) {
+			overlayVideo.play();
+		} else {
+			overlayVideo.pause();
+		}
+	});
 	
 	// Browser back/forward button support
 	window.addEventListener('popstate', handlePopState);

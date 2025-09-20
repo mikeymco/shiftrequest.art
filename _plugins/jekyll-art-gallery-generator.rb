@@ -8,6 +8,8 @@ include Magick
 include FileUtils
 
 $image_extensions = [".png", ".jpg", ".jpeg", ".gif"]
+$video_extensions = [".mov", ".mp4", ".m4v", ".avi", ".mkv"]
+$media_extensions = $image_extensions + $video_extensions
 
 unless File.respond_to?(:exists?)
   class << File
@@ -149,7 +151,7 @@ module Jekyll
       date_times = {}
       Dir.foreach(dir) do |image|
         next if image.chars.first == "."
-        next unless image.downcase().end_with?(*$image_extensions)
+        next unless image.downcase().end_with?(*$media_extensions)
 
         image_path = File.join(dir, image) # source image short path
         # img_src = site.in_source_dir(image_path) # absolute path for the source image
@@ -171,10 +173,14 @@ module Jekyll
         end
           # cleanup, watermark and copy the files
           # Strip out the non-ascii character and downcase the final file name
-          dest_image=image.gsub(/[^0-9A-Za-z.\-]/, '_').downcase
+          dest_image=image.gsub(/[^0-9A-Za-z.\-]/, '').downcase
           dest_image_abs_path = site.in_dest_dir(File.join(@dir, dest_image))
         if File.file?(dest_image_abs_path) == false or File.mtime(image_path) > File.mtime(dest_image_abs_path)
-          if config["strip_exif"] or config["watermark"] or config["size_limit"] # can't simply copy or symlink, need to pre-process the image
+          if is_video?(image_path)
+            # For videos: just copy the file as-is, no processing needed
+            puts "Copying video #{image_path} to #{dest_image}..."
+            FileUtils.cp(image_path, dest_image_abs_path)
+          elsif config["strip_exif"] or config["watermark"] or config["size_limit"] # can't simply copy or symlink, need to pre-process the image
             source_img=ImageList.new(image_path)
             print "Generating #{dest_image}..."
             if config["strip_exif"]
@@ -267,7 +273,7 @@ module Jekyll
       self.data["images"] = @images
 
       best_image = gallery_config["best_image"] || @images[0]
-      best_image.gsub!(/[^0-9A-Za-z.\-]/, '_') # renormalize the name - important in case the best image name is specified via config
+      best_image.gsub!(/[^0-9A-Za-z.\-]/, '') # renormalize the name - important in case the best image name is specified via config
       best_image.downcase! # two step because mutating gsub returns nil that's unusable in a compound call
       #best_image = File.join(@dir, best_image)
       self.data["best_image"] = best_image
@@ -282,43 +288,95 @@ module Jekyll
       GC.start
     end
 
+    # Check if file is a video
+    def is_video?(file_path)
+      $video_extensions.any? { |ext| file_path.downcase.end_with?(ext) }
+    end
+
+    # Generate video thumbnail using FFmpeg
+    def generate_video_thumb(video_path, thumb_path, thumb_x, thumb_y)
+      # Extract frame at 1 second into video
+      temp_frame = thumb_path.gsub(/\.[^.]+$/, '_temp.png')
+      
+      # Use FFmpeg to extract a frame
+      system("ffmpeg -i \"#{video_path}\" -ss 00:00:01 -vframes 1 -y \"#{temp_frame}\" 2>/dev/null")
+      
+      if File.exist?(temp_frame)
+        # Use ImageMagick to resize the extracted frame
+        m_image = ImageList.new(temp_frame)
+        m_image.resize_to_fill!(thumb_x, thumb_y)
+        m_image.strip!
+        m_image.write(thumb_path)
+        
+        # Clean up temp file
+        File.delete(temp_frame)
+        return true
+      else
+        puts "Warning: Could not extract frame from video #{video_path}"
+        return false
+      end
+    rescue Exception => e
+      puts "Error generating video thumbnail for #{video_path}: #{e}"
+      File.delete(temp_frame) if File.exist?(temp_frame)
+      return false
+    end
+
     def makeThumb(image_path, dest_image, thumb_x, thumb_y, scale_method)
       # create thumbnail if it is not there
       thumbs_dir = File.join(site.dest, @dir, "thumbs")
       #thumbs_dir = File.join(@dir, "thumbs")
-      thumb_path = File.join(thumbs_dir, dest_image)
+      thumb_path = File.join(thumbs_dir, dest_image.gsub(/\.[^.]+$/, '.jpeg')) # Always save thumbs as JPG
 
       # create thumbnails
       FileUtils.mkdir_p(thumbs_dir, :mode => 0755)
       if File.file?(thumb_path) == false or File.mtime(image_path) > File.mtime(thumb_path)
         begin
-          m_image = ImageList.new(image_path)
-          # m_image.auto_orient!
-          #m_image.send("resize_to_#{scale_method}!", max_size_x, max_size_y)
-          if scale_method == "crop"
-            m_image.resize_to_fill!(thumb_x, thumb_y)
-          elsif scale_method == "crop_bottom"
-              m_image.resize_to_fill!(thumb_x, thumb_y, NorthGravity)
-          elsif scale_method == "crop_right"
-              m_image.resize_to_fill!(thumb_x, thumb_y, WestGravity)
-          elsif scale_method == "crop_left"
-              m_image.resize_to_fill!(thumb_x, thumb_y, EastGravity)
-          elsif scale_method == "crop_top"
-              m_image.resize_to_fill!(thumb_x, thumb_y, SouthGravity)
-          else
-              m_image.resize_to_fit!(thumb_x, thumb_y)
+          if is_video?(image_path)
+            # Handle video thumbnail generation
+            puts "Generating video thumbnail for #{dest_image}..."
+            success = generate_video_thumb(image_path, thumb_path, thumb_x, thumb_y)
+            unless success
+              puts "Failed to generate video thumbnail, creating placeholder"
+              # Create a simple placeholder thumbnail
+              placeholder = Image.new(thumb_x, thumb_y) { self.background_color = 'black' }
+              placeholder.annotate(AdaptiveThresholdMark.new) { |txt|
+                txt.text = "VIDEO"
+                txt.fill = 'white'
+                txt.gravity = CenterGravity
+              }
+              placeholder.write(thumb_path)
             end
-          # strip EXIF from thumbnails. Some browsers, notably, Safari on iOS will try to rotate images according to the 'orientation' tag which is no longer valid in case of thumbnails
-          m_image.strip!
-          puts "Writing thumbnail to #{thumb_path}"
-          m_image.write(thumb_path)
+          else
+            # Handle image thumbnail generation (existing code)
+            m_image = ImageList.new(image_path)
+            # m_image.auto_orient!
+            #m_image.send("resize_to_#{scale_method}!", max_size_x, max_size_y)
+            if scale_method == "crop"
+              m_image.resize_to_fill!(thumb_x, thumb_y)
+            elsif scale_method == "crop_bottom"
+                m_image.resize_to_fill!(thumb_x, thumb_y, NorthGravity)
+            elsif scale_method == "crop_right"
+                m_image.resize_to_fill!(thumb_x, thumb_y, WestGravity)
+            elsif scale_method == "crop_left"
+                m_image.resize_to_fill!(thumb_x, thumb_y, EastGravity)
+            elsif scale_method == "crop_top"
+                m_image.resize_to_fill!(thumb_x, thumb_y, SouthGravity)
+            else
+                m_image.resize_to_fit!(thumb_x, thumb_y)
+              end
+            # strip EXIF from thumbnails. Some browsers, notably, Safari on iOS will try to rotate images according to the 'orientation' tag which is no longer valid in case of thumbnails
+            m_image.strip!
+            puts "Writing thumbnail to #{thumb_path}"
+            m_image.write(thumb_path)
+          end
         rescue Exception => e
           puts "Error generating thumbnail for #{image_path}: #{e}"
           # puts e.backtrace
         end
       end
-      # record the thumbnail
-      @site.static_files << GalleryFile.new(@site, @base, thumbs_dir, dest_image)
+      # record the thumbnail (use the JPEG filename for videos)
+      thumb_filename = dest_image.gsub(/\.[^.]+$/, '.jpeg')
+      @site.static_files << GalleryFile.new(@site, @base, thumbs_dir, thumb_filename)
     end
   end
 
