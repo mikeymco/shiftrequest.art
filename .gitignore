@@ -6,3 +6,17 @@ _site/
 .bundle/
 vendor/
 Gemfile.lock
+
+# Media files (keep out of repo)
+portfolio/
+assets/images/gallery/
+assets/videos/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# AWS deployment
+.env
+.aws-credentials
+s3_website.yml

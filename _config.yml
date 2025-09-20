@@ -1,8 +1,8 @@
 # Site settings
 title: ShiftRequest.art
 description: A digital art and creative platform
-url: "https://mikeymco.github.io"
-baseurl: "/shiftrequest.art"
+url: "https://shiftrequest.art"
+baseurl: ""
 
 # GitHub Pages settings
 theme: minima
