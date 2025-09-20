@@ -85,7 +85,7 @@ module Jekyll
             site.data["gallery"]["galleries"][gallery_title]=gallery.data
           end
           site.data["navigation"].push({"title"=> gallery.data["title"], "url"=> gallery.data["link"], "side"=> "left"})
-          site.data["galleries-sorted"].push(gallery.data["title"]) # sorted array to order the galleries hash on the portfolio page
+          site.data["galleries-sorted"].push(gallery.data["title"]) # sorted array to order the galleries hash on the msg (portfolio) page
         end
       }
     end

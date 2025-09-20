@@ -1,4 +1,4 @@
-source_dir: _portfolio  # original images, that will be cropped according to the size_limit, thumbnailed and posted
+source_dir: _msg  # original images, that will be cropped according to the size_limit, thumbnailed and posted
 title: unknown.shiftrequest
 sort_field: "name" # sorting of the galleries on the gallery index page
 thumbnail_size:

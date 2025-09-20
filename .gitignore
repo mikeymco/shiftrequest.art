@@ -9,7 +9,7 @@ vendor/
 Gemfile.lock
 
 # Media files (keep out of repo)
-_portfolio/
+_msg/
 
 # OS files
 .DS_Store
