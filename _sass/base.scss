@@ -13,12 +13,14 @@ body {
 
 .thumbnail-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  justify-content: center;
-  gap: 4px;
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(32%, 120px), 1fr));
+  gap: 2px;
+  @media screen and (min-width: 920px) {
+    grid-template-columns: repeat(auto-fill, minmax(max(120px, 14%), 1fr));
+    gap: 4px;
   }
+
+  justify-content: center;
   a {
     text-decoration: none;
     line-height: 0;
