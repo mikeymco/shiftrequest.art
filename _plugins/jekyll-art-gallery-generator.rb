@@ -249,7 +249,18 @@ module Jekyll
             end
           }
         else
-          @images.sort!
+          # Natural sorting for filenames (handles numbers properly)
+          @images.sort! { |a, b|
+            a.split(/(\d+)/).zip(b.split(/(\d+)/)).each do |a_part, b_part|
+              if a_part =~ /\d/ && b_part =~ /\d/
+                result = a_part.to_i <=> b_part.to_i
+              else
+                result = a_part <=> b_part
+              end
+              return result if result != 0
+            end
+            0
+          }
         end
         if gallery_config["sort_reverse"]
           @images.reverse!

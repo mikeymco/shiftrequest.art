@@ -16,8 +16,8 @@ strip_exif: true
 size_limit: 1200 # maximum size, px in either dimension, to limit the images to
 
 galleries:
-  main-collection:
-    title: Main Collection # name used in the navigation bar and headers
-    description: shiftrequest.art digital art collection
+  main:
+    title: Main # name used in the navigation bar and headers
+    description: UNKNOWN.shiftrequest
     sort_field: name # rule for sorting images within galleries
     scale_method: crop

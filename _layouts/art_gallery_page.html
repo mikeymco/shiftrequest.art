@@ -9,9 +9,9 @@ header:
 	{% for image in page.images %}
 	<a href="{{ image }}">
 		{% if page.captions[image] == nil %}
-		<img data-caption="<a class='clearing-link' href='/contact/'>Ask me about this work</a>" src="thumbs/{{ image }}">
+		<img class="thumbnail" data-caption="<a class='clearing-link' href='/contact/'>Ask me about this work</a>" src="thumbs/{{ image }}">
 		{% else %}
-		<img data-caption="{{ page.captions[image] }}.  <a class='clearing-link' href='/contact/'>Ask me about this work</a>" src="thumbs/{{ image }}" alt="{{ page.captions[image] }}" title="{{ page.captions[image] }}">
+		<img class="thumbnail" data-caption="{{ page.captions[image] }}.  <a class='clearing-link' href='/contact/'>Ask me about this work</a>" src="thumbs/{{ image }}" alt="{{ page.captions[image] }}" title="{{ page.captions[image] }}">
 		{% endif %}
 	</a>
 	{% endfor %}
