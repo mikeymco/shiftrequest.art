@@ -7,7 +7,7 @@ echo "🔧 Installing dependencies..."
 bundle install
 
 echo "🏗️  Building Jekyll site..."
-bundle exec jekyll build
+JEKYLL_ENV=production bundle exec jekyll build
 
 echo "☁️  Syncing to S3..."
 aws s3 sync _site/ s3://shiftrequest.art --delete --cache-control "max-age=300"

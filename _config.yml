@@ -4,6 +4,9 @@ description: UNKNOWN:connection.request
 url: "https://shiftrequest.art"
 baseurl: ""
 
+# Analytics
+google_analytics: "G-QHEVSGP24N"  # Replace with your actual GA4 measurement ID
+
 # Jekyll plugins
 plugins:
   - jekyll-feed
@@ -14,6 +17,10 @@ plugins:
 markdown: kramdown
 highlighter: rouge
 permalink: /:title/
+
+# Environment (set to production for analytics)
+# JEKYLL_ENV=production bundle exec jekyll build
+environment: development
 
 # Include .well-known directory for Chrome DevTools
 include:
