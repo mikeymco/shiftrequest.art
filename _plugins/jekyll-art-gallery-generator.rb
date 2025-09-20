@@ -174,24 +174,24 @@ module Jekyll
           # cleanup, watermark and copy the files
           # Strip out the non-ascii character and downcase the final file name
           dest_image=image.gsub(/[^0-9A-Za-z.\-]/, '').downcase
+          
+          # For videos, adjust the destination filename to use .mp4 extension for proper file comparison
+          if is_video?(image_path)
+            dest_image = dest_image.gsub(/\.(mov|m4v|avi|mkv)$/i, '.mp4')
+          end
+          
           dest_image_abs_path = site.in_dest_dir(File.join(@dir, dest_image))
         if File.file?(dest_image_abs_path) == false or File.mtime(image_path) > File.mtime(dest_image_abs_path)
           if is_video?(image_path)
             # For videos: convert to web-compatible MP4 format
             puts "Converting video #{image_path} to web-compatible MP4..."
             
-            # Change extension to .mp4 for web compatibility
-            dest_video = dest_image.gsub(/\.(mov|m4v|avi|mkv)$/i, '.mp4')
-            dest_video_abs_path = site.in_dest_dir(File.join(@dir, dest_video))
-            
+            # dest_image already has .mp4 extension from above adjustment
             # Convert using FFmpeg to H.264 for maximum browser compatibility
-            success = system("ffmpeg -i \"#{image_path}\" -c:v libx264 -crf 23 -preset medium -c:a aac -b:a 128k -movflags +faststart -y \"#{dest_video_abs_path}\" 2>/dev/null")
+            success = system("ffmpeg -i \"#{image_path}\" -c:v libx264 -crf 23 -preset medium -c:a aac -b:a 128k -movflags +faststart -y \"#{dest_image_abs_path}\" 2>/dev/null")
             
             if success
-              puts "Successfully converted #{image_path} to #{dest_video}"
-              # Update the dest_image to use .mp4 extension for the rest of the processing
-              dest_image = dest_video
-              dest_image_abs_path = dest_video_abs_path
+              puts "Successfully converted #{image_path} to #{dest_image}"
             else
               puts "Failed to convert video, copying original file..."
               FileUtils.cp(image_path, dest_image_abs_path)

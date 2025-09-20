@@ -1,0 +1,14 @@
+{% comment -%}
+  Video detection include
+  Usage: {% include video_detection.liquid filename=image %}
+  Result: Sets is_video variable to true/false
+{%- endcomment -%}
+{%- assign video_extensions = '.mp4,.mov,.m4v,.avi,.mkv' | split: ',' -%}
+{%- assign file_ext = include.filename | split: '.' | last | downcase | prepend: '.' -%}
+{%- assign is_video = false -%}
+{%- for ext in video_extensions -%}
+  {%- if file_ext == ext -%}
+    {%- assign is_video = true -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}

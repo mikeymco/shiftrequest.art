@@ -8,29 +8,21 @@ header:
 <div class="thumbnail-grid" data-clearing>
 	{% for image in page.images %}
 	<a href="#" class="gallery-link" data-image="{{ image }}" data-index="{{ forloop.index0 }}">
-		{% assign is_video = false %}
-		{% assign video_extensions = 'mp4,mov,m4v,avi,mkv' | split: ',' %}
-		{% for ext in video_extensions %}
-			{% assign image_ext = image | split: '.' | last | downcase %}
-			{% if image_ext == ext %}
-				{% assign is_video = true %}
-				{% break %}
-			{% endif %}
-		{% endfor %}
+		{% include video_detection.liquid filename=image %}
 		
 		{% if page.captions[image] == nil %}
 			{% if is_video %}
-				<img class="thumbnail video-thumb" src="thumbs/{{ image | replace: '.mov', '.jpeg' | replace: '.mp4', '.jpeg' | replace: '.m4v', '.jpeg' | replace: '.avi', '.jpeg' | replace: '.mkv', '.jpeg' | replace: '.jpg', '.jpeg' | replace: '.png', '.jpeg' | replace: '.gif', '.jpeg' }}">
+				<img class="thumbnail video-thumb" src="thumbs/{% include thumbnail_path.liquid filename=image %}">
 				<div class="video-indicator">▶</div>
 			{% else %}
-				<img class="thumbnail" src="thumbs/{{ image | replace: '.mov', '.jpeg' | replace: '.mp4', '.jpeg' | replace: '.m4v', '.jpeg' | replace: '.avi', '.jpeg' | replace: '.mkv', '.jpeg' | replace: '.jpg', '.jpeg' | replace: '.png', '.jpeg' | replace: '.gif', '.jpeg' }}">
+				<img class="thumbnail" src="thumbs/{% include thumbnail_path.liquid filename=image %}">
 			{% endif %}
 		{% else %}
 			{% if is_video %}
-				<img class="thumbnail video-thumb" data-caption="{{ page.captions[image] }}.  " src="thumbs/{{ image | replace: '.mov', '.jpeg' | replace: '.mp4', '.jpeg' | replace: '.m4v', '.jpeg' | replace: '.avi', '.jpeg' | replace: '.mkv', '.jpeg' | replace: '.jpg', '.jpeg' | replace: '.png', '.jpeg' | replace: '.gif', '.jpeg' }}" alt="{{ page.captions[image] }}" title="{{ page.captions[image] }}">
+				<img class="thumbnail video-thumb" data-caption="{{ page.captions[image] }}.  " src="thumbs/{% include thumbnail_path.liquid filename=image %}" alt="{{ page.captions[image] }}" title="{{ page.captions[image] }}">
 				<div class="video-indicator">▶</div>
 			{% else %}
-				<img class="thumbnail" data-caption="{{ page.captions[image] }}.  " src="thumbs/{{ image | replace: '.mov', '.jpeg' | replace: '.mp4', '.jpeg' | replace: '.m4v', '.jpeg' | replace: '.avi', '.jpeg' | replace: '.mkv', '.jpeg' | replace: '.jpg', '.jpeg' | replace: '.png', '.jpeg' | replace: '.gif', '.jpeg' }}" alt="{{ page.captions[image] }}" title="{{ page.captions[image] }}">
+				<img class="thumbnail" data-caption="{{ page.captions[image] }}.  " src="thumbs/{% include thumbnail_path.liquid filename=image %}" alt="{{ page.captions[image] }}" title="{{ page.captions[image] }}">
 			{% endif %}
 		{% endif %}
 	</a>
@@ -57,20 +49,12 @@ header:
 // Define gallery images for the overlay script
 var galleryImages = [
 	{% for image in page.images %}
-	{% assign is_video_js = false %}
-	{% assign video_extensions_js = 'mp4,mov,m4v,avi,mkv' | split: ',' %}
-	{% for ext in video_extensions_js %}
-		{% assign image_ext_js = image | split: '.' | last | downcase %}
-		{% if image_ext_js == ext %}
-			{% assign is_video_js = true %}
-			{% break %}
-		{% endif %}
-	{% endfor %}
+	{% include video_detection.liquid filename=image %}
 	{
-		thumb: 'thumbs/{{ image | replace: ".mov", ".jpeg" | replace: ".mp4", ".jpeg" | replace: ".m4v", ".jpeg" | replace: ".avi", ".jpeg" | replace: ".mkv", ".jpeg" | replace: ".jpg", ".jpeg" | replace: ".png", ".jpeg" | replace: ".gif", ".jpeg" }}',
+		thumb: 'thumbs/{% include thumbnail_path.liquid filename=image %}',
 		src: '{{ image }}',
 		caption: '{% if page.captions[image] %}{{ page.captions[image] | escape }}{% else %}Ask me about this work{% endif %}',
-		isVideo: {% if is_video_js %}true{% else %}false{% endif %}
+		isVideo: {% if is_video %}true{% else %}false{% endif %}
 	}{% unless forloop.last %},{% endunless %}
 	{% endfor %}
 ];

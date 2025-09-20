@@ -1,0 +1,6 @@
+{% comment -%}
+  Thumbnail path include
+  Usage: {% include thumbnail_path.liquid filename=image %}
+  Result: Returns the thumbnail path for any media file
+{%- endcomment -%}
+{{- include.filename | replace: '.mov', '.jpeg' | replace: '.mp4', '.jpeg' | replace: '.m4v', '.jpeg' | replace: '.avi', '.jpeg' | replace: '.mkv', '.jpeg' | replace: '.jpg', '.jpeg' | replace: '.png', '.jpeg' | replace: '.gif', '.jpeg' -}}
