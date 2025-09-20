@@ -15,6 +15,9 @@ _portfolio/
 .DS_Store
 Thumbs.db
 
+# Development files
+.well-known/
+
 # AWS deployment
 .env
 .aws-credentials
