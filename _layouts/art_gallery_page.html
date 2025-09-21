@@ -29,6 +29,37 @@ header:
 	{% endfor %}
 </div>
 
+<!-- Spotify Music Section - Minimal -->
+{% assign gallery_config = site.data.gallery.galleries[page.gallery] %}
+{% if gallery_config.spotify_playlist or gallery_config.spotify_track %}
+<div class="music-section">
+	<button class="close-music" aria-label="Close music player">×</button>
+	{% if gallery_config.spotify_playlist %}
+	<div class="spotify-container">
+		<iframe class="spotify-playlist" style="border-radius:12px" 
+			src="https://open.spotify.com/embed/playlist/{{ gallery_config.spotify_playlist }}?utm_source=generator&theme=0" 
+			frameBorder="0" 
+			allowfullscreen="" 
+			allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+			loading="lazy"
+			title="Gallery Soundtrack">
+		</iframe>
+	</div>
+	{% elsif gallery_config.spotify_track %}
+	<div class="spotify-container">
+		<iframe class="spotify-track" style="border-radius:12px" 
+			src="https://open.spotify.com/embed/track/{{ gallery_config.spotify_track }}?utm_source=generator&theme=0" 
+			frameBorder="0" 
+			allowfullscreen="" 
+			allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+			loading="lazy"
+			title="Gallery Soundtrack">
+		</iframe>
+	</div>
+	{% endif %}
+</div>
+{% endif %}
+
 <!-- Full-screen image overlay -->
 <div id="image-overlay" class="image-overlay" role="dialog" aria-modal="true" aria-labelledby="overlay-caption" aria-hidden="true">
 	<div class="overlay-background"></div>
@@ -60,6 +91,10 @@ var galleryImages = [
 	{% endfor %}
 ];
 </script>
+<!-- Gallery Overlay JavaScript -->
 <script src="{{ '/assets/js/gallery-overlay.js' | relative_url }}"></script>
+
+<!-- Music Player Management -->
+<script src="{{ '/assets/js/music-player.js' | relative_url }}"></script>
 
 <!-- {{ page.description }} -->
