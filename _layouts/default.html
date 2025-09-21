@@ -9,8 +9,12 @@
     <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
     
+    <!-- Visitor Consent System -->
+    <link rel="stylesheet" href="{{ '/assets/css/visitor-consent.css' | relative_url }}">
+    
     <!-- Preload critical resources -->
     <link rel="preload" href="{{ '/assets/js/gallery-overlay.js' | relative_url }}" as="script">
+    <link rel="preload" href="{{ '/assets/js/visitor-consent.js' | relative_url }}" as="script">
     
     <!-- Favicon and touch icons -->
     <link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon.png' | relative_url }}">
@@ -35,6 +39,9 @@
     
     <!-- Google Analytics -->
     {% include google-analytics.html %}
+    
+    <!-- Visitor Consent System - Must load before any other scripts -->
+    <script src="{{ '/assets/js/visitor-consent.js' | relative_url }}"></script>
 </head>
 <body>
     <main>

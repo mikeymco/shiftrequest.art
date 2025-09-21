@@ -1,0 +1,139 @@
+<div class="consent-container">
+    <div class="consent-step" id="step-welcome">
+        <div class="consent-content">
+            <h1>Welcome to Nina's Digital Space</h1>
+            <p>This is a personal art site containing mature content including:</p>
+            <ul>
+                <li>Artistic nudity and sexual themes</li>
+                <li>Adult language and unconventional perspectives</li>
+                <li>Content involving alcohol and cannabis</li>
+                <li>Potentially challenging or provocative material</li>
+            </ul>
+            <p>By entering, you acknowledge this is artistic expression protected under First Amendment rights.</p>
+            <p><strong>Viewer discretion is advised. No responsibility taken for offense.</strong></p>
+            
+            <div class="consent-actions">
+                <button onclick="window.location.href='https://disney.com'" class="btn-leave">
+                    🏰 Take me to Disney instead
+                </button>
+                <button onclick="visitorConsent.nextStep('age')" class="btn-continue">
+                    Continue →
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="consent-step hidden" id="step-age">
+        <div class="consent-content">
+            <h2>Age Verification</h2>
+            <p>Please confirm your age to determine appropriate content access:</p>
+            
+            <div class="age-options">
+                <button onclick="visitorConsent.setAge('under18')" class="age-btn">
+                    Under 18
+                </button>
+                <button onclick="visitorConsent.setAge('18-20')" class="age-btn">
+                    18-20 years old
+                </button>
+                <button onclick="visitorConsent.setAge('21+')" class="age-btn">
+                    21+ years old
+                </button>
+            </div>
+            
+            <p class="age-disclaimer">
+                You confirm you are legally able to view adult content in your jurisdiction.
+            </p>
+        </div>
+    </div>
+    
+    <div class="consent-step hidden" id="step-content">
+        <div class="consent-content">
+            <h2>Content Preferences</h2>
+            <p>Choose your comfort level (you can change this anytime):</p>
+            
+            <div class="content-options">
+                <label class="content-option sfw-option">
+                    <input type="radio" name="content-level" value="sfw">
+                    <div class="option-details">
+                        <h3>🌈 SFW Mode</h3>
+                        <p>All-ages content (but potentially "contagious" perspectives)</p>
+                    </div>
+                </label>
+                
+                <label class="content-option nsfw-option">
+                    <input type="radio" name="content-level" value="nsfw">
+                    <div class="option-details">
+                        <h3>🔥 NSFW Mode</h3>
+                        <p>Includes sexual content, artistic nudity, adult themes</p>
+                    </div>
+                </label>
+                
+                <label class="content-option da-option" id="da-option" style="display: none;">
+                    <input type="radio" name="content-level" value="drugs_alcohol">
+                    <div class="option-details">
+                        <h3>🌿 D+A Mode</h3>
+                        <p>Full access: drugs, alcohol, explicit content</p>
+                    </div>
+                </label>
+            </div>
+            
+            <button onclick="visitorConsent.nextStep('gdpr')" class="btn-continue">
+                Continue →
+            </button>
+        </div>
+    </div>
+    
+    <div class="consent-step hidden" id="step-gdpr">
+        <div class="consent-content">
+            <h2>Privacy & Analytics</h2>
+            <p>This site uses Google Analytics to understand visitor engagement and improve the experience.</p>
+            
+            <div class="gdpr-details">
+                <h3>What we collect:</h3>
+                <ul>
+                    <li>Page views and navigation patterns</li>
+                    <li>Device and browser information</li>
+                    <li>Geographic region (not specific location)</li>
+                </ul>
+                
+                <h3>What we don't collect:</h3>
+                <ul>
+                    <li>Personal identifying information</li>
+                    <li>Your content preferences (stored locally only)</li>
+                    <li>Anything that could identify you personally</li>
+                </ul>
+            </div>
+            
+            <div class="gdpr-actions">
+                <button onclick="visitorConsent.completeConsent(false)" class="btn-decline">
+                    Decline Analytics
+                </button>
+                <button onclick="visitorConsent.completeConsent(true)" class="btn-accept">
+                    Accept Analytics
+                </button>
+            </div>
+            
+            <p class="gdpr-note">
+                <small>You can change this choice anytime. See our <a href="/privacy" target="_blank">Privacy Policy</a> for details.</small>
+            </p>
+        </div>
+    </div>
+    
+    <div class="consent-step hidden" id="step-complete">
+        <div class="consent-content">
+            <h2>🎨 Welcome to the Experience</h2>
+            <p>You're all set! A few quick notes:</p>
+            
+            <ul>
+                <li>Content warnings appear before sensitive material</li>
+                <li>Change your preferences anytime in site settings</li>
+                <li>This is a space for authentic artistic expression</li>
+                <li>Enjoy the journey through Nina's creative universe</li>
+            </ul>
+            
+            <button onclick="visitorConsent.enterSite()" class="btn-enter">
+                🚀 Enter the Gallery
+            </button>
+        </div>
+    </div>
+</div>
