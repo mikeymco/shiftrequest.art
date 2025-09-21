@@ -13,9 +13,17 @@ gem "bigdecimal"
 gem "rmagick"
 gem "exifr"
 
+# Development tools
+gem "webrick", "~> 1.8"
+
 # Jekyll plugins
 group :jekyll_plugins do
   gem "jekyll-feed"
   gem "jekyll-sitemap"
   gem "jekyll-seo-tag"
+end
+
+# Development gems
+group :development do
+  gem "jekyll-livereload"
 end
