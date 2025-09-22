@@ -15,15 +15,35 @@ scale_method: crop # default for all galleries. could be fit or crop, crop_botto
 strip_exif: true
 size_limit: 1200 # maximum size, px in either dimension, to limit the images to
 
+# Global social media links configuration
+social_links:
+  - name: "Twitter"
+    url: "https://x.com/UNKNOWN_exists"
+    icon: "x-twitter"
+  - name: "Reddit"
+    url: "https://www.reddit.com/user/r_b_rocket/"
+    icon: "reddit"
+  - name: "YouTube"
+    url: "https://www.youtube.com/@UNKNOWNshiftrequest"
+    icon: "youtube"
+  - name: "TikTok"
+    url: "https://www.tiktok.com/@unknown.shiftrequest"
+    icon: "tiktok"
+  - name: "Ko-fi"
+    url: "https://ko-fi.com/idontknowchaosart"
+    icon: "kofi"
+
 galleries:
   main:
     title: ARRIVAL # name used in the navigation bar and headers
     description: UNKNOWN.shiftrequest
     sort_field: apple_photos # rule for sorting images within galleries - parses Apple Photos filename numbers
     scale_method: crop
+    # Social media panel configuration
+    show_social_panel: true  # Opt-in / Show social links panel for SFW galleries only
     # Optional: Add music for this gallery
     # spotify_playlist: "6mWnyOevjXsigshH9vPv7J"  # Playlist ID from Spotify share URL
-    spotify_track: "6w0oCUVyKsBq9AtrdEj3pz"     # Single track ID from Spotify share URL
+    # spotify_track: "6w0oCUVyKsBq9AtrdEj3pz"     # Single track ID from Spotify share URL
     # soundcloud_track: "phuturedoom/thebook"              # Track ID from SoundCloud share URL
     # soundcloud_playlist: "sets/playlist-name"   # Playlist/set from SoundCloud share URL
   dark:
@@ -31,10 +51,10 @@ galleries:
     description: UNKNOWN.shiftrequest
     sort_field: apple_photos # rule for sorting images within galleries - parses Apple Photos filename numbers
     scale_method: crop
-    spotify_track: "3DQs678YUdTMJ0FG7EDWzf"
+    # spotify_track: "3DQs678YUdTMJ0FG7EDWzf"
   darkall:
     title: WHYGOD # name used in the navigation bar and headers
     description: UNKNOWN.shiftrequest
     sort_field: apple_photos # rule for sorting images within galleries - parses Apple Photos filename numbers
     scale_method: crop
-    spotify_track: "3DQs678YUdTMJ0FG7EDWzf"
+    # spotify_track: "3DQs678YUdTMJ0FG7EDWzf"
