@@ -35,7 +35,7 @@ social_links:
 
 galleries:
   main:
-    title: ARRIVAL # name used in the navigation bar and headers
+    title: MAIN # name used in the navigation bar and headers
     description: UNKNOWN.shiftrequest
     sort_field: apple_photos # rule for sorting images within galleries - parses Apple Photos filename numbers
     scale_method: crop
@@ -47,13 +47,13 @@ galleries:
     # soundcloud_track: "phuturedoom/thebook"              # Track ID from SoundCloud share URL
     # soundcloud_playlist: "sets/playlist-name"   # Playlist/set from SoundCloud share URL
   dark:
-    title: WHYGOD # name used in the navigation bar and headers
+    title: DARK # name used in the navigation bar and headers
     description: UNKNOWN.shiftrequest
     sort_field: apple_photos # rule for sorting images within galleries - parses Apple Photos filename numbers
     scale_method: crop
     # spotify_track: "3DQs678YUdTMJ0FG7EDWzf"
   darkall:
-    title: WHYGOD # name used in the navigation bar and headers
+    title: DARK # name used in the navigation bar and headers
     description: UNKNOWN.shiftrequest
     sort_field: apple_photos # rule for sorting images within galleries - parses Apple Photos filename numbers
     scale_method: crop
