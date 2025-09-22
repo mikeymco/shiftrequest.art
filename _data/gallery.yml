@@ -21,7 +21,13 @@ galleries:
     description: UNKNOWN.shiftrequest
     sort_field: apple_photos # rule for sorting images within galleries - parses Apple Photos filename numbers
     scale_method: crop
-    # Optional: Add Spotify playlist for this gallery
+    # Optional: Add music for this gallery
     # spotify_playlist: "6mWnyOevjXsigshH9vPv7J"  # Playlist ID from Spotify share URL
-    spotify_track: "2gb2YA7nIoaI79KefZ8GuM"     # Single track ID from Spotify share URL
-  
+    # spotify_track: "2gb2YA7nIoaI79KefZ8GuM"     # Single track ID from Spotify share URL
+    # soundcloud_track: "phuturedoom/thebook"              # Track ID from SoundCloud share URL
+    # soundcloud_playlist: "sets/playlist-name"   # Playlist/set from SoundCloud share URL
+  dark:
+    title: ARRIVAL # name used in the navigation bar and headers
+    description: UNKNOWN.shiftrequest
+    sort_field: apple_photos # rule for sorting images within galleries - parses Apple Photos filename numbers
+    scale_method: crop

@@ -29,11 +29,12 @@ header:
 	{% endfor %}
 </div>
 
-<!-- Spotify Music Section - Minimal -->
+<!-- Music Section - Spotify & SoundCloud -->
 {% assign gallery_config = site.data.gallery.galleries[page.gallery] %}
-{% if gallery_config.spotify_playlist or gallery_config.spotify_track %}
+{% if gallery_config.spotify_playlist or gallery_config.spotify_track or gallery_config.soundcloud_track or gallery_config.soundcloud_playlist %}
 <div class="music-section">
 	<button class="close-music" aria-label="Close music player">×</button>
+	
 	{% if gallery_config.spotify_playlist %}
 	<div class="spotify-container">
 		<iframe class="spotify-playlist" style="border-radius:12px" 
@@ -52,6 +53,32 @@ header:
 			frameBorder="0" 
 			allowfullscreen="" 
 			allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+			loading="lazy"
+			title="Gallery Soundtrack">
+		</iframe>
+	</div>
+	{% elsif gallery_config.soundcloud_track %}
+	<div class="soundcloud-container">
+		{% comment %} Handle both numeric IDs and permalink formats {% endcomment %}
+		{% if gallery_config.soundcloud_track contains "/" %}
+			{% assign sc_url = "https%3A//soundcloud.com/" | append: gallery_config.soundcloud_track %}
+		{% else %}
+			{% assign sc_url = "https%3A//api.soundcloud.com/tracks/" | append: gallery_config.soundcloud_track %}
+		{% endif %}
+		<iframe class="soundcloud-track" 
+			src="https://w.soundcloud.com/player/?url={{ sc_url }}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true" 
+			frameBorder="0" 
+			allow="autoplay" 
+			loading="lazy"
+			title="Gallery Soundtrack">
+		</iframe>
+	</div>
+	{% elsif gallery_config.soundcloud_playlist %}
+	<div class="soundcloud-container">
+		<iframe class="soundcloud-playlist" 
+			src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/{{ gallery_config.soundcloud_playlist }}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true" 
+			frameBorder="0" 
+			allow="autoplay" 
 			loading="lazy"
 			title="Gallery Soundtrack">
 		</iframe>

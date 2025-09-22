@@ -51,7 +51,6 @@ ul {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.7);
     color: white;
     font-size: 24px;
     padding: 8px 12px;
@@ -136,6 +135,24 @@ body:not(.has-music) footer p {
 	border: none;
 }
 
+.soundcloud-container {
+	width: 100%;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.soundcloud-track {
+	width: 300px;
+	height: 166px; /* SoundCloud's visual player height */
+	border: none;
+}
+
+.soundcloud-playlist {
+	width: 300px;
+	height: 300px; /* SoundCloud playlist height */
+	border: none;
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
 	.music-section {
@@ -147,7 +164,9 @@ body:not(.has-music) footer p {
 	}
 	
 	.spotify-track,
-	.spotify-playlist {
+	.spotify-playlist,
+	.soundcloud-track,
+	.soundcloud-playlist {
 		width: 100%;
 	}
 }
