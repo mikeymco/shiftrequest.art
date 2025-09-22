@@ -32,7 +32,7 @@ galleries:
     sort_field: apple_photos # rule for sorting images within galleries - parses Apple Photos filename numbers
     scale_method: crop
     spotify_track: "3DQs678YUdTMJ0FG7EDWzf"
-  darkAll:
+  darkall:
     title: WHYGOD # name used in the navigation bar and headers
     description: UNKNOWN.shiftrequest
     sort_field: apple_photos # rule for sorting images within galleries - parses Apple Photos filename numbers
