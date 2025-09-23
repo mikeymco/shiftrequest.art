@@ -18,19 +18,22 @@ size_limit: 1200 # maximum size, px in either dimension, to limit the images to
 # Global social media links configuration
 social_links:
   - name: "Twitter"
-    url: "https://x.com/UNKNOWN_exists"
+    url: "https://x.com/shiftrequest"
     icon: "x-twitter"
+  - name: "Instagram"
+    url: "https://www.instagram.com/shiftrequest"
+    icon: "instagram"
   - name: "Reddit"
     url: "https://www.reddit.com/user/r_b_rocket/"
     icon: "reddit"
   - name: "YouTube"
-    url: "https://www.youtube.com/@UNKNOWNshiftrequest"
+    url: "https://www.youtube.com/@shiftrequest000"
     icon: "youtube"
   - name: "TikTok"
     url: "https://www.tiktok.com/@unknown.shiftrequest"
     icon: "tiktok"
   - name: "Ko-fi"
-    url: "https://ko-fi.com/idontknowchaosart"
+    url: "https://ko-fi.com/shiftrequest"
     icon: "kofi"
 
 galleries:
