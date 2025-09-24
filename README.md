@@ -12,4 +12,4 @@ bundle install
 bundle exec jekyll serve --livereload
 ```
 
-The site will be available at `http://localhost:4000/shiftrequest.art`
+The site will be available at `http://localhost:4000/`
