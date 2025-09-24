@@ -6,7 +6,7 @@ class MusicPlayer {
 	constructor() {
 		this.musicSection = document.querySelector('.music-section');
 		this.closeButton = document.querySelector('.close-music');
-		this.footer = document.querySelector('footer');
+		this.footer = document.querySelector('.footer-text');
 		this.storageKey = 'musicPlayerHidden';
 		
 		this.init();
