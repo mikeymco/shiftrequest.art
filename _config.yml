@@ -4,9 +4,6 @@ description: ❤️‍🩹📸❤️‍🔥 - My Domain & Galleries - NinA[rt] +
 url: "https://shiftrequest.art"
 baseurl: ""
 
-# Analytics
-google_analytics: "G-QHEVSGP24N"
-
 # Jekyll plugins
 plugins:
   - jekyll-feed
