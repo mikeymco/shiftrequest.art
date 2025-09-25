@@ -82,9 +82,16 @@ footer {
   }
 }
 
-// Spotify green hint when music player is hidden
 body:not(.has-music) footer p {
-  color: #1db954; // Spotify green
+  color: #cc032c;
   opacity: 0.8;
   cursor: pointer;
+}
+
+.github-link {
+  color: #cc032c;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 }
