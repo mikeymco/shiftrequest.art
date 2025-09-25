@@ -1,4 +1,4 @@
-/* Visitor Consent System Styles - Matrix/Terminal Theme */
+// Visitor Consent System Styles - Matrix/Terminal Theme
 
 .consent-overlay {
   position: fixed;
@@ -142,7 +142,7 @@
   box-shadow: 0 0 15px rgba(255, 255, 0, 0.5);
 }
 
-/* Age Selection */
+// Age Selection
 .age-options {
   display: flex;
   flex-direction: column;
@@ -176,7 +176,7 @@
   font-style: italic;
 }
 
-/* Content Options */
+// Content Options
 .content-options {
   display: flex;
   flex-direction: column;
@@ -203,7 +203,7 @@
   display: none;
 }
 
-/* SFW Mode - Green */
+// SFW Mode - Green
 .sfw-option:has(input:checked) {
   border-color: #00ff00;
   background: rgba(0, 255, 0, 0.1);
@@ -214,7 +214,7 @@
   color: #00ff00;
 }
 
-/* NSFW Mode - Yellow */
+// NSFW Mode - Yellow
 .nsfw-option:has(input:checked) {
   border-color: #ffff00;
   background: rgba(255, 255, 0, 0.1);
@@ -225,7 +225,7 @@
   color: #ffff00;
 }
 
-/* D+A Mode - Red */
+// D+A Mode - Red
 .da-option:has(input:checked) {
   border-color: #ff0000;
   background: rgba(255, 0, 0, 0.1);
@@ -249,7 +249,7 @@
   font-size: 0.9rem;
 }
 
-/* GDPR Section */
+// GDPR Section
 .gdpr-details {
   background: rgba(0, 50, 0, 0.3);
   border: 1px solid #00ff00;
@@ -286,7 +286,7 @@
   text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
 }
 
-/* Mobile Responsiveness */
+// Mobile Responsiveness
 @media (max-width: 768px) {
   .consent-container {
     width: 95%;
