@@ -8,11 +8,8 @@ layout: default
     {% include social-tile.html %}
     
     {% for gallery in page.galleries %}
-    <li>
-    <a href="{{ gallery['link'] }}">
-        <img class="gallery-best-image" src="{{ gallery['link'] }}/thumbs/front_{{ gallery['best_image'] }}">
+    <a href="{{ gallery['link'] }}" class="gallery-link">
+        <img class="thumbnail" src="{{ gallery['link'] }}/thumbs/front_{{ gallery['best_image'] }}">
     </a>
-    <h3><a href="{{ gallery['link'] }}">{{ gallery["title"] }}</a></h3>
-    </li>
     {% endfor %}
 </div>

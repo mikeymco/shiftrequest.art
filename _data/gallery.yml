@@ -5,8 +5,8 @@ thumbnail_size:
   x: 300
   y: 300
 front_thumb_size:     # best image thumb size for the gallery super-index page
-  x: 200
-  y: 200
+  x: 300
+  y: 300
 header_thumb_size:    # best image thumb for the header of a gallery index page
   x: 1200
   y: 200
