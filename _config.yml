@@ -5,7 +5,7 @@ url: "https://shiftrequest.art"
 baseurl: ""
 
 # Analytics
-google_analytics: "G-QHEVSGP24N"  # Replace with your actual GA4 measurement ID
+google_analytics: "G-XXXXXXXXXX"  # Replace with your actual GA4 measurement ID
 
 # Jekyll plugins
 plugins:

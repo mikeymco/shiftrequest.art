@@ -7,15 +7,16 @@ include Magick
 
 include FileUtils
 
-$image_extensions = [".png", ".jpg", ".jpeg", ".gif"]
-$video_extensions = [".mp4", ".mov", ".m4v", ".avi", ".mkv"]
-$media_extensions = $image_extensions + $video_extensions
-
-unless File.respond_to?(:exists?)
-  class << File
-    alias_method :exists?, :exist?
+module Jekyll
+  module ArtGallery
+    IMAGE_EXTENSIONS = [".png", ".jpg", ".jpeg", ".gif"].freeze
+    VIDEO_EXTENSIONS = [".mp4", ".mov", ".m4v", ".avi", ".mkv"].freeze
+    MEDIA_EXTENSIONS = (IMAGE_EXTENSIONS + VIDEO_EXTENSIONS).freeze
   end
 end
+
+# Use File.exist? instead of the deprecated File.exists?
+# This compatibility layer is no longer needed in modern Ruby versions
 
 
 module Jekyll
@@ -55,7 +56,7 @@ module Jekyll
 
       self.process(@name)
       gallery_index = File.join(base, "_layouts", "art_gallery_index.html")
-      unless File.exists?(gallery_index)
+      unless File.exist?(gallery_index)
         gallery_index = File.join(File.dirname(__FILE__), "art_gallery_index.html")
       end
       self.read_yaml(File.dirname(gallery_index), File.basename(gallery_index))
@@ -65,9 +66,8 @@ module Jekyll
       begin
         sort_field = config["sort_field"] || "name"
         galleries.sort! {|a,b| a.data[sort_field] <=> b.data[sort_field]}
-      rescue Exception => e
-        puts "Error sorting galleries: #{e}"
-        puts e.backtrace
+      rescue StandardError => e
+        Jekyll.logger.error "Error sorting galleries: #{e.message}"
       end
       if config["sort_reverse"]
         galleries.reverse!
@@ -81,7 +81,7 @@ module Jekyll
           # available to liquid via site.data.gallery.galleries.[name]. subitems are manually defined in gallery.yml, and title, link, description, best_image etc and images array
           # inject additional auto-discovered data back into sitewide gallery object
           gallery_title=gallery.data["title"]
-          if site.data["gallery"]["galleries"].has_key?(gallery_title)
+          if site.data["gallery"]["galleries"].key?(gallery_title)
             site.data["gallery"]["galleries"][gallery_title].merge!(gallery.data)
           else
             site.data["gallery"]["galleries"][gallery_title]=gallery.data
@@ -118,12 +118,11 @@ module Jekyll
           galleries.merge!({k.downcase => v})
         end
       gallery_config = galleries[gallery_name.downcase] || {}
-      #puts "Generating #{gallery_name}: #{gallery_config}"
       sort_field = gallery_config["sort_field"] || config["sort_field"] || "name"
 
       self.process(@name)
       gallery_page = File.join(base, "_layouts", "art_gallery_page.html")
-      unless File.exists?(gallery_page)
+      unless File.exist?(gallery_page)
         gallery_page = File.join(File.dirname(__FILE__), "art_gallery_page.html")
       end
       self.read_yaml(File.dirname(gallery_page), File.basename(gallery_page))
@@ -151,7 +150,7 @@ module Jekyll
       date_times = {}
       Dir.foreach(dir) do |image|
         next if image.chars.first == "."
-        next unless image.downcase().end_with?(*$media_extensions)
+        next unless image.downcase().end_with?(*ArtGallery::MEDIA_EXTENSIONS)
 
         image_path = File.join(dir, image) # source image short path
         # img_src = site.in_source_dir(image_path) # absolute path for the source image
@@ -166,9 +165,8 @@ module Jekyll
             if date_array != nil && date_array.length > 0 and date_array[0].length > 1
               date_times[image]=DateTime.strptime(date_array[0][1],"%Y:%m:%d %H:%M:%S").to_time.to_i
             end
-            # puts "gtot #{date_array} date" + date_times[image].to_s
-          rescue Exception => e
-            puts "Error getting date_time "+date_times[image]+" for #{image}: #{e}"
+          rescue StandardError => e
+            Jekyll.logger.warn "Error getting date_time #{date_times[image]} for #{image}: #{e.message}"
           end
         end
           # cleanup, watermark and copy the files
@@ -184,16 +182,16 @@ module Jekyll
         if File.file?(dest_image_abs_path) == false or File.mtime(image_path) > File.mtime(dest_image_abs_path)
           if is_video?(image_path)
             # For videos: convert to web-compatible MP4 format
-            puts "Converting video #{image_path} to web-compatible MP4..."
+            Jekyll.logger.info "Converting video #{File.basename(image_path)} to web-compatible MP4..."
             
             # dest_image already has .mp4 extension from above adjustment
             # Convert using FFmpeg to H.264 for maximum browser compatibility
             success = system("ffmpeg -i \"#{image_path}\" -c:v libx264 -crf 23 -preset medium -c:a aac -b:a 128k -movflags +faststart -y \"#{dest_image_abs_path}\" 2>/dev/null")
             
             if success
-              puts "Successfully converted #{image_path} to #{dest_image}"
+              Jekyll.logger.info "Successfully converted #{File.basename(image_path)}"
             else
-              puts "Failed to convert video, copying original file..."
+              Jekyll.logger.warn "Failed to convert video, copying original file..."
               FileUtils.cp(image_path, dest_image_abs_path)
             end
           elsif config["strip_exif"] or config["watermark"] or config["size_limit"] # can't simply copy or symlink, need to pre-process the image
@@ -225,27 +223,25 @@ module Jekyll
               sf.relative_path == "/" + image_path
             }
             @site.static_files << GalleryFile.new(site, base, dir, image)
-            if File.exists?(link_dest) or File.symlink?(link_dest)
+            if File.exist?(link_dest) or File.symlink?(link_dest)
               if not File.symlink?(link_dest)
-                puts "#{link_dest} exists but is not a symlink. Deleting."
+                Jekyll.logger.debug "#{link_dest} exists but is not a symlink. Deleting."
                 File.delete(link_dest)
               elsif File.readlink(link_dest) != link_src
-                puts "#{link_dest} points to the wrong file. Deleting."
+                Jekyll.logger.debug "#{link_dest} points to the wrong file. Deleting."
                 File.delete(link_dest)
               end
             end
-            if not File.exists?(link_dest) and not File.symlink?(link_dest)
+            if not File.exist?(link_dest) and not File.symlink?(link_dest)
               File.symlink(link_src, link_dest)
             end
-            print "\n"
           else
-            puts "Copying #{image_path} to #{dest_image}..."
+            Jekyll.logger.debug "Copying #{File.basename(image_path)}..."
             FileUtils.cp(image_path,dest_image_abs_path)
           end
         end
         # Add file descriptions if defined
-        if gallery_config.has_key?(image)
-          # puts "added ${image} = #{gallery_config[image]}"
+        if gallery_config.key?(image)
           self.data["captions"][dest_image]=gallery_config[image]
         else
           # If not defined add a trimmed filename to help with SEO
@@ -280,9 +276,8 @@ module Jekyll
         if gallery_config["sort_reverse"]
           @images.reverse!
         end
-      rescue Exception => e
-        puts "Error sorting images in gallery #{gallery_name}: #{e}"
-        # puts e.backtrace
+      rescue StandardError => e
+        Jekyll.logger.error "Error sorting images in gallery #{gallery_name}: #{e.message}"
       end
 
       site.static_files = @site.static_files
@@ -306,7 +301,7 @@ module Jekyll
 
     # Check if file is a video
     def is_video?(file_path)
-      $video_extensions.any? { |ext| file_path.downcase.end_with?(ext) }
+      ArtGallery::VIDEO_EXTENSIONS.any? { |ext| file_path.downcase.end_with?(ext) }
     end
 
     # Generate video thumbnail using FFmpeg
@@ -328,11 +323,11 @@ module Jekyll
         File.delete(temp_frame)
         return true
       else
-        puts "Warning: Could not extract frame from video #{video_path}"
+        Jekyll.logger.warn "Could not extract frame from video #{File.basename(video_path)}"
         return false
       end
-    rescue Exception => e
-      puts "Error generating video thumbnail for #{video_path}: #{e}"
+    rescue StandardError => e
+      Jekyll.logger.error "Error generating video thumbnail for #{File.basename(video_path)}: #{e.message}"
       File.delete(temp_frame) if File.exist?(temp_frame)
       return false
     end
@@ -349,10 +344,10 @@ module Jekyll
         begin
           if is_video?(image_path)
             # Handle video thumbnail generation
-            puts "Generating video thumbnail for #{dest_image}..."
+            Jekyll.logger.debug "Generating video thumbnail for #{File.basename(dest_image)}..."
             success = generate_video_thumb(image_path, thumb_path, thumb_x, thumb_y)
             unless success
-              puts "Failed to generate video thumbnail, creating placeholder"
+              Jekyll.logger.warn "Failed to generate video thumbnail, creating placeholder"
               # Create a simple placeholder thumbnail
               placeholder = Image.new(thumb_x, thumb_y) { self.background_color = 'black' }
               placeholder.annotate(AdaptiveThresholdMark.new) { |txt|
@@ -382,12 +377,11 @@ module Jekyll
               end
             # strip EXIF from thumbnails. Some browsers, notably, Safari on iOS will try to rotate images according to the 'orientation' tag which is no longer valid in case of thumbnails
             m_image.strip!
-            puts "Writing thumbnail to #{thumb_path}"
+            Jekyll.logger.debug "Writing thumbnail to #{File.basename(thumb_path)}"
             m_image.write(thumb_path)
           end
-        rescue Exception => e
-          puts "Error generating thumbnail for #{image_path}: #{e}"
-          # puts e.backtrace
+        rescue StandardError => e
+          Jekyll.logger.error "Error generating thumbnail for #{File.basename(image_path)}: #{e.message}"
         end
       end
       # record the thumbnail (use the JPEG filename for videos)
@@ -418,9 +412,8 @@ module Jekyll
             galleries << gallery
           end
         end
-      rescue Exception => e
-        puts "Error generating galleries: #{e}"
-        puts e.backtrace
+      rescue StandardError => e
+        Jekyll.logger.error "Error generating galleries: #{e.message}"
       end
       Dir.chdir(original_dir)
 
