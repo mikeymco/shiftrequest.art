@@ -51,13 +51,17 @@ galleries:
     # soundcloud_playlist: "sets/playlist-name"   # Playlist/set from SoundCloud share URL
   # dark:
   #   title: DARK # NSFW as fuck! - You're welcome. X_X
-  #   description: UNKNOWN.shiftrequest
+  #   description: transit:CORRUPT:BLACK>?LASTRESORT
   #   sort_field: apple_photos
   #   scale_method: crop
+  #   nsfw: true
+  #   show_social_panel: true
   #   spotify_track: "3DQs678YUdTMJ0FG7EDWzf"
   # darkall:
-  #   title: DARKALL # NSFW as fuck! (NIGHTMARE MODE) - X_X
-  #   description: UNKNOWN.shiftrequest
+  #   title: DARK # NSFW as fuck! (NIGHTMARE MODE) - X_X
+  #   description: transit:CORRUPT>VOID>?THISGOD
   #   sort_field: apple_photos
   #   scale_method: crop
+  #   nsfw: true
+  #   show_social_panel: true
   #   soundcloud_track: "phuturedoom/thebook"
