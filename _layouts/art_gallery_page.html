@@ -13,7 +13,7 @@ header:
 	
 	<!-- Gallery Images -->
 	{% for image in page.images %}
-	<a href="#" class="gallery-link" data-image="{{ image }}" data-index="{{ forloop.index0 }}" role="gridcell" aria-label="View {% if page.captions[image] %}{{ page.captions[image] }}{% else %}image {{ forloop.index }} of {{ page.images.size }}{% endif %}">
+	<a href="#" class="gallery-item-link" data-image="{{ image }}" data-index="{{ forloop.index0 }}" role="gridcell" aria-label="View {% if page.captions[image] %}{{ page.captions[image] }}{% else %}image {{ forloop.index }} of {{ page.images.size }}{% endif %}">
 		{% include video_detection.liquid filename=image %}
 		
 		{% if page.captions[image] == nil %}

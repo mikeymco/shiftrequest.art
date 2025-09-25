@@ -7,7 +7,7 @@
 		video: document.getElementById('overlay-video'),
 		caption: document.getElementById('overlay-caption'),
 		loadingIndicator: document.getElementById('loading-indicator'),
-		links: document.querySelectorAll('.gallery-link'),
+		links: document.querySelectorAll('.gallery-item-link'),
 		closeBtn: document.querySelector('.overlay-close'),
 		background: document.querySelector('.overlay-background'),
 		nextBtn: document.querySelector('.overlay-next'),
