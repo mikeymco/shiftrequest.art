@@ -1,7 +1,7 @@
 {
-  "name": "UNKNOWN.shiftrequest",
+  "name": "shiftrequest.art",
   "short_name": "shiftrequest",
-  "description": "UNKNOWN:connection.request",
+  "description": "shiftrequest.art",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",

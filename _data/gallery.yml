@@ -39,7 +39,7 @@ social_links:
 galleries:
   main:
     title: MAIN # name used in the navigation bar and headers
-    description: UNKNOWN.shiftrequest
+    description: shiftrequest.art
     sort_field: apple_photos # rule for sorting images within galleries - parses Apple Photos filename numbers
     scale_method: crop
     # Optional: Add music for this gallery
