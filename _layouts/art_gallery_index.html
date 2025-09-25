@@ -3,7 +3,10 @@ layout: default
 # This page is used for the main index of galleries
 ---
 
-<div class="thumbnail-grid">
+<div class="thumbnail-grid" data-clearing role="grid" aria-label="Gallery index">
+    <!-- Social Media Tile (First tile) -->
+    {% include social-tile.html %}
+    
     {% for gallery in page.galleries %}
     <li>
     <a href="{{ gallery['link'] }}">

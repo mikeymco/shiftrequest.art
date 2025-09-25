@@ -42,8 +42,6 @@ galleries:
     description: UNKNOWN.shiftrequest
     sort_field: apple_photos # rule for sorting images within galleries - parses Apple Photos filename numbers
     scale_method: crop
-    # Social media panel configuration
-    show_social_panel: true  # Opt-in / Show social links panel for SFW galleries only
     # Optional: Add music for this gallery
     # spotify_playlist: "6mWnyOevjXsigshH9vPv7J"  # Playlist ID from Spotify share URL
     # spotify_track: "6w0oCUVyKsBq9AtrdEj3pz"     # Single track ID from Spotify share URL
