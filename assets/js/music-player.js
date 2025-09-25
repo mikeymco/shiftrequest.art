@@ -1,12 +1,11 @@
 /**
  * Music Player Management
- * Handles Spotify embed visibility, close/restore functionality, and footer hints
+ * Handles Spotify embed visibility, close/restore functionality
  */
 class MusicPlayer {
 	constructor() {
 		this.musicSection = document.querySelector('.music-section');
 		this.closeButton = document.querySelector('.close-music');
-		this.footer = document.querySelector('.footer-text');
 		this.storageKey = 'musicPlayerHidden';
 		
 		this.init();
@@ -35,16 +34,6 @@ class MusicPlayer {
 			this.closeButton.addEventListener('click', () => {
 				this.hidePlayer();
 				this.rememberChoice(true);
-			});
-		}
-		
-		// Footer click to restore (sadistic easter egg)
-		if (this.footer) {
-			this.footer.addEventListener('click', () => {
-				if (this.isHidden()) {
-					this.showPlayer();
-					this.rememberChoice(false);
-				}
 			});
 		}
 	}

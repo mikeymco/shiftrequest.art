@@ -13,11 +13,6 @@ main {
   flex: 1;
 }
 
-// Only add bottom padding when music player is present and visible
-body.has-music {
-  padding-bottom: 80px;
-}
-
 ul {
   list-style-type: none;
   margin: 0;
@@ -37,12 +32,6 @@ footer {
     color: white;
     transition: color 0.3s ease;
   }
-}
-
-body:not(.has-music) footer p {
-  color: #cc032c;
-  opacity: 0.8;
-  cursor: pointer;
 }
 
 .github-link {

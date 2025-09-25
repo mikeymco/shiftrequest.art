@@ -85,3 +85,8 @@
 		width: 100%;
 	}
 }
+
+// Only add bottom padding when music player is present and visible
+body.has-music {
+  padding-bottom: 80px;
+}
