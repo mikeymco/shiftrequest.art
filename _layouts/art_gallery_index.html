@@ -8,7 +8,7 @@ layout: default
     
     {% for gallery in page.galleries %}
     <a href="{{ gallery['link'] }}" class="gallery-link">
-        <img class="thumbnail" src="{{ gallery['link'] }}/thumbs/front_{{ gallery['best_image'] }}">
+        <img class="thumbnail" src="{{ gallery['link'] }}thumbs/front_{{ gallery['best_image'] }}">
         <h3 class="thumbnail-label">{{ gallery["title"] }}</h3>
     </a>
     {% endfor %}
