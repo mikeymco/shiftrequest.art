@@ -32,10 +32,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white;
-    font-size: 54px;
-    padding: 8px 12px;
-    border-radius: 50%;
+    width: 0;
+    height: 0;
+    border-left: 30px solid #fff;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
     pointer-events: none;
     z-index: 10;
   }
