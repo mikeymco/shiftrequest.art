@@ -23,7 +23,7 @@ class ContentGate {
         const templateHTML = await templateResponse.text();
         
         const overlay = document.createElement('div');
-        overlay.className = 'consent-overlay';
+        overlay.className = 'consent-dialog';
         overlay.innerHTML = templateHTML;
         
         document.body.appendChild(overlay);
@@ -41,7 +41,7 @@ class ContentGate {
     
     enterSite() {
         // Remove gate overlay
-        document.querySelector('.consent-overlay').remove();
+        document.querySelector('.consent-dialog').remove();
         document.body.style.overflow = '';        
     }
 }
