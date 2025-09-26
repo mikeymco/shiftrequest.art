@@ -5,129 +5,34 @@ header:
     title: default
     background-color: "black"
 ---
+<!-- {{ page.description }} -->
 <div class="thumbnail-grid" data-clearing role="grid" aria-label="Image gallery">
-	{% assign gallery_config = site.data.gallery.galleries[page.gallery] %}
-	
 	<!-- Social Media Tile (First tile) -->
 	{% include social-tile.html %}
 	
 	<!-- Gallery Images -->
 	{% for image in page.images %}
-	<a href="#" class="gallery-item-link" data-image="{{ image }}" data-index="{{ forloop.index0 }}" role="gridcell" aria-label="View {% if page.captions[image] %}{{ page.captions[image] }}{% else %}image {{ forloop.index }} of {{ page.images.size }}{% endif %}">
+	<a href="#"
+		class="gallery-item-link"
+		data-image="{{ image }}"
+		data-index="{{ forloop.index0 }}"
+		role="gridcell"
+		aria-label="View {% if page.captions[image] %}{{ page.captions[image] }}{% else %}image {{ forloop.index }} of {{ page.images.size }}{% endif %}">		
+		<img
+			class="thumbnail"
+			data-caption="{{ page.captions[image] }}."
+			src="thumbs/{% include thumbnail_path.liquid filename=image %}"
+			alt="{{ page.captions[image] }}"
+			title="{{ page.captions[image] }}"
+			loading="lazy"
+		>
 		{% include video_detection.liquid filename=image %}
-		
-		{% if page.captions[image] == nil %}
-			{% if is_video %}
-				<img class="thumbnail video-thumb" src="thumbs/{% include thumbnail_path.liquid filename=image %}" alt="Video thumbnail {{ forloop.index }}" loading="lazy">
-				<div class="video-indicator" aria-hidden="true">▶</div>
-			{% else %}
-				<img class="thumbnail" src="thumbs/{% include thumbnail_path.liquid filename=image %}" alt="Image {{ forloop.index }}" loading="lazy">
-			{% endif %}
-		{% else %}
-			{% if is_video %}
-				<img class="thumbnail video-thumb" data-caption="{{ page.captions[image] }}.  " src="thumbs/{% include thumbnail_path.liquid filename=image %}" alt="{{ page.captions[image] }}" title="{{ page.captions[image] }}" loading="lazy">
-				<div class="video-indicator" aria-hidden="true">▶</div>
-			{% else %}
-				<img class="thumbnail" data-caption="{{ page.captions[image] }}.  " src="thumbs/{% include thumbnail_path.liquid filename=image %}" alt="{{ page.captions[image] }}" title="{{ page.captions[image] }}" loading="lazy">
-			{% endif %}
+		{% if is_video %}
+		<div class="video-indicator" aria-hidden="true">▶</div>
 		{% endif %}
 	</a>
 	{% endfor %}
 </div>
 
-<!-- Music Section - Spotify & SoundCloud -->
-{% assign gallery_config = site.data.gallery.galleries[page.gallery] %}
-{% if gallery_config.spotify_playlist or gallery_config.spotify_track or gallery_config.soundcloud_track or gallery_config.soundcloud_playlist %}
-<div class="music-section">
-	<button class="close-music" aria-label="Close music player">×</button>
-	
-	{% if gallery_config.spotify_playlist %}
-	<div class="spotify-container">
-		<iframe class="spotify-playlist" style="border-radius:12px" 
-			src="https://open.spotify.com/embed/playlist/{{ gallery_config.spotify_playlist }}?utm_source=generator&theme=0" 
-			frameBorder="0" 
-			allowfullscreen="" 
-			allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-			loading="lazy"
-			title="Gallery Soundtrack">
-		</iframe>
-	</div>
-	{% elsif gallery_config.spotify_track %}
-	<div class="spotify-container">
-		<iframe class="spotify-track" style="border-radius:12px" 
-			src="https://open.spotify.com/embed/track/{{ gallery_config.spotify_track }}?utm_source=generator&theme=0" 
-			frameBorder="0" 
-			allowfullscreen="" 
-			allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-			loading="lazy"
-			title="Gallery Soundtrack">
-		</iframe>
-	</div>
-	{% elsif gallery_config.soundcloud_track %}
-	<div class="soundcloud-container">
-		{% comment %} Handle both numeric IDs and permalink formats {% endcomment %}
-		{% if gallery_config.soundcloud_track contains "/" %}
-			{% assign sc_url = "https%3A//soundcloud.com/" | append: gallery_config.soundcloud_track %}
-		{% else %}
-			{% assign sc_url = "https%3A//api.soundcloud.com/tracks/" | append: gallery_config.soundcloud_track %}
-		{% endif %}
-		<iframe class="soundcloud-track" 
-			src="https://w.soundcloud.com/player/?url={{ sc_url }}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true" 
-			frameBorder="0" 
-			allow="autoplay" 
-			loading="lazy"
-			title="Gallery Soundtrack">
-		</iframe>
-	</div>
-	{% elsif gallery_config.soundcloud_playlist %}
-	<div class="soundcloud-container">
-		<iframe class="soundcloud-playlist" 
-			src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/{{ gallery_config.soundcloud_playlist }}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true" 
-			frameBorder="0" 
-			allow="autoplay" 
-			loading="lazy"
-			title="Gallery Soundtrack">
-		</iframe>
-	</div>
-	{% endif %}
-</div>
-{% endif %}
-
-<!-- Full-screen image overlay -->
-<div id="image-overlay" class="image-overlay" role="dialog" aria-modal="true" aria-labelledby="overlay-caption" aria-hidden="true">
-	<div class="overlay-background"></div>
-	<div class="overlay-content">
-		<img id="overlay-image" src="" alt="" style="display: none;">
-		<video id="overlay-video" controls preload="metadata" style="display: none;" aria-label="Gallery video">
-			<source src="" type="">
-			Your browser does not support the video tag.
-		</video>
-		<div class="loading-indicator" id="loading-indicator" aria-label="Loading content"></div>
-		<div class="overlay-caption" id="overlay-caption"></div>
-	</div>
-	<button class="overlay-close" aria-label="Close gallery overlay">&times;</button>
-	<button class="overlay-prev" aria-label="Previous image">&#8249;</button>
-	<button class="overlay-next" aria-label="Next image">&#8250;</button>
-</div>
-
-<script>
-// Define gallery images for the overlay script
-var galleryImages = [
-	{% for image in page.images %}
-	{% include video_detection.liquid filename=image %}
-	{
-		thumb: 'thumbs/{% include thumbnail_path.liquid filename=image %}',
-		src: '{{ image }}',
-		caption: '{% if page.captions[image] %}{{ page.captions[image] | escape }}{% else %}Ask me about this work{% endif %}',
-		isVideo: {% if is_video %}true{% else %}false{% endif %}
-	}{% unless forloop.last %},{% endunless %}
-	{% endfor %}
-];
-</script>
-<!-- Gallery Overlay JavaScript -->
-<script src="{{ '/assets/js/gallery-overlay.js' | relative_url }}"></script>
-
-<!-- Music Player Management -->
-<script src="{{ '/assets/js/music-player.js' | relative_url }}"></script>
-
-<!-- {{ page.description }} -->
+{% include gallery-item-viewer.html %}
+{% include music-section.html %}

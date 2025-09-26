@@ -9,9 +9,6 @@
     <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
     
-    <!-- Preload critical resources -->
-    <link rel="preload" href="{{ '/assets/js/gallery-overlay.js' | relative_url }}" as="script">
-    
     <!-- Favicon and touch icons -->
     <link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon.png' | relative_url }}">
     <link rel="icon" type="image/png" sizes="192x192" href="{{ '/favicon-192x192.png' | relative_url }}">
@@ -32,16 +29,19 @@
     
     <!-- Jekyll feed -->
     {% feed_meta %}
+
+    <!-- Visitor NSFW Consent Dialog -->
+    {% assign gallery_config = site.data.gallery.galleries[page.gallery] %}
+    {% if gallery_config.nsfw %}<script src="{{ '/assets/js/visitor-consent.js' | relative_url }}"></script>{% endif %}
+
 </head>
-<body>
+<body {% if gallery_config.nsfw %}style="display: none;"{% endif %}>
     <main>
         {{ content }}
     </main>
     <footer>
-        <p>
-            <span class="footer-text">&copy; {{ 'now' | date: '%Y' }} - Michael McOrmond - All rights reserved - </span>
-            <a class="github-link" href="https://github.com/mikeymco/shiftrequest.art" target="_blank" rel="noopener">Source on GitHub</a>
-        </p>
+        <span class="footer-text">&copy; {{ 'now' | date: '%Y' }} - Michael McOrmond - All rights reserved - </span>
+        <a class="github-link" href="https://github.com/mikeymco/shiftrequest.art" target="_blank" rel="noopener">Source on GitHub</a>
     </footer>
 </body>
 </html>

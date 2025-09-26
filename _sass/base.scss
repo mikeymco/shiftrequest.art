@@ -24,18 +24,15 @@ footer {
   padding: 2rem;
   text-align: center;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  
-  p {
-    margin: 0;
-    font-size: 0.9rem;
-    opacity: 0.6;
-    color: white;
-    transition: color 0.3s ease;
-  }
+}
+
+.github-link, .footer-text {
+  color: #cc032c;
+  font-size: 0.9rem;
+  opacity: 0.6;
 }
 
 .github-link {
-  color: #cc032c;
   text-decoration: none;
   &:hover {
     text-decoration: underline;

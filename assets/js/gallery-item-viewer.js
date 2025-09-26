@@ -1,4 +1,4 @@
-// Gallery overlay functionality with URL state
+// Gallery item viewer functionality with URL state
 (function() {
 	// Constants and DOM elements
 	const DOM = {
