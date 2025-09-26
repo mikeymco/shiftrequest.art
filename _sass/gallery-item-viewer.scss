@@ -1,5 +1,5 @@
-// Full-screen image overlay
-.image-overlay {
+// Full-screen gallery item viewer
+.gallery-item-viewer {
   position: fixed;
   top: 0;
   left: 0;
@@ -19,7 +19,7 @@
     visibility: visible;
   }
   
-  .overlay-background {
+  .viewer-background {
     position: absolute;
     top: 0;
     left: 0;
@@ -28,7 +28,7 @@
     cursor: pointer;
   }
   
-  .overlay-content {
+  .viewer-content {
     position: relative;
     max-width: 90vw;
     max-height: 90vh;
@@ -48,7 +48,7 @@
       }
     }
     
-    .overlay-caption {
+    .viewer-caption {
       display: none;
       margin-top: 20px;
       text-align: center;
@@ -87,9 +87,9 @@
     }
   }
   
-  .overlay-close,
-  .overlay-prev,
-  .overlay-next {
+  .viewer-close,
+  .viewer-prev,
+  .viewer-next {
     position: absolute;
     background: transparent;
     border: none;
@@ -104,14 +104,14 @@
     }
   }
   
-  .overlay-close {
+  .viewer-close {
     top: 20px;
     right: 20px;
     font-size: 32px;
     font-weight: bold;
   }
   
-  .overlay-prev {
+  .viewer-prev {
     left: 20px;
     top: 50%;
     transform: translateY(-50%);
@@ -119,7 +119,7 @@
     font-weight: bold;
   }
   
-  .overlay-next {
+  .viewer-next {
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
@@ -130,9 +130,9 @@
 
 // Hide navigation buttons on small screens
 @media (max-width: 768px) {
-  .image-overlay {
-    .overlay-prev,
-    .overlay-next {
+  .gallery-item-viewer {
+    .viewer-prev,
+    .viewer-next {
       display: none;
     }
   }

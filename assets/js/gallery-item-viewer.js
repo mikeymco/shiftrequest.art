@@ -2,21 +2,21 @@
 (function() {
 	// Constants and DOM elements
 	const DOM = {
-		overlay: document.getElementById('image-overlay'),
-		image: document.getElementById('overlay-image'),
-		video: document.getElementById('overlay-video'),
-		caption: document.getElementById('overlay-caption'),
+		overlay: document.getElementById('gallery-item-viewer'),
+		image: document.getElementById('viewer-image'),
+		video: document.getElementById('viewer-video'),
+		caption: document.getElementById('viewer-caption'),
 		loadingIndicator: document.getElementById('loading-indicator'),
 		links: document.querySelectorAll('.gallery-item-link'),
-		closeBtn: document.querySelector('.overlay-close'),
-		background: document.querySelector('.overlay-background'),
-		nextBtn: document.querySelector('.overlay-next'),
-		prevBtn: document.querySelector('.overlay-prev')
+		closeBtn: document.querySelector('.viewer-close'),
+		background: document.querySelector('.viewer-background'),
+		nextBtn: document.querySelector('.viewer-next'),
+		prevBtn: document.querySelector('.viewer-prev')
 	};
 	
 	// State
 	let currentIndex = 0;
-	let isOverlayOpen = false;
+	let isViewerOpen = false;
 	
 	// Check if gallery data exists
 	if (typeof galleryImages === 'undefined') {
@@ -31,23 +31,23 @@
 		const params = new URLSearchParams(window.location.search);
 		return {
 			image: parseInt(params.get('image')) || null,
-			overlay: params.get('overlay') === 'true'
+			viewer: params.get('viewer') === 'true'
 		};
 	}
 	
 	// Update URL without reloading page
-	function updateUrl(index = null, showOverlay = false) {
+	function updateUrl(index = null, showViewer = false) {
 		const url = new URL(window.location);
 		
-		if (showOverlay && index !== null) {
-			url.searchParams.set('overlay', 'true');
+		if (showViewer && index !== null) {
+			url.searchParams.set('viewer', 'true');
 			url.searchParams.set('image', index.toString());
 		} else {
-			url.searchParams.delete('overlay');
+			url.searchParams.delete('viewer');
 			url.searchParams.delete('image');
 		}
 		
-		window.history.pushState({ overlay: showOverlay, image: index }, '', url);
+		window.history.pushState({ viewer: showViewer, image: index }, '', url);
 	}
 	
 	// Loading indicator functions
@@ -113,10 +113,10 @@
 		DOM.video.addEventListener('error', handleVideoError);
 	}
 	
-	// Show overlay with specific image or video
-	function showOverlay(index, updateHistory = true) {
+	// Show viewer with specific image or video
+	function showViewer(index, updateHistory = true) {
 		currentIndex = index;
-		isOverlayOpen = true;
+		isViewerOpen = true;
 		
 		// Display the appropriate media type
 		if (images[index].isVideo) {
@@ -138,9 +138,9 @@
 		}
 	}
 	
-	// Hide overlay
-	function hideOverlay(updateHistory = true) {
-		isOverlayOpen = false;
+	// Hide viewer
+	function hideViewer(updateHistory = true) {
+		isViewerOpen = false;
 		hideLoading(); // Ensure loading indicator is hidden
 		DOM.overlay.classList.remove('active');
 		DOM.overlay.setAttribute('aria-hidden', 'true');
@@ -154,23 +154,23 @@
 	// Navigate to next image
 	function nextImage() {
 		currentIndex = (currentIndex + 1) % images.length;
-		showOverlay(currentIndex, true);
+		showViewer(currentIndex, true);
 	}
 	
 	// Navigate to previous image
 	function prevImage() {
 		currentIndex = (currentIndex - 1 + images.length) % images.length;
-		showOverlay(currentIndex, true);
+		showViewer(currentIndex, true);
 	}
 	
 	// Handle browser back/forward
 	function handlePopState(event) {
 		const state = event.state || {};
 		
-		if (state.overlay && state.image !== null && state.image !== undefined) {
-			showOverlay(state.image, false);
+		if (state.viewer && state.image !== null && state.image !== undefined) {
+			showViewer(state.image, false);
 		} else {
-			hideOverlay(false);
+			hideViewer(false);
 		}
 	}
 	
@@ -178,8 +178,8 @@
 	function initializeFromUrl() {
 		const params = getUrlParams();
 		
-		if (params.overlay && params.image !== null && params.image < images.length) {
-			showOverlay(params.image, false);
+		if (params.viewer && params.image !== null && params.image < images.length) {
+			showViewer(params.image, false);
 		}
 	}
 	
@@ -189,13 +189,13 @@
 		DOM.links.forEach((link, index) => {
 			link.addEventListener('click', (e) => {
 				e.preventDefault();
-				showOverlay(index);
+				showViewer(index);
 			});
 		});
 		
-		// Close overlay
-		DOM.closeBtn.addEventListener('click', hideOverlay);
-		DOM.background.addEventListener('click', hideOverlay);
+		// Close viewer
+		DOM.closeBtn.addEventListener('click', hideViewer);
+		DOM.background.addEventListener('click', hideViewer);
 		
 		// Navigation buttons
 		DOM.nextBtn.addEventListener('click', nextImage);
@@ -226,11 +226,11 @@
 		
 		// Keyboard navigation
 		document.addEventListener('keydown', (e) => {
-			if (!isOverlayOpen) return;
+			if (!isViewerOpen) return;
 			
 			switch(e.key) {
 				case 'Escape':
-					hideOverlay();
+					hideViewer();
 					break;
 				case 'ArrowRight':
 				case ' ':
@@ -255,7 +255,7 @@
 		
 		// Set initial history state if not already set
 		if (!window.history.state) {
-			window.history.replaceState({ overlay: false, image: null }, '', window.location);
+			window.history.replaceState({ viewer: false, image: null }, '', window.location);
 		}
 	}
 	
