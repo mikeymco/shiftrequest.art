@@ -1,4 +1,7 @@
 <!-- NSFW Gallery Link Tile -->
-<a href="javascript:void(0)" class="gallery-item--link gallery-link-tile" role="gridcell" aria-label="NSFW gallery link">
+{% assign gallery_config = site.data.gallery.galleries[page.gallery] %}
+{% if gallery_config.gallery_link %}
+<a href="javascript:void(0)" class="gallery-item--link gallery-link-tile" role="gridcell" aria-label="Gallery link: {{ gallery_config.gallery_link }}">
 	<span class="gallery-lock-icon" aria-hidden="true"></span>
 </a>
+{% endif %}
