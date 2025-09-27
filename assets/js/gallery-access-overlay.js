@@ -18,10 +18,6 @@
 	function initializeOverlay() {
 		if (DOM.overlay) return; // Already initialized
 		
-		// Template is already in DOM, just get references
-		DOM.overlay = document.getElementById('gallery-access-overlay');
-		
-		// Update DOM references
 		DOM.overlay = document.getElementById('gallery-access-overlay');
 		DOM.input = document.getElementById('access-code');
 		DOM.submitBtn = document.querySelector('.gallery-access__submit');
