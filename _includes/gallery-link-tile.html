@@ -5,12 +5,13 @@
     {% if target_gallery.nsfw %}
     <a
         href="javascript:void(0)"
-        class="gallery-item gallery-item--link gallery-link-tile"
+        class="gallery-item gallery-item--link gallery-link-tile gallery-link-tile--locked"
         role="gridcell"
         aria-label="Gallery link: {{ target_gallery.title }}"
     >
         <span class="gallery-lock-icon" aria-hidden="true"></span>
     </a>
+    <script src="{{ '/assets/js/gallery-link-tile.js' | relative_url }}"></script>
     {% else %}
     <a
         href="../{{ gallery_config.gallery_link }}/"
