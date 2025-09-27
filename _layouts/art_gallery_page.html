@@ -10,10 +10,13 @@ header:
 	<!-- Social Media Tile (First tile) -->
 	{% include social-tile.html %}
 	
+	<!-- NSFW gallery link tile -->
+	{% include gallery-link-tile.html %}
+	
 	<!-- Gallery Images -->
 	{% for image in page.images %}
 	<a href="#"
-		class="gallery-item-link"
+		class="gallery-item--link"
 		data-image="{{ image }}"
 		data-index="{{ forloop.index0 }}"
 		role="gridcell"
