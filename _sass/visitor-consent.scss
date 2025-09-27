@@ -5,10 +5,10 @@ $breakpoint-height: 680px;
 $text-max-width: 520px;
 
 // Color variables
-$matrix-green: #00ff00;
-$matrix-green-glow: rgba(0, 255, 0, 0.5);
-$matrix-green-soft-glow: rgba(0, 255, 0, 0.3);
-$matrix-dark-bg: rgba(0, 20, 0, 0.95);
+$matrix-red: #ff0000;
+$matrix-red-glow: rgba(255, 0, 0, 0.5);
+$matrix-red-soft-glow: rgba(255, 0, 0, 0.3);
+$matrix-dark-bg: rgba(20, 0, 0, 0.95);
 $text-light-gray: #cccccc;
 $text-dark-gray: #888888;
 $warning-red: #ff4444;
@@ -22,7 +22,7 @@ $warning-red: #ff4444;
   overflow-y: auto;
   z-index: 10000;
   box-sizing: border-box;
-  border: 2px solid $matrix-green;
+  border: 2px solid $matrix-red;
   background: $matrix-dark-bg;
   backdrop-filter: blur(5px); 
   font-family: 'Courier New', monospace;
@@ -57,15 +57,15 @@ $warning-red: #ff4444;
     @media (min-width: $breakpoint-width)
        and (min-height: $breakpoint-height) {
       padding: 3rem;
-      border: 2px solid $matrix-green;
-      box-shadow: 0 0 20px $matrix-green-soft-glow;
+      border: 2px solid $matrix-red;
+      box-shadow: 0 0 20px $matrix-red-soft-glow;
       background: #000;
     }
     
     h1 {
-      color: $matrix-green;
+      color: $matrix-red;
       text-align: center;
-      text-shadow: 0 0 10px $matrix-green-glow;
+      text-shadow: 0 0 10px $matrix-red-glow;
       font-size: 2rem;
       margin-top: 0;
     }
