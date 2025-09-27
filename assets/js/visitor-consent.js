@@ -17,16 +17,12 @@ class ContentGate {
         this.createGateOverlay();
     }
 
-    async createGateOverlay() {
-        // Load template from external HTML file
-        const templateResponse = await fetch('/assets/templates/visitor-consent.html');
-        const templateHTML = await templateResponse.text();
-        
-        const overlay = document.createElement('div');
-        overlay.className = 'consent-dialog';
-        overlay.innerHTML = templateHTML;
-        
-        document.body.appendChild(overlay);
+    createGateOverlay() {
+        // Template is already rendered in HTML by Jekyll
+        const overlay = document.querySelector('.consent-dialog');
+        if (overlay) {
+            overlay.style.display = 'block';
+        }
         document.body.style.display = '';
     }
     

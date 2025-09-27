@@ -25,6 +25,7 @@ $warning-red: #ff4444;
   border: 2px solid $matrix-red;
   background: $matrix-dark-bg;
   backdrop-filter: blur(5px); 
+  cursor: not-allowed;
   font-family: 'Courier New', monospace;
 
   @media (min-width: $breakpoint-width)
@@ -53,6 +54,7 @@ $warning-red: #ff4444;
     flex-direction: column;
     align-items: stretch;
     justify-content: center;
+    cursor: default;
 
     @media (min-width: $breakpoint-width)
        and (min-height: $breakpoint-height) {

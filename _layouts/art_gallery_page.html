@@ -42,4 +42,4 @@ header:
 
 <!-- Visitor NSFW Consent Dialog -->
 {% assign gallery_config = site.data.gallery.galleries[page.gallery] %}
-{% if gallery_config.nsfw %}<script src="{{ '/assets/js/visitor-consent.js' | relative_url }}"></script>{% endif %}
+{% if gallery_config.nsfw %}{% include visitor-consent.html %}{% endif %}

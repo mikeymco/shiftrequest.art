@@ -14,18 +14,12 @@
 	// State
 	let isOverlayOpen = false;
 	
-	// Create overlay dynamically
-	async function createOverlay() {
-		if (DOM.overlay) return; // Already created
+	// Initialize overlay (template already rendered by Jekyll)
+	function initializeOverlay() {
+		if (DOM.overlay) return; // Already initialized
 		
-		// Load template from external HTML file
-		const templateResponse = await fetch('/assets/templates/gallery-access-overlay.html');
-		const templateHTML = await templateResponse.text();
-		
-		const overlay = document.createElement('div');
-		overlay.innerHTML = templateHTML;
-		
-		document.body.appendChild(overlay.firstElementChild);
+		// Template is already in DOM, just get references
+		DOM.overlay = document.getElementById('gallery-access-overlay');
 		
 		// Update DOM references
 		DOM.overlay = document.getElementById('gallery-access-overlay');
@@ -40,8 +34,8 @@
 	}
 	
 	// Show overlay
-	async function showOverlay() {
-		if (!DOM.overlay) await createOverlay();
+	function showOverlay() {
+		if (!DOM.overlay) initializeOverlay();
 		
 		isOverlayOpen = true;
 		DOM.overlay.classList.add('active');
@@ -149,9 +143,9 @@
 	function init() {
 		if (!DOM.trigger) return;
 		
-		DOM.trigger.addEventListener('click', async (e) => {
+		DOM.trigger.addEventListener('click', (e) => {
 			e.preventDefault();
-			await showOverlay();
+			showOverlay();
 		});
 	}
 	
