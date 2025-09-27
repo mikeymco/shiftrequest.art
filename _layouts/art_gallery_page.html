@@ -39,3 +39,7 @@ header:
 
 {% include gallery-item-viewer.html %}
 {% include music-section.html %}
+
+<!-- Visitor NSFW Consent Dialog -->
+{% assign gallery_config = site.data.gallery.galleries[page.gallery] %}
+{% if gallery_config.nsfw %}<script src="{{ '/assets/js/visitor-consent.js' | relative_url }}"></script>{% endif %}
