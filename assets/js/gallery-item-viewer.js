@@ -7,7 +7,7 @@
 		video: document.getElementById('viewer-video'),
 		caption: document.getElementById('viewer-caption'),
 		loadingIndicator: document.getElementById('loading-indicator'),
-		links: document.querySelectorAll('.gallery-item--link'),
+		links: document.querySelectorAll('.gallery-item--media'),
 		closeBtn: document.querySelector('.viewer-close'),
 		background: document.querySelector('.viewer-background'),
 		nextBtn: document.querySelector('.viewer-next'),

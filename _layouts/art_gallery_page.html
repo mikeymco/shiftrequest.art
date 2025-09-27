@@ -9,14 +9,14 @@ header:
 <div class="thumbnail-grid" data-clearing role="grid" aria-label="Image gallery">
 	<!-- Social Media Tile (First tile) -->
 	{% include social-tile.html %}
-	
-	<!-- NSFW gallery link tile -->
+
+	<!-- Gallery Link Tile -->
 	{% include gallery-link-tile.html %}
 	
 	<!-- Gallery Images -->
 	{% for image in page.images %}
 	<a href="#"
-		class="gallery-item--link"
+		class="gallery-item gallery-item--media"
 		data-image="{{ image }}"
 		data-index="{{ forloop.index0 }}"
 		role="gridcell"

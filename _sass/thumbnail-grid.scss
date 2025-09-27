@@ -14,13 +14,17 @@
   height: 100%;
 }
 
-.gallery-item--link {
+.gallery-item {
   position: relative;
   text-decoration: none;
   line-height: 0;
   &:hover {
     opacity: 0.8;
     transition: all 0.1s ease-in-out;
+  }
+
+  &--media {
+
   }
   
   // Video thumbnail indicator
