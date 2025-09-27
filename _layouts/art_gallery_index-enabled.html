@@ -1,0 +1,15 @@
+---
+layout: default
+# main index of galleries
+---
+<div class="thumbnail-grid" data-clearing role="grid" aria-label="Gallery index">
+    <!-- Social Media Tile (First tile) -->
+    {% include social-tile.html %}
+    
+    {% for gallery in page.galleries %}
+    <a href="{{ gallery['link'] }}" class="gallery-link">
+        <img class="thumbnail" src="{{ gallery['link'] }}thumbs/front_{{ gallery['best_image'] }}">
+        <h3 class="thumbnail-label">{{ gallery["title"] }}</h3>
+    </a>
+    {% endfor %}
+</div>
