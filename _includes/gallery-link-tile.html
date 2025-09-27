@@ -1,7 +1,24 @@
 <!-- NSFW Gallery Link Tile -->
 {% assign gallery_config = site.data.gallery.galleries[page.gallery] %}
 {% if gallery_config.gallery_link %}
-<a href="javascript:void(0)" class="gallery-item--link gallery-link-tile" role="gridcell" aria-label="Gallery link: {{ gallery_config.gallery_link }}">
-	<span class="gallery-lock-icon" aria-hidden="true"></span>
-</a>
+    {% assign target_gallery = site.data.gallery.galleries[gallery_config.gallery_link] %}
+    {% if target_gallery.nsfw %}
+    <a
+        href="javascript:void(0)"
+        class="gallery-item--link gallery-link-tile"
+        role="gridcell"
+        aria-label="Gallery link: {{ target_gallery.title }}"
+    >
+        <span class="gallery-lock-icon" aria-hidden="true"></span>
+    </a>
+    {% else %}
+    <a
+        href="{{ site.baseurl }}/{{ gallery_config.gallery_link }}/"
+        class="gallery-item--link gallery-link-tile"
+        role="gridcell"
+        aria-label="Link to {{ target_gallery.title }} gallery"
+    >
+        <span class="gallery-link-title">{{ target_gallery.title }}</span>
+    </a>
+    {% endif %}
 {% endif %}
