@@ -99,8 +99,9 @@
     padding: 10px;
     transition: background 0.3s ease;
     
-    &:hover {
-      color: rgba(white, 1)
+    &:hover, &:focus {
+      color: rgba(white, 1);
+      outline: none;
     }
   }
   
