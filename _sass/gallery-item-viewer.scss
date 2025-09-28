@@ -92,15 +92,16 @@
     position: absolute;
     background: transparent;
     border: none;
-    color: rgba(white, 0.8);
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 24px;
     cursor: pointer;
     padding: 10px;
-    transition: background 0.3s ease;
+    color: #ff0000;
+    opacity: 0.6;
     
     &:hover, &:focus {
-      color: rgba(white, 1);
       outline: none;
+      opacity: 0.3;
     }
   }
   
