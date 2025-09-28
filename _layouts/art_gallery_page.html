@@ -40,6 +40,6 @@ header:
 {% include gallery-item-viewer.html %}
 {% include music-section.html %}
 
-<!-- Visitor NSFW Consent Dialog -->
+<!-- Visitor Consent Gate -->
 {% assign gallery_config = site.data.gallery.galleries[page.gallery] %}
 {% if gallery_config.nsfw %}{% include visitor-consent.html %}{% endif %}

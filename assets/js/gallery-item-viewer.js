@@ -9,7 +9,7 @@
 		loadingIndicator: document.getElementById('loading-indicator'),
 		links: document.querySelectorAll('.gallery-item--media'),
 		closeBtn: document.querySelector('.viewer-close'),
-		background: document.querySelector('.viewer-background'),
+		background: document.querySelector('.gallery-item-viewer__background'),
 		nextBtn: document.querySelector('.viewer-next'),
 		prevBtn: document.querySelector('.viewer-prev')
 	};

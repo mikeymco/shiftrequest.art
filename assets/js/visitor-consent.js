@@ -1,5 +1,5 @@
 /**
- * Simple NSFW Content Gate
+ * Visitor Consent Gate
  * Stateless age verification for artistic content
  * No tracking, no storage, no bullshit
  */
