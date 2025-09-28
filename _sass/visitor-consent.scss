@@ -26,7 +26,6 @@ $warning-red: #ff4444;
   background: $matrix-dark-bg;
   backdrop-filter: blur(5px); 
   cursor: not-allowed;
-  font-family: 'Courier New', monospace;
 
   @media (min-width: $breakpoint-width)
      and (min-height: $breakpoint-height) {
@@ -125,7 +124,6 @@ $warning-red: #ff4444;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
-  font-family: 'Courier New', monospace;
   text-transform: uppercase;
 }
 
