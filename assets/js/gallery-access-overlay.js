@@ -39,10 +39,10 @@
 		document.body.style.overflow = 'hidden';
 		
 		// Focus the input
-		setTimeout(() => DOM.input.focus(), 100);
+		// setTimeout(() => DOM.input.focus(), 100);
 		
 		// Clear any previous messages
-		showMessage('', '');
+		showMessage('❤️‍🩹📸❤️‍🔥', 'love');
 	}
 	
 	// Hide overlay
@@ -50,6 +50,7 @@
 		if (!DOM.overlay) return;
 		
 		isOverlayOpen = false;
+		DOM.input.blur();
 		DOM.overlay.classList.remove('active');
 		DOM.overlay.setAttribute('aria-hidden', 'true');
 		document.body.style.overflow = '';

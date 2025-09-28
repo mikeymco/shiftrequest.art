@@ -30,7 +30,10 @@
 
   &__content {
     position: relative;
-    max-width: 500px;
+    width: 333px;
+    height: 360px;
+    box-sizing: border-box;
+    // max-width: 500px;
     max-height: 90vh;
     border: 2px solid #ff0000;
     box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
@@ -68,7 +71,7 @@
   
   &__title {
     color: #ff0000;
-    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    text-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
     font-size: 2rem;
     margin-top: 0;
     margin-bottom: 2rem;
@@ -101,8 +104,6 @@
     
     &:focus {
       outline: none;
-      border-color: #ff4444;
-      box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
     }
     
     &::placeholder {
@@ -155,12 +156,21 @@
     
     &--error {
       color: #ff0000;
-      text-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+      text-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
     }
     
     &--success {
       color: #00ff00;
       text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+    }
+
+    &--love {
+      font-size: 2rem;
+      margin-top: 2rem;
+      text-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+      &.show {
+        opacity: 0.9;
+      }
     }
   }
 }
