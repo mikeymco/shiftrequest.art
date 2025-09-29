@@ -1,0 +1,18 @@
+footer {
+  padding: 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.github-link, .footer-text {
+  color: #cc032c;
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
+
+.github-link {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}

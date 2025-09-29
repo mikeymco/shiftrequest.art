@@ -4,13 +4,14 @@
 @charset "utf-8";
 
 // Import SASS partials
-@import "base";
 @import "base-overlay";
+@import "base";
 @import "error-page";
-@import "music-player";
+@import "footer";
+@import "gallery-access-overlay";
 @import "gallery-item-viewer";
 @import "gallery-link-tile";
-@import "gallery-access-overlay";
+@import "music-player";
 @import "social-tile";
 @import "thumbnail-grid";
 @import "visitor-consent";
