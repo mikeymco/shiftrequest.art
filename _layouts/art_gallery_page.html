@@ -17,7 +17,7 @@ header:
 
 	<!-- Gallery Link Tile -->
 	{% include gallery-link-tile.html %}
-	
+
 	<!-- Gallery Images -->
 	{% for image in page.images %}
 	<a href="#"
@@ -25,7 +25,7 @@ header:
 		data-image="{{ image }}"
 		data-index="{{ forloop.index0 }}"
 		role="gridcell"
-		aria-label="View {% if page.captions[image] %}{{ page.captions[image] }}{% else %}image {{ forloop.index }} of {{ page.images.size }}{% endif %}">		
+		aria-label="View {% if page.captions[image] %}{{ page.captions[image] }}{% else %}image {{ forloop.index }} of {{ page.images.size }}{% endif %}">
 		<img
 			class="thumbnail"
 			data-caption="{{ page.captions[image] }}."
