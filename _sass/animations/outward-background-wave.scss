@@ -1,5 +1,5 @@
-@mixin background-wave-expand() {
-  position: relative;
+@mixin outward-background-wave() {
+  // position: relative;
 
   &::before {
     content: '';
@@ -11,7 +11,7 @@
     z-index: -1;
     pointer-events: none;
     background: radial-gradient(
-      closest-side,
+      circle closest-side,
       rgba(255, 0, 0, 0) 0%,
       rgba(255, 0, 0, 0) 1%,
       rgba(255, 0, 0, 1) 10%,
@@ -31,7 +31,7 @@
   100% { background-size: 10000% 10000%; }
 }
 @keyframes background-wave-opacity {
-  0% { opacity: 0.5; }
-  20% { opacity: 0.5; }
+  0% { opacity: 0.1; }
+  20% { opacity: 0.1; }
   100% { opacity: 0; }
 }

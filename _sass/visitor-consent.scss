@@ -30,7 +30,7 @@ $warning-red: #ff4444;
     border: none;
     background-image: none;
     background: $matrix-dark-bg;
-    backdrop-filter: blur(5px); 
+    backdrop-filter: blur(5px);
   }
 
   &__content-container {
@@ -62,7 +62,12 @@ $warning-red: #ff4444;
       border: 2px solid $matrix-red;
       box-shadow: 0 0 20px $matrix-red-soft-glow;
     }
-    
+    @media (max-width: $breakpoint-width),
+           (max-height: $breakpoint-height) {
+      background-image: none;
+      background: transparent;
+    }
+
     h1 {
       color: $matrix-red;
       text-align: center;
