@@ -8,16 +8,16 @@
     <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
     <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
-    
+
     <!-- Favicon and touch icons -->
     <link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon.png' | relative_url }}">
     <link rel="icon" type="image/png" sizes="192x192" href="{{ '/favicon-192x192.png' | relative_url }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | relative_url }}">
     <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
-    
+
     <!-- SEO tags -->
     {% seo %}
-    
+
     <!-- Enhanced social sharing -->
     <meta property="og:image" content="{{ '/social-image.jpg' | absolute_url }}">
     <meta property="og:image:width" content="1200">
@@ -26,7 +26,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="{{ '/social-image.jpg' | absolute_url }}">
     <meta name="twitter:creator" content="@shiftrequest">
-    
+
     <!-- Jekyll feed -->
     {% feed_meta %}
 

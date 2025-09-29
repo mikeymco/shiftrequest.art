@@ -1,4 +1,5 @@
 .thumbnail-grid {
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(32%, 120px), 1fr));
   gap: 2px;
@@ -23,10 +24,6 @@
     transition: all 0.1s ease-in-out;
   }
 
-  &--media {
-
-  }
-  
   // Video thumbnail indicator
   .video-indicator {
     position: absolute;

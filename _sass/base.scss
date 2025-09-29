@@ -1,3 +1,6 @@
+@import "animations/outward-background-wave";
+@import "animations/scanline-gradient";
+
 body {
   padding: 0;
   margin: 0;
@@ -12,6 +15,7 @@ body {
 main {
   flex: 1;
   display: flex;
+  @include background-wave-expand();
 }
 
 ul {

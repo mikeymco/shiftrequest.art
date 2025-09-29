@@ -1,0 +1,24 @@
+@mixin breath-scale-transform($duration: 15s, $scale-max: 1.02, $scale-min: 1) {
+  @keyframes breath-scale-transform {
+    0% { transform: scale($scale-min); }
+    100% { transform: scale($scale-max); }
+  }
+  animation: breath-scale-transform 3s ease infinite;
+}
+
+// Recommended Timing Values
+//   Calm/Resting Breath
+//     Duration: 8-10s
+//     Easing: cubic-bezier(0.37, 0, 0.63, 1)
+//     Scale Range: 1.0 to 1.05-1.1
+//   Deep/Meditative Breath
+//     Duration: 12-15s
+//     Easing: cubic-bezier(0.25, 0, 0.25, 1)
+//     Scale Range: 1.0 to 1.1-1.15
+//   Anxious/Rapid Breath
+//     Duration: 4-6s
+//     Easing: cubic-bezier(0.6, 0, 0.4, 1)
+//     Scale Range: 1.0 to 1.03-1.08
+//
+//  The cubic-bezier(0.4, 0, 0.2, 1) with an 8-10 second duration most closely
+//  mimics natural human breathing rhythm!

@@ -1,0 +1,17 @@
+@mixin scanline-gradient() {
+  @keyframes scanline-gradient {
+    0% { background-position: 0% 100%; }
+    50% { background-position: 0% 100%; }
+    100% { background-position: 0% -100%; }
+  }
+
+  background: linear-gradient(
+    0deg,
+    rgba(255, 0, 0, 0) 66%,
+    rgba(255, 0, 0, 0.2) 82%,
+    rgba(255, 0, 0, 0.2) 84%,
+    rgba(255, 0, 0, 0) 100%
+  );
+  background-size: 100% 200%;
+  animation: scanline-gradient 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
