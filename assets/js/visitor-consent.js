@@ -22,8 +22,8 @@ class ContentGate {
         const overlay = document.querySelector('.consent-dialog');
         if (overlay) {
             overlay.style.display = 'block';
-        }
-        document.body.style.display = '';
+            document.querySelector('.thumbnail-grid').style.display = '';
+        }        
     }
     
     verifyAge(isAdult) {
@@ -38,7 +38,7 @@ class ContentGate {
     enterSite() {
         // Remove gate overlay
         document.querySelector('.consent-dialog').remove();
-        document.body.style.overflow = '';        
+        document.body.style.overflow = '';
     }
 }
 

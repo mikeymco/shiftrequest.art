@@ -5,8 +5,13 @@ header:
     title: default
     background-color: "black"
 ---
+
+<!-- Visitor Consent Gate -->
+{% assign gallery_config = site.data.gallery.galleries[page.gallery] %}
+{% if gallery_config.nsfw %}{% include visitor-consent.html %}{% endif %}
+
 <!-- {{ page.description }} -->
-<div class="thumbnail-grid" data-clearing role="grid" aria-label="Image gallery">
+<div class="thumbnail-grid" data-clearing role="grid" aria-label="Image gallery" {% if gallery_config.nsfw %}style="display: none;"{% endif %}>
 	<!-- Social Media Tile (First tile) -->
 	{% include social-tile.html %}
 
@@ -39,7 +44,3 @@ header:
 
 {% include gallery-item-viewer.html %}
 {% include music-section.html %}
-
-<!-- Visitor Consent Gate -->
-{% assign gallery_config = site.data.gallery.galleries[page.gallery] %}
-{% if gallery_config.nsfw %}{% include visitor-consent.html %}{% endif %}
