@@ -1,0 +1,51 @@
+// Heartbeat Mixin - Generate ECG-based keyframe animations for any CSS property
+
+// Generate some common heartbeat animations
+// @include heartbeat-keyframes('heart-scale', 'transform: scale', 1, 1.05);
+// @include heartbeat-keyframes('heart-opacity', 'opacity', 0.7, 1);
+// @include heartbeat-keyframes('heart-glow', 'box-shadow', 0, 40, 'px');
+
+// @param {String} $keyframe-name - Name for the generated @keyframes
+// @param {String} $property - CSS property to animate (e.g., 'transform: scale', 'opacity', 'box-shadow')
+// @param {Number} $baseline - Baseline value (resting state)
+// @param {Number} $peak - Peak value (R Wave maximum intensity)
+// @param {String} $unit - Unit to append to values (default: empty string)
+@mixin heartbeat-keyframes($keyframe-name, $property, $baseline, $peak, $unit: '') {
+  // Calculate relative values based on peak intensity
+  $p-wave-peak: $baseline + (($peak - $baseline) * 0.167); // ~17% of peak intensity
+  $q-wave-trough: $baseline - (($peak - $baseline) * 0.063); // Small dip before peak
+  $s-wave-trough: $baseline - (($peak - $baseline) * 0.25); // Deeper post-peak dip
+  $t-wave-peak: $baseline + (($peak - $baseline) * 0.125); // ~13% of peak intensity
+  $t-wave-mid: $baseline + (($peak - $baseline) * 0.063); // Half of T wave
+
+  @keyframes #{$keyframe-name} {
+    /* P Wave (Atrial Depolarization/Contraction) */
+    0% { #{$property}: #{$baseline}#{$unit}; } /* Baseline */
+    5% { #{$property}: #{$p-wave-peak}#{$unit}; } /* P Wave Peak */
+    10% { #{$property}: #{$baseline}#{$unit}; } /* Return to Baseline */
+
+    /* PR Segment (Pause before ventricular firing) */
+    15% { #{$property}: #{$baseline}#{$unit}; }
+
+    /* QRS Complex (Ventricular Depolarization/Contraction) */
+    16% { #{$property}: #{$q-wave-trough}#{$unit}; } /* Q Wave Trough */
+    18% { #{$property}: #{$peak}#{$unit}; } /* R Wave Peak (The main, sharp contraction) */
+    20% { #{$property}: #{$s-wave-trough}#{$unit}; } /* S Wave Trough */
+    22% { #{$property}: #{$baseline}#{$unit}; } /* Return to Baseline */
+
+    /* ST Segment (Plateau Phase) */
+    25% { #{$property}: #{$baseline}#{$unit}; }
+    30% { #{$property}: #{$baseline}#{$unit}; }
+    40% { #{$property}: #{$baseline}#{$unit}; }
+
+    /* T Wave (Ventricular Repolarization) */
+    45% { #{$property}: #{$t-wave-peak}#{$unit}; } /* T Wave Broad Peak */
+    50% { #{$property}: #{$t-wave-mid}#{$unit}; }
+    55% { #{$property}: #{$baseline}#{$unit}; } /* Return to Baseline */
+
+    /* Diastole (The long resting phase until the next beat) */
+    65% { #{$property}: #{$baseline}#{$unit}; }
+    80% { #{$property}: #{$baseline}#{$unit}; }
+    100% { #{$property}: #{$baseline}#{$unit}; } /* Cycle repeats */
+  }
+}
