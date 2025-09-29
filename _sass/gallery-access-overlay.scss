@@ -123,7 +123,10 @@
     text-transform: uppercase;
     background: #000000;
     color: #ff0000;
-    
+    &::before {
+      content: 'Enter 🔒';
+    }
+
     &:hover {
       background: #ff0000;
       color: #000000;
@@ -139,6 +142,20 @@
         color: #ff0000;
         box-shadow: none;
       }
+    }
+
+    &--error {
+
+    }
+
+    &--success {
+      &::before {
+        content: 'Enter 🔓';
+      }
+      background: #00ff00;
+      color: #000000;
+      border-color: #00ff00;
+      text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
     }
   }
   

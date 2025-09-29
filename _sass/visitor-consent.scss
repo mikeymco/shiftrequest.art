@@ -23,13 +23,14 @@ $warning-red: #ff4444;
   z-index: 10000;
   box-sizing: border-box;
   border: 2px solid $matrix-red;
-  background: $matrix-dark-bg;
-  backdrop-filter: blur(5px); 
   cursor: not-allowed;
 
   @media (min-width: $breakpoint-width)
      and (min-height: $breakpoint-height) {
     border: none;
+    background-image: none;
+    background: $matrix-dark-bg;
+    backdrop-filter: blur(5px); 
   }
 
   &__content-container {
@@ -55,16 +56,11 @@ $warning-red: #ff4444;
     justify-content: center;
     cursor: default;
 
-    // Diagonal background stripes
-    background-image: linear-gradient(45deg, #000000 25%, #110000 25%, #110000 50%, #000000 50%, #000000 75%, #110000 75%, #110000 100%);
-    background-size: 56.57px 56.57px;
-
     @media (min-width: $breakpoint-width)
        and (min-height: $breakpoint-height) {
       padding: 3rem;
       border: 2px solid $matrix-red;
       box-shadow: 0 0 20px $matrix-red-soft-glow;
-      background: #000;
     }
     
     h1 {

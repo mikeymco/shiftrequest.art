@@ -69,6 +69,7 @@
 		
 		if (type) {
 			DOM.messageEl.classList.add(`gallery-access__message--${type}`);
+			DOM.submitBtn.classList.add(`gallery-access__submit--${type}`);
 		}
 		
 		if (message) {
@@ -91,19 +92,20 @@
 		DOM.submitBtn.disabled = true;
 		showMessage('Checking access...', '');
 		
-		// TODO: Add actual validation logic here
 		// For now, simulate processing delay
 		setTimeout(() => {
 			DOM.submitBtn.disabled = false;
 			
-			// TODO: Replace with actual gallery matching logic
-			// Placeholder: always show access denied for now
-			showMessage('Access denied', 'error');
-			// showMessage('Username is not in the sudoers file. This incident will be reported.', 'error');
-			
-			// TODO: On success, redirect to gallery:
-			// window.location.href = '/gallery-name/';
-			
+			if (code === 'void') {
+				showMessage('💚 Access Granted 😈', 'success');
+				setTimeout(() => {
+					window.location.href = '../' + code;
+				}, 1500);
+			} else {
+				// showMessage('Access denied', 'error');
+				showMessage('Access denied. This incident will be reported.', 'error');
+				// showMessage('Username is not in the sudoers file. This incident will be reported.', 'error');
+			}
 		}, 1000);
 	}
 	
