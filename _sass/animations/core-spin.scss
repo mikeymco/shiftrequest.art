@@ -3,16 +3,27 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
-  --size: 750px;
-  --speed: 50s;
-  --easing: cubic-bezier(0.8, 0.2, 0.2, 0.8);
 
-  width: var(--size);
-  height: var(--size);
-  filter: blur(calc(var(--size) / 5));
-  background-image: linear-gradient(hsl(222, 84, 60, 100%), hsl(164, 79, 71));
-  animation: rotate var(--speed) var(--easing) alternate infinite;
-  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  position: relative;
+  overflow: hidden;
 
-  transition: all 0.5s ease-out;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: calc(min(40vh, 40vw) * -1);
+    margin-left: calc(min(40vh, 40vw) * -1);
+    width: min(80vh, 80vw);
+    height: min(80vh, 80vw);
+    z-index: -1;
+    background-image: linear-gradient(
+      rgba(255, 0, 0, 0.3),
+      rgba(255, 255, 0, 0.2)
+    );
+    animation: rotate 10s cubic-bezier(0.8, 0.2, 0.2, 0.8) alternate infinite;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    transition: all 0.5s ease-out;
+    filter: blur(200px);
+  }
 }
