@@ -3,31 +3,31 @@ layout: default
 # individual pages for each gallery
 header:
     title: default
-    background-color: "black"
+    background: "black"
 ---
 
 <!-- Visitor Consent Gate -->
 {% assign gallery_config = site.data.gallery.galleries[page.gallery] %}
-{% if gallery_config.nsfw %}{% include visitor-consent.html %}{% endif %}
+{% if gallery_config.nsfw %}{% include gateway-nsfw.html %}{% endif %}
 
 <!-- {{ page.description }} -->
-<div class="thumbnail-grid" data-clearing role="grid" aria-label="Image gallery" {% if gallery_config.nsfw %}style="display: none;"{% endif %}>
+<div class="gallery-grid" data-clearing role="grid" aria-label="Art gallery" {% if gallery_config.nsfw %}style="display: none;"{% endif %}>
 	<!-- Social Media Tile (First tile) -->
-	{% include social-tile.html %}
+  {% include gallery-tile-social.html %}
 
 	<!-- Gallery Link Tile -->
-	{% include gallery-link-tile.html %}
+  {% include gallery-tile-link.html %}
 
-	<!-- Gallery Images -->
+	<!-- Gallery Images + Videos -->
 	{% for image in page.images %}
 	<a href="#"
-		class="gallery-item gallery-item--media"
+		class="gallery-tile gallery-tile--media"
 		data-image="{{ image }}"
 		data-index="{{ forloop.index0 }}"
 		role="gridcell"
 		aria-label="View {% if page.captions[image] %}{{ page.captions[image] }}{% else %}image {{ forloop.index }} of {{ page.images.size }}{% endif %}">
 		<img
-			class="thumbnail"
+			class="gallery-tile__thumbnail"
 			data-caption="{{ page.captions[image] }}."
 			src="thumbs/{% include thumbnail_path.liquid filename=image %}"
 			alt="{{ page.captions[image] }}"
@@ -36,11 +36,11 @@ header:
 		>
 		{% include video_detection.liquid filename=image %}
 		{% if is_video %}
-		<div class="video-indicator" aria-hidden="true"></div>
+		<div class="gallery-tile__video-indicator" aria-hidden="true"></div>
 		{% endif %}
 	</a>
 	{% endfor %}
 </div>
 
-{% include gallery-item-viewer.html %}
-{% include music-section.html %}
+{% include gallery-media-viewer.html %}
+{% include gallery-music-embed.html %}

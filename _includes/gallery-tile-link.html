@@ -5,18 +5,18 @@
     {% if target_gallery.nsfw %}
     <a
         href="javascript:void(0)"
-        class="gallery-item gallery-item--link gallery-link-tile gallery-link-tile--locked"
+        class="gallery-tile gallery-tile--link gallery-link-tile gallery-link-tile--locked"
         role="gridcell"
         aria-label="Gallery link: {{ target_gallery.title }}"
     >
         <span class="gallery-lock-icon" aria-hidden="true"></span>
     </a>
-    {% include gallery-access-overlay.html %}
-    <script src="{{ '/assets/js/gallery-access-overlay.js' | relative_url }}"></script>
+    {% include gateway-access-code.html %}
+    <script src="{{ '/assets/js/gateway-access-code.js' | relative_url }}"></script>
     {% else %}
     <a
         href="../{{ gallery_config.gallery_link }}/"
-        class="gallery-item gallery-item--link gallery-link-tile"
+        class="gallery-tile gallery-tile--link gallery-link-tile"
         role="gridcell"
         aria-label="Link to {{ target_gallery.title }} gallery"
     >

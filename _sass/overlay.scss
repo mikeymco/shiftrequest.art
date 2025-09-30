@@ -1,0 +1,39 @@
+@import 'animations/outward-background-wave';
+@import 'animations/scanline-gradient';
+@import 'animations/breath-transform';
+
+.overlay {
+  position: fixed;
+  opacity: 0;
+  visibility: hidden;
+  height: 100vh;
+  height: 100dvh;
+  width: 100vw;
+  z-index: 1000;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: $color-bg-primary;
+  backdrop-filter: blur(6px);
+  @include outward-background-wave;
+  @include scanline-gradient;
+
+  &__content {
+    border: $border-primary;
+    box-sizing: border-box;
+    padding: $padding-primary;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    @include breath-transform;
+  }
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}

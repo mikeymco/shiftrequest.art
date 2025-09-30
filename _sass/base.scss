@@ -1,33 +1,35 @@
+@import 'animations/outward-background-wave';
+@import 'animations/scanline-gradient';
+@import 'variables';
+
 body {
   margin: 0;
-  padding: 0;
-  color: white;
-  font-family: 'Courier New', monospace;
-  background-color: #000000;
-  min-height: 100vh;
-  min-height: 100dvh;
+  color: $color-primary;
+  text-align: center;
+  font-family: $font-primary;
+  background: $color-bg;
+  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
+
+  @include outward-background-wave;
+  @include scanline-gradient;
 }
 
 main {
   flex: 1;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
+a {
+  color: $color-primary;
+  text-decoration: none;
+}
+
 ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-button {
-  font-family: 'Courier New', monospace;
-}
-
-.diagonal-stripes-background {
-  background-image: linear-gradient(45deg, #000000 25%, #110000 25%, #110000 50%, #000000 50%, #000000 75%, #110000 75%, #110000 100%);
-  background-size: 56.57px 56.57px;
+  list-style-type: square;
+  padding-left: 1.5rem;
+  line-height: 1.6;
 }

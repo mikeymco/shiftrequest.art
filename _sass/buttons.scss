@@ -1,0 +1,55 @@
+@import 'variables';
+
+button,
+.btn,
+.btn--red {
+  font-family: $font-primary;
+  padding: 0.8rem 1.5rem;
+  border: $border-primary;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: $transition-primary;
+  background: $color-bg;
+  color: $color-primary;
+  box-shadow: $box-shadow-primary;
+
+  &:hover, &:focus {
+    color: $color-bg;
+    background: $color-primary;
+    box-shadow: none;
+  }
+
+  &:active {
+    transform: $state-active-transform;
+  }
+
+  &.disabled, &:disabled {
+    filter: grayscale(100%);
+    box-shadow: none;
+    cursor: not-allowed;
+
+    &:hover, &:focus {
+      color: $color-primary;
+      background: $color-bg;
+    }
+
+    &:active {
+      transform: none;
+    }
+  }
+}
+
+.btn--green {
+  background: $color-secondary;
+  color: $color-bg;
+  border-color: $color-secondary;
+  box-shadow: $box-shadow-secondary;
+
+  &:hover, &:focus {
+    background: $color-bg;
+    color: $color-secondary;
+  }
+}

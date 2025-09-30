@@ -1,18 +1,18 @@
 /**
- * Music Player Management
+ * Gallery Music Embed Management
  * Handles Spotify embed visibility, close/restore functionality
  */
-class MusicPlayer {
+class GalleryMusicEmbed {
 	constructor() {
-		this.musicSection = document.querySelector('.music-section');
-		this.closeButton = document.querySelector('.close-music');
-		
+		this.musicEmbed = document.querySelector('.gallery-music-embed');
+		this.closeButton = document.querySelector('.gallery-music-embed__close');
+
 		this.init();
 	}
-	
+
 	init() {
-		if (!this.musicSection) return;
-		
+		if (!this.musicEmbed) return;
+    document.body.classList.add('has-music-embed');
 		this.bindEvents();
 	}
 
@@ -26,12 +26,12 @@ class MusicPlayer {
 	}
 
 	hidePlayer() {
-		this.musicSection.style.display = 'none';
-		document.body.classList.remove('has-music');
+		this.musicEmbed.style.display = 'none';
+		document.body.classList.remove('has-music-embed');
 	}
 }
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-	new MusicPlayer();
+	new GalleryMusicEmbed();
 });

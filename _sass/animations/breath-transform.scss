@@ -1,4 +1,4 @@
-@mixin breath-transform($duration: 8s, $scale-max: 1.015, $scale-min: 1) {
+@mixin breath-transform($scale-max: 1.01, $scale-min: 1) {
   @keyframes breath-transform {
     0% { transform: scale($scale-min); }
     30% { transform: scale($scale-max); }  /* Inhale */
@@ -6,10 +6,10 @@
     70% { transform: scale($scale-min); }  /* Exhale */
     100% { transform: scale($scale-min); } /* Rest */
   }
-  animation: breath-transform $duration cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: breath-transform 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
-@mixin natural-breath-transform($scale-max: 1.015, $scale-min: 1) {
+@mixin natural-breath-transform($scale-max: 1.01, $scale-min: 1) {
   @keyframes natural-breath {
     0% {
       transform: scale($scale-min);

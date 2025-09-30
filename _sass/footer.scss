@@ -1,18 +1,13 @@
-footer {
-  padding: 2rem;
-  text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
+@import 'variables';
 
-.github-link, .footer-text {
-  color: #cc032c;
-  font-size: 0.9rem;
-  opacity: 0.6;
+footer {
+  padding: $padding-primary;
+  border-top: $border-bg;
+  background: $color-bg;
 }
 
 .github-link {
-  text-decoration: none;
-  &:hover {
+  &:hover, &:focus {
     text-decoration: underline;
   }
 }

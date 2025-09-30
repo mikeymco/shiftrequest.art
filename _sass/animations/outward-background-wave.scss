@@ -1,6 +1,4 @@
 @mixin outward-background-wave() {
-  // position: relative;
-
   &::before {
     content: '';
     position: absolute;
