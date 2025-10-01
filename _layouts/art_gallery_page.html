@@ -10,6 +10,12 @@ header:
 {% assign gallery_config = site.data.gallery.galleries[page.gallery] %}
 {% if gallery_config.nsfw %}{% include gateway-nsfw.html %}{% endif %}
 
+<!-- Media Viewer -->
+{% include gallery-media-viewer.html %}
+
+<!-- Music Embed -->
+{% include gallery-music-embed.html %}
+
 <!-- {{ page.description }} -->
 <div class="gallery-grid" data-clearing role="grid" aria-label="Art gallery" {% if gallery_config.nsfw %}style="display: none;"{% endif %}>
 	<!-- Social Media Tile (First tile) -->
@@ -41,6 +47,3 @@ header:
 	</a>
 	{% endfor %}
 </div>
-
-{% include gallery-media-viewer.html %}
-{% include gallery-music-embed.html %}
