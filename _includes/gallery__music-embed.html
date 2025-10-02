@@ -11,7 +11,7 @@
 
 	{% if gallery.spotify_playlist %}
 	<div class="gallery__music-embed__spotify-container">
-		<iframe class="gallery__music-embed__spotify-playlist" style="border-radius:12px"
+		<iframe class="gallery__music-embed__spotify-playlist" style="border-radius:0.75rem"
 			src="https://open.spotify.com/embed/playlist/{{ gallery.spotify_playlist }}?utm_source=generator&theme=0"
 			frameBorder="0"
 			allowfullscreen=""
@@ -22,7 +22,7 @@
 	</div>
 	{% elsif gallery.spotify_track %}
 	<div class="gallery__music-embed__spotify-container">
-		<iframe class="gallery__music-embed__spotify-track" style="border-radius:12px"
+		<iframe class="gallery__music-embed__spotify-track" style="border-radius:0.75rem"
 			src="https://open.spotify.com/embed/track/{{ gallery.spotify_track }}?utm_source=generator&theme=0"
 			frameBorder="0"
 			allowfullscreen=""

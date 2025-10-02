@@ -1,12 +1,13 @@
-@import 'animations/breath-transform';
+@import 'mixins/breath-transform';
 @import 'variables';
-@import 'mixins';
 
 .gateway__access-panel {
   &__content {
+    margin: auto;
+    padding: $padding-primary;
+
     // @include diagonal-stripes-background;
 //     position: relative;
-    padding: $padding-primary;
 //     width: 333px;
 //     height: 360px;
 //     box-sizing: border-box;

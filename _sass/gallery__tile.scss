@@ -1,11 +1,10 @@
 @import 'variables';
-@import 'mixins';
 
 .gallery__tile {
   aspect-ratio: 1;
+  overflow: hidden;
   position: relative;
   background: $color-bg-primary-dim;
-  overflow: hidden;
 
   &:hover {
     opacity: 0.8;
@@ -34,9 +33,9 @@
     height: 0;
     z-index: 1;
     transform: translate(-50%, -50%);
-    border-left: 30px solid #fff;
-    border-top: 15px solid transparent;
-    border-bottom: 15px solid transparent;
+    border-left: 2rem solid #fff;
+    border-top: 1rem solid transparent;
+    border-bottom: 1rem solid transparent;
     pointer-events: none;
   }
 }

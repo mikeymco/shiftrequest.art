@@ -1,19 +1,20 @@
-@import 'animations/breath-transform';
+@import 'mixins/breath-transform';
 @import 'variables';
-@import 'mixins';
 
 .gateway__nsfw-warning {
   cursor: not-allowed;
 
   &__content {
-    @include breath-transform(1, 0.98);
-    // @include diagonal-stripes-background;
+    margin: auto;
     max-width: $layout-max-text-width;
-    cursor: default;
+    padding: $padding-primary;
 
+    cursor: default;
+    @include breath-transform(1, 0.98);
+
+    // @include diagonal-stripes-background;
     // border: $border-primary;
     // box-sizing: border-box;
-    padding: $padding-primary;
   }
 
   &__heading {
@@ -28,7 +29,7 @@
 
     &__descriptions {
       text-align: left;
-      align-self: center;
+      justify-self: center;
       color: $color-bg-opposite-dim;
       margin-top: 0;
     }
@@ -51,9 +52,7 @@
   }
 
   &__actions {
-    width: 100%;
     display: grid;
-    grid-template-columns: 1fr;
     gap: 1rem;
   }
 }

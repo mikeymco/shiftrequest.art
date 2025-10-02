@@ -1,14 +1,13 @@
-$grid-template--sm: repeat(auto-fill, minmax(min(32vw, 120px), 1fr));
-// $grid-template--lg: repeat(auto-fill, minmax(max(120px, 14vw), 1fr));
+$grid-template--sm: repeat(auto-fill, minmax(min(32vw, 7.5rem), 1fr));
+// $grid-template--lg: repeat(auto-fill, minmax(max(7.5rem, 14vw), 1fr));
 
 .gallery {
-  flex: 1;
   display: grid;
   grid-template-columns: $grid-template--sm;
-  gap: 2px;
+  gap: 0.125rem;
 
   // @media (min-width: 920px) { // todo: ???
   //   grid-template-columns: $grid-template--lg;
-  //   gap: 4px;
+  //   gap: 0.25rem;
   // }
 }

@@ -15,11 +15,10 @@ $color-secondary: rgba(0, 255, 0, 1);
 $color-secondary-dim: rgba(0, 200, 0, 1);
 $border-secondary: 2px solid $color-secondary;
 
-$box-shadow-primary: 0 0 15px rgba(255, 0, 0, 0.5);
-// $matrix-red-soft-glow: rgba(255, 0, 0, 0.3);
-$box-shadow-secondary: 0 0 15px rgba(0, 255, 0, 0.5);
+$box-shadow-primary: 0 0 1rem rgba(255, 0, 0, 0.5);
+$box-shadow-secondary: 0 0 1rem rgba(0, 255, 0, 0.5);
 
-$text-shadow-primary: 0 0 10px rgba(255, 0, 0, 0.5);
+$text-shadow-primary: 0 0 .75rem rgba(255, 0, 0, 0.5);
 
 $font-primary: 'Courier New', monospace;
 $font-secondary: Arial, Helvetica, sans-serif;
@@ -27,6 +26,7 @@ $font-secondary: Arial, Helvetica, sans-serif;
 $transition-primary: all 0.1s ease-in-out;
 
 $padding-primary: 2rem;
+$padding-btns-inputs: 0.8rem 1.2rem;
 
 $layout-max-text-width: 600px;
 $layout-min-hide-on-mobile: 600px;
@@ -35,3 +35,4 @@ $state-active-transform: translateY(1px);
 
 $color-warning-red: #ff4444;
 $o32c-red: rgba(204, 3, 44, 1); //032c red :)
+// $matrix-red-soft-glow: rgba(255, 0, 0, 0.3);

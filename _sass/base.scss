@@ -1,11 +1,11 @@
-@import 'animations/outward-background-wave';
-@import 'animations/scanline-gradient';
+@import 'mixins/outward-background-wave';
+@import 'mixins/scanline-gradient';
 @import 'variables';
-@import 'mixins';
 
 body {
   height: 100vh;
   height: 100dvh;
+  width: 100%;
   margin: 0;
   display: grid;
   grid-template: 1fr auto / 1fr;
@@ -32,7 +32,7 @@ ul {
 }
 
 input {
-  padding: 0.8rem 1.2rem;
+  padding: $padding-btns-inputs;
   border: 2px inset;
   border-color: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
   background: $color-bg-primary;

@@ -3,11 +3,10 @@
 button,
 .btn,
 .btn--red {
-  display: inline-block;
   font-family: $font-primary;
-  padding: 0.8rem 1.5rem;
+  padding: $padding-btns-inputs;
   border: $border-primary;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   font-size: medium;
   font-weight: bold;
   cursor: pointer;

@@ -5,6 +5,7 @@
     position: relative;
     max-width: 90vw;
     max-height: 90vh;
+    max-height: 90dvh;
   }
 
   &__image,
@@ -27,11 +28,11 @@
   }
 
   &__prev {
-    left: 20px;
+    left: 1.25rem;
   }
 
   &__next {
-    right: 20px;
+    right: 1.25rem;
   }
 
   // Hide navigation buttons on small screens
@@ -52,8 +53,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     border: 3px solid rgba(255, 255, 255, 0.3);
     border-top: 3px solid rgba(255, 255, 255, 0.8);
     border-radius: 50%;

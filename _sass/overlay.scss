@@ -1,4 +1,4 @@
-@import 'animations/outward-background-wave';
+@import 'mixins/outward-background-wave';
 @import 'variables';
 
 .overlay {
@@ -10,15 +10,13 @@
   left: 0;
   height: 100vh;
   height: 100dvh;
-  width: 100vw;
+  width: 100%;
   z-index: 1000;
-  display: grid;
-  grid-template: 1fr / 1fr;
-  place-items: center;
+  align-content: center;
   overflow-y: auto;
 
   background: $color-bg-primary;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(0.4rem);
   @include outward-background-wave;
 
   &--active {
@@ -28,8 +26,8 @@
 
   &__close {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 1.25rem;
+    right: 1.25rem;
     background: transparent;
     border: none;
     box-shadow: none;

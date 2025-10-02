@@ -14,7 +14,7 @@
     letter-spacing: 1px;
 
     // @media (min-width: 920px) {
-    //   margin-bottom: 12px;
+    //   margin-bottom: 0.75rem;
     // }
   }
 
@@ -24,18 +24,14 @@
     // gap: 0.25rem;
 
     // @media (min-width: 920px) {
-    //   gap: 4px;
+    //   gap: 0.25rem;
     // }
     // @media (min-width: 1300px) {
-    //   gap: 8px;
+    //   gap: 0.5rem;
     // }
   }
 
   &__link {
-    display: grid;
-    grid-template: 1fr auto / 1fr;
-    gap: 0.25rem;
-
     &:hover, &:focus {
       background: rgba(255, 255, 255, 0.2);
       transform: translateY(-1px);
@@ -48,6 +44,7 @@
     }
 
     &__icon {
+      display: block;
       width: 1.5rem;
       height: 1.5rem;
       margin: auto;
