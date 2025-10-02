@@ -32,18 +32,3 @@
 	<button class="gallery__media-viewer__prev" aria-label="Previous image">&#8249;</button>
 	<button class="gallery__media-viewer__next" aria-label="Next image">&#8250;</button>
 </div>
-
-<script>
-	// Define gallery items for media viewer
-	var galleryMedia = [
-		{% for image in page.images %}
-		{% include video_detection.liquid filename=image %}
-		{
-			thumb: 'thumbs/{% include thumbnail_path.liquid filename=image %}',
-			src: '{{ image }}',
-			caption: '{% if page.captions[image] %}{{ page.captions[image] | escape }}{% endif %}',
-			isVideo: {% if is_video %}true{% else %}false{% endif %}
-		}{% unless forloop.last %},{% endunless %}
-		{% endfor %}
-	];
-</script>

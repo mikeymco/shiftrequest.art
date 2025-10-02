@@ -106,7 +106,7 @@ module Jekyll
       FileUtils.mkdir_p(site.in_dest_dir(@dir), :mode => 0755)
 
       @name = "index.html"
-      @images = []
+      @media = []
       @hidden = false
 
       # load configs, set defaults
@@ -127,7 +127,15 @@ module Jekyll
         gallery_page = File.join(File.dirname(__FILE__), "gallery.html")
       end
       self.read_yaml(File.dirname(gallery_page), File.basename(gallery_page))
-      self.data["gallery"] = gallery_name # aka folder name
+
+      # Store complete gallery object with computed data
+      self.data["gallery"] = gallery.merge({
+        "name" => gallery_name,
+        "folder" => gallery_name,  # Keep original folder name if needed
+        "link" => "/#{@dir}/"
+      })
+
+      # Keep individual properties for Jekyll compatibility
       self.data["description"] = gallery["description"]
 
       # prettify gallery name if not set
@@ -251,8 +259,14 @@ module Jekyll
           # If not defined add a trimmed filename to help with SEO
           self.data["captions"][dest_image]=File.basename(image,File.extname(image)).gsub("_", " ").gsub("\"", "&quot;")
         end
-        # remember the image
-        @images.push(dest_image)
+        # remember the media item with type information
+        media_type = is_video?(image_path) ? "video" : "image"
+        thumbnail_filename = dest_image.gsub(/\.[^.]+$/, '.jpeg')
+        @media.push({
+          "filename" => dest_image,
+          "type" => media_type,
+          "thumbnail" => thumbnail_filename
+        })
         @site.static_files << GalleryFile.new(site, base, @dir, dest_image)
 
         # make a thumbnail
@@ -260,35 +274,40 @@ module Jekyll
         #@site.static_files << GalleryFile.new(site, base, File.join(@dir, "thumbs"), dest_image)
       end
 
-      # sort pictures inside the gallery
+      # sort media items inside the gallery
       begin
         if sort_field == "timestamp"
-          @images.sort! {|a,b|
-            if date_times[a] == date_times[b]
-              a <=> b # do the name if the timestamps match
+          @media.sort! {|a,b|
+            filename_a = a["filename"]
+            filename_b = b["filename"]
+            if date_times[filename_a] == date_times[filename_b]
+              filename_a <=> filename_b # do the name if the timestamps match
             else
-              date_times[a] <=> date_times[b]
+              date_times[filename_a] <=> date_times[filename_b]
             end
           }
         elsif sort_field == "apple_photos"
-          @images.sort! {|a,b|
-            a[/\d+/].to_i <=> b[/\d+/].to_i
+          @media.sort! {|a,b|
+            a["filename"][/\d+/].to_i <=> b["filename"][/\d+/].to_i
           }
         else
-          @images.sort!
+          @media.sort! {|a,b| a["filename"] <=> b["filename"]}
         end
         if gallery["sort_reverse"]
-          @images.reverse!
+          @media.reverse!
         end
       rescue Exception => e
-        puts "Error sorting images in gallery #{gallery_name}: #{e}"
+        puts "Error sorting media in gallery #{gallery_name}: #{e}"
         # puts e.backtrace
       end
 
       site.static_files = @site.static_files
-      self.data["images"] = @images
 
-      best_image = gallery["best_image"] || @images[0]
+      best_image = gallery["best_image"] || @media[0]["filename"]
+
+      # Add computed data to gallery object
+      self.data["gallery"]["media"] = @media
+      self.data["gallery"]["best_image"] = best_image
       best_image.gsub!(/[^0-9A-Za-z.\-]/, '') # renormalize the name - important in case the best image name is specified via config
       best_image.downcase! # two step because mutating gsub returns nil that's unusable in a compound call
       #best_image = File.join(@dir, best_image)
@@ -301,6 +320,7 @@ module Jekyll
       makeThumb(site.in_dest_dir(File.join(@dir, best_image)), "header_"+best_image, config["header_thumb_size"]["x"] || 400, config["header_thumb_size"]["y"] || 400,"crop")
 
       self.data["header"]["image_fullwidth"] = "thumbs/header_"+best_image # used in the theme
+      self.data["gallery"]["header"] = { "image_fullwidth" => "thumbs/header_"+best_image }
       GC.start
     end
 

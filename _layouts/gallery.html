@@ -6,8 +6,6 @@ header:
     background: "black"
 ---
 
-{% assign gallery = site.data.galleries[page.gallery] %}
-
 {% include gateway__nsfw-warning.html %}
 
 {% include gallery__music-embed.html %}
@@ -16,7 +14,7 @@ header:
 
 <div
   class="gallery"
-  {% if gallery.nsfw %}style="display: none;"{% endif %}
+  {% if page.gallery.nsfw %}style="display: none;"{% endif %}
   aria-label="shiftrequest gallery"
   role="grid"
 >

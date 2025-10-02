@@ -7,41 +7,34 @@
 class GalleryMediaViewer {
   constructor() {
     this.mediaViewer = document.querySelector('.overlay.gallery__media-viewer');
-    this.mediaTiles = document.querySelectorAll('.gallery__tile--media'),
+    this.media = document.querySelectorAll('.gallery__tile--media');
 
-    this.image = document.querySelector('.gallery__media-viewer__image'),
-    this.video = document.querySelector('.gallery__media-viewer__video'),
-    this.caption = document.querySelector('.gallery__media-viewer__caption'),
-    this.loadingIndicator = document.querySelector('.gallery__media-viewer__loading-indicator'),
+    this.image = document.querySelector('.gallery__media-viewer__image');
+    this.video = document.querySelector('.gallery__media-viewer__video');
+    this.caption = document.querySelector('.gallery__media-viewer__caption');
+    this.loadingIndicator = document.querySelector('.gallery__media-viewer__loading-indicator');
     this.loadingIndicatorActiveClass = 'gallery__media-viewer__loading-indicator--active';
 
-    this.closeButton = document.querySelector('.gallery__media-viewer__close'),
-    this.nextButton = document.querySelector('.gallery__media-viewer__next'),
-    this.prevButton = document.querySelector('.gallery__media-viewer__prev'),
+    this.closeButton = document.querySelector('.gallery__media-viewer__close');
+    this.nextButton = document.querySelector('.gallery__media-viewer__next');
+    this.prevButton = document.querySelector('.gallery__media-viewer__prev');
 
-    // defined as a global in gallery__media-viewer.html - TODO: ???
-    this.mediaList = typeof galleryMedia !== 'undefined' ? galleryMedia : [];
-
-    if (!this.mediaViewer || this.mediaList.length === 0) {
+    if (!this.mediaViewer || this.media.length === 0) {
       console.error('Gallery media viewer: Missing required elements or gallery data');
       return;
-    }this.mediaList[
+    }
 
     this.bindEvents();
 
     const index = this.getUrlParam();
-    if (index !== null && index < this.mediaList.length) {
+    if (index !== null && index < this.media.length) {
       this.showViewer(index);
     }
-
-    // if (!window.history.state) {
-    //   window.history.replaceState({ media: null }, '', window.location);
-    // }
   }
 
   bindEvents() {
     // Gallery tile clicks
-    this.mediaTiles.forEach((tile, index) => {
+    this.media.forEach((tile, index) => {
       tile.addEventListener('click', e => this.showViewer(index, e));
     });
 
@@ -142,16 +135,21 @@ class GalleryMediaViewer {
   }
 
   showViewer(index) {
-    if (index < 0) { index = this.mediaList.length - 1; } // loop around to end
-    if (index === this.mediaList.length) { index = 0; } // loop around to start
+    if (index < 0) { index = this.media.length - 1; } // loop around to end
+    if (index === this.media.length) { index = 0; } // loop around to start
 
-    if (this.mediaList[index].isVideo) {
-      this.showVideo(this.mediaList[index].src);
+    const tile = this.media[index];
+    const src = tile.dataset.src;
+    const caption = tile.dataset.caption || '';
+    const isVideo = tile.dataset.isVideo === 'true';
+
+    if (isVideo) {
+      this.showVideo(src);
     } else {
-      this.showImage(this.mediaList[index].src);
+      this.showImage(src);
     }
 
-    this.caption.innerHTML = this.mediaList[index].caption;
+    this.caption.innerHTML = caption;
     this.mediaViewer.classList.add('overlay--active');
     this.mediaViewer.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';

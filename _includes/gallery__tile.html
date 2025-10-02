@@ -1,26 +1,26 @@
-{% for image in page.images %}
+{% for media in page.gallery.media %}
 <button
   class="gallery__tile gallery__tile--media"
-  data-image="{{ image }}"
+  data-src="{{ media.filename }}"
+  data-caption="{% if page.captions[media.filename] %}{{ page.captions[media.filename] | escape }}{% endif %}"
+  data-is-video="{% if media.type == 'video' %}true{% else %}false{% endif %}"
   data-index="{{ forloop.index0 }}"
   role="gridcell"
   aria-label="View {%
-    if page.captions[image] %}
-      {{ page.captions[image] }}
+    if page.captions[media.filename] %}
+      {{ page.captions[media.filename] }}
     {% else %}
-      image {{ forloop.index }} of {{ page.images.size }}
+      {{ media.type }} {{ forloop.index }} of {{ page.gallery.media.size }}
     {% endif %}
   ">
   <img
     class="gallery__tile__thumbnail"
-    data-caption="{{ page.captions[image] }}."
-    src="thumbs/{% include thumbnail_path.liquid filename=image %}"
-    alt="{{ page.captions[image] }}"
-    title="{{ page.captions[image] }}"
+    src="thumbs/{{ media.thumbnail }}"
+    alt="{{ page.captions[media.filename] }}"
+    title="{{ page.captions[media.filename] }}"
     loading="lazy"
   >
-  {% include video_detection.liquid filename=image %}
-  {% if is_video %}
+  {% if media.type == 'video' %}
   <div class="gallery__tile__video-indicator" aria-hidden="true"></div>
   {% endif %}
 </button>
