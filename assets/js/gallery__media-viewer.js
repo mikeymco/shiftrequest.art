@@ -24,6 +24,12 @@ class GalleryMediaViewer {
       return;
     }
 
+    // Set initial state if none exists
+    if (!window.history.state) {
+      const currentIndex = this.getUrlParam();
+      window.history.replaceState({ media: currentIndex }, '', window.location);
+    }
+
     this.bindEvents();
 
     const index = this.getUrlParam();
@@ -62,11 +68,18 @@ class GalleryMediaViewer {
 
   getUrlParam() {
     const params = new URLSearchParams(window.location.search);
-    return parseInt(params.get('media'));
+    const index = params.get('media')
+    return index === null ? null : parseInt(index);
   }
 
   setUrlParam(index = null) {
     const url = new URL(window.location);
+    const currentIndex = this.getUrlParam();
+
+    // Don't push duplicate states (was happening on 'back' navigation)
+    if (currentIndex === index) {
+      return;
+    }
 
     if (index !== null) {
       url.searchParams.set('media', index.toString());
@@ -74,7 +87,10 @@ class GalleryMediaViewer {
       url.searchParams.delete('media');
     }
 
-    window.history.pushState({ media: index }, '', url);
+    // Only push state if URL actually changes
+    if (url.toString() !== window.location.toString()) {
+      window.history.pushState({ media: index }, '', url);
+    }
   }
 
   showLoading() {
@@ -158,7 +174,6 @@ class GalleryMediaViewer {
 
   hideViewer() {
     this.hideLoading();
-    // this.closeButton.blur();
     this.mediaViewer.classList.remove('overlay--active');
     this.mediaViewer.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
@@ -186,13 +201,12 @@ class GalleryMediaViewer {
   }
 
   handleKeydown(e) {
-    // if (this.currentIndex === null) return;
+    if (this.getUrlParam() === null) return;
 
     const actions = {
       'Escape': () => this.hideViewer(),
       'ArrowRight': () => this.nextImage(),
-      'ArrowLeft': () => this.prevImage(),
-      // ' ': () => this.nextImage()
+      'ArrowLeft': () => this.prevImage()
     };
 
     const action = actions[e.key];
@@ -206,8 +220,8 @@ class GalleryMediaViewer {
     console.log('popstate', e.state);
     const state = e.state || {};
 
-    if (state.image !== null && state.image !== undefined) {
-      this.showViewer(state.image);
+    if (state.media !== null && state.media !== undefined) {
+      this.showViewer(state.media);
     } else {
       this.hideViewer();
     }
