@@ -1,15 +1,9 @@
 @import 'variables';
 
 .gallery__media-viewer {
-  &__content {
-    position: relative;
-    max-width: 90vw;
-    max-height: 90vh;
-    max-height: 90dvh;
-  }
-
   &__image,
   &__video {
+    margin: auto;
     max-width: 100%;
     max-height: 85vh;
     object-fit: contain;
@@ -22,7 +16,7 @@
 
   &__prev,
   &__next {
-    // @extend .overlay__close;
+    @extend .overlay__btn;
     top: 50%;
     transform: translateY(-50%);
   }

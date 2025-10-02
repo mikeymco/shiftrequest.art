@@ -30,15 +30,21 @@ class GalleryAccessPanel {
 			this.handleSubmission();
 		});
 
-		this.input.addEventListener('keydown', e => {
-			if (e.key === 'Enter') {
-				e.preventDefault();
-				this.handleSubmission();
-			}
-		});
+		// this.input.addEventListener('keydown', e => {
+		// 	if (e.key === 'Enter') {
+		// 		e.preventDefault();
+		// 		this.handleSubmission();
+		// 	}
+		// });
 
-		this.closeButton.addEventListener('click', () => this.hideOverlay());
-		this.gateway.addEventListener('click', () => this.hideOverlay());
+    // Close on background, not content
+    this.mediaViewer.addEventListener('click', e => {
+        if (e.target === this.mediaViewer) { // Only background
+            this.hideViewer();
+        }
+    });
+
+    this.closeButton.addEventListener('click', () => this.hideOverlay());
 
 		document.addEventListener('keydown', e => {
 			if (e.key === 'Escape') {

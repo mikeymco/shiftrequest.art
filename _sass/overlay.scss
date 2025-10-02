@@ -24,10 +24,8 @@
     opacity: 1;
   }
 
-  &__close {
+  &__btn {
     position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
     background: transparent;
     border: none;
     box-shadow: none;
@@ -35,14 +33,23 @@
     cursor: pointer;
     font-size: xxx-large;
     font-weight: bold;
-    padding: 0.5rem;
+    width: 4rem;
+    height: 4rem;
     opacity: 0.6;
 
     &:hover, &:focus {
-      color: $color-primary;
-      background: transparent;
+      opacity: 0.9;
+      text-shadow: $text-shadow-secondary;
+    }
+
+    &:active {
       outline: none;
-      opacity: 0.3;
+    }
+
+    &--close {
+      @extend .overlay__btn;
+      top: 1.25rem;
+      right: 1.25rem;
     }
   }
 }

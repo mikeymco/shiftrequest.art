@@ -2,12 +2,12 @@
   {% assign linked_gallery = site.data.galleries[gallery.link_to] %}
 
   {% if linked_gallery.nsfw %}
-    <a
+    <button
       href="javascript:void(0)"
       class="gallery__tile gallery__tile-link gallery__tile-link--locked"
       aria-label="Locked gallery access dialog"
       role="gridcell"
-    ></a>
+    ></button>
     {% include gateway__access-panel.html %}
   {% else %}
     <a

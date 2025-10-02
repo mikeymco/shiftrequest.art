@@ -1,5 +1,5 @@
 {% for image in page.images %}
-<a href="#"
+<button
   class="gallery__tile gallery__tile--media"
   data-image="{{ image }}"
   data-index="{{ forloop.index0 }}"
@@ -23,5 +23,5 @@
   {% if is_video %}
   <div class="gallery__tile__video-indicator" aria-hidden="true"></div>
   {% endif %}
-</a>
+</button>
 {% endfor %}

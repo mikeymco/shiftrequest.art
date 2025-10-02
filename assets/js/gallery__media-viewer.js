@@ -5,13 +5,15 @@
  */
 
 class GalleryMediaViewer {
-	constructor() {
+  constructor() {
+    this.loadingIndicatorActiveClass = 'gallery__media-viewer__loading-indicator--active';
+
     this.mediaViewer = document.querySelector('.overlay.gallery__media-viewer');
+		this.mediaTiles = document.querySelectorAll('.gallery__tile--media'),
 
 		this.image = document.querySelector('.gallery__media-viewer__image'),
 		this.video = document.querySelector('.gallery__media-viewer__video'),
 		this.caption = document.querySelector('.gallery__media-viewer__caption'),
-		this.links = document.querySelectorAll('.gallery__tile--media'),
 		this.closeBtn = document.querySelector('.gallery__media-viewer__close'),
 		this.nextBtn = document.querySelector('.gallery__media-viewer__next'),
 		this.prevBtn = document.querySelector('.gallery__media-viewer__prev'),
@@ -31,25 +33,25 @@ class GalleryMediaViewer {
 	}
 
 	bindEvents() {
-		// Gallery link clicks
-		this.links.forEach((link, index) => {
-			link.addEventListener('click', e => {
-				// e.preventDefault();
-				this.showViewer(index);
-			});
-		});
+		// Gallery button clicks
+    this.mediaTiles.forEach((button, index) => {
+      button.addEventListener('click', e => this.showViewer(index, e));
+    });
 
-		// Close viewer
-		this.closeBtn.addEventListener('click', e => this.hideViewer(e));
-		this.mediaViewer.addEventListener('click', e => this.hideViewer(e));
+    // Close on background, not content
+    this.mediaViewer.addEventListener('click', e => {
+        if (e.target === this.mediaViewer) { // Only background
+            this.hideViewer();
+        }
+    });
 
 		// Navigation buttons
 		this.nextBtn.addEventListener('click', e => this.nextImage(e));
 		this.prevBtn.addEventListener('click', e => this.prevImage(e) );
+    this.closeBtn.addEventListener('click', e => this.hideViewer(e));
 
-		// Media interactions
+		// Image interactions
 		this.image.addEventListener('click', e => this.handleImageClick(e));
-		this.video.addEventListener('click', e => this.handleVideoClick(e));
 
 		// Keyboard navigation
 		document.addEventListener('keydown', e => this.handleKeydown(e));
@@ -95,11 +97,11 @@ class GalleryMediaViewer {
 	}
 
 	showLoading() {
-		this.loadingIndicator.classList.add('gallery__media-viewer__loading-indicator--active');
+		this.loadingIndicator.classList.add(this.loadingIndicatorActiveClass);
 	}
 
 	hideLoading() {
-		this.loadingIndicator.classList.remove('gallery__media-viewer__loading-indicator--active');
+		this.loadingIndicator.classList.remove(this.loadingIndicatorActiveClass);
 	}
 
 	showImage(src) {
@@ -184,19 +186,16 @@ class GalleryMediaViewer {
 	}
 
 	nextImage(e) {
-		// e && e.stopPropagation();
 		this.currentIndex = (this.currentIndex + 1) % this.images.length;
 		this.showViewer(this.currentIndex, true);
 	}
 
 	prevImage(e) {
-		// e && e.stopPropagation();
 		this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
 		this.showViewer(this.currentIndex, true);
 	}
 
 	handleImageClick(e) {
-		// e.stopPropagation();
 		const rect = this.image.getBoundingClientRect();
 		const clickX = e.clientX - rect.left;
 		const imageWidth = rect.width;
@@ -208,33 +207,22 @@ class GalleryMediaViewer {
 		}
 	}
 
-	handleVideoClick(e) {
-		// e.stopPropagation();
-		if (this.video.paused) {
-			this.video.play();
-		} else {
-			this.video.pause();
-		}
-	}
+  handleKeydown(e) {
+    if (this.currentIndex === null) return;
 
-	handleKeydown(e) {
-		if (this.currentIndex === null) return;
+    const actions = {
+      'Escape': () => this.hideViewer(),
+      'ArrowRight': () => this.nextImage(),
+      'ArrowLeft': () => this.prevImage(),
+      ' ': () => this.nextImage()
+    };
 
-		switch(e.key) {
-			case 'Escape':
-				this.hideViewer();
-				break;
-			case 'ArrowRight':
-			case ' ':
-				// e.preventDefault();
-				this.nextImage();
-				break;
-			case 'ArrowLeft':
-				// e.preventDefault();
-				this.prevImage();
-				break;
-		}
-	}
+    const action = actions[e.key];
+    if (action) {
+        e.preventDefault(); // Only prevent when we actually handle it
+        action();
+    }
+  }
 
 	handlePopState(e) {
 		const state = e.state || {};

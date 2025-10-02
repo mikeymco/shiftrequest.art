@@ -3,18 +3,7 @@ layout: default
 # main list of configured galleries
 ---
 
-<div class="gallery" role="grid" aria-label="Galleries index list">
-  {% include gallery__tile-social.html %}
-
-  {% for gallery in page.galleries %}
-  <a class="gallery__tile" href="{{ gallery['link'] }}">
-    <img class="gallery__tile__thumbnail" src="{{ gallery['link'] }}thumbs/front_{{ gallery['best_image'] }}">
-    <h3 class="gallery__tile__label">{{ gallery["title"] }}</h3>
-  </a>
-  {% endfor %}
-</div>
-
-<!-- <script>
+<script>
   // Redirect to main gallery
   window.location.href = "{{ site.baseurl }}/msg/main/";
 </script>
@@ -22,4 +11,15 @@ layout: default
 <noscript>
   <meta http-equiv="refresh" content="0;url={{ site.baseurl }}/msg/main/">
   <p><a href="{{ site.baseurl }}/msg/main/">View Gallery</a></p>
-</noscript> -->
+</noscript>
+
+<!-- <div class="gallery" role="grid" aria-label="Galleries index list"> -->
+  <!-- {% include gallery__tile-social.html %} -->
+
+  <!-- {% for gallery in page.galleries %} -->
+  <!-- <a class="gallery__tile" href="{{ gallery['link'] }}"> -->
+    <!-- <img class="gallery__tile__thumbnail" src="{{ gallery['link'] }}thumbs/front_{{ gallery['best_image'] }}"> -->
+    <!-- <h3 class="gallery__tile__label">{{ gallery["title"] }}</h3> -->
+  <!-- </a> -->
+  <!-- {% endfor %} -->
+<!-- </div> -->

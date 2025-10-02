@@ -2,6 +2,7 @@
 
 .gallery__tile {
   aspect-ratio: 1;
+  align-content: center;
   overflow: hidden;
   position: relative;
   background: $color-bg-primary-dim;
@@ -33,7 +34,7 @@
     height: 0;
     z-index: 1;
     transform: translate(-50%, -50%);
-    border-left: 2rem solid #fff;
+    border-left: 2rem solid $color-bg-opposite;
     border-top: 1rem solid transparent;
     border-bottom: 1rem solid transparent;
     pointer-events: none;
