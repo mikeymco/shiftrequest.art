@@ -51,7 +51,7 @@ module Jekyll
       @dir = dir.gsub(/^_/, "")
       @name = "index.html"
       # load gallery configs from the _data/gallery.yml file
-      config = site.data["base"] || {}
+      config = site.data["base"] || {} # _data/base.yml
 
       self.process(@name)
       gallery_index = File.join(base, "_layouts", "galleries-list.html")
@@ -110,11 +110,11 @@ module Jekyll
       @hidden = false
 
       # load configs, set defaults
-      config = site.data["base"] || {}
+      config = site.data["base"] || {} # _data/base.yml
       symlink = config["symlink"] || false
       # downcase gallery names, technically duplicating them
       galleries = {}
-      (config["galleries"] || {}).each_pair do |k,v|
+      (site.data["galleries"] || {}).each_pair do |k,v| # _data/galleries.yml
           galleries.merge!({k.downcase => v})
         end
       gallery = galleries[gallery_name.downcase] || {}
@@ -129,10 +129,11 @@ module Jekyll
       self.read_yaml(File.dirname(gallery_page), File.basename(gallery_page))
 
       # Store complete gallery object with computed data
+      # Start with all YAML data, then add computed fields
       self.data["gallery"] = gallery.merge({
         "name" => gallery_name,
         "folder" => gallery_name,  # Keep original folder name if needed
-        "link" => "/#{@dir}/"
+        "link" => "/#{@dir}/"      # Computed link path
       })
 
       # Keep individual properties for Jekyll compatibility
@@ -420,7 +421,7 @@ module Jekyll
     safe true
 
     def generate(site)
-      config = site.data["base"] || {}
+      config = site.data["base"] || {} # _data/base.yml
       dir = config["source_dir"] || "_photos"
       galleries = []
       original_dir = Dir.getwd
