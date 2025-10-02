@@ -1,39 +1,50 @@
 @import 'animations/outward-background-wave';
-@import 'animations/scanline-gradient';
-@import 'animations/breath-transform';
+@import 'variables';
 
 .overlay {
-  position: fixed;
-  opacity: 0;
   visibility: hidden;
+  opacity: 0;
+
+  position: fixed;
+  top: 0;
+  left: 0;
   height: 100vh;
   height: 100dvh;
   width: 100vw;
   z-index: 1000;
+  display: grid;
+  grid-template: 1fr / 1fr;
+  place-items: center;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 
   background: $color-bg-primary;
   backdrop-filter: blur(6px);
   @include outward-background-wave;
-  @include scanline-gradient;
 
-  &__content {
-    border: $border-primary;
-    box-sizing: border-box;
-    padding: $padding-primary;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    @include breath-transform;
+  &--active {
+    visibility: visible;
+    opacity: 1;
   }
 
-  &.active {
-    opacity: 1;
-    visibility: visible;
+  &__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    font-family: $font-secondary;
+    cursor: pointer;
+    font-size: xxx-large;
+    font-weight: bold;
+    padding: 0.5rem;
+    opacity: 0.6;
+
+    &:hover, &:focus {
+      color: $color-primary;
+      background: transparent;
+      outline: none;
+      opacity: 0.3;
+    }
   }
 }

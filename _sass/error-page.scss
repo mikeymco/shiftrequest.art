@@ -2,21 +2,20 @@
 @import 'variables';
 
 .error-page {
-  flex: 1;
-  max-width: $layout-max-text-width;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-self: center;
   padding: $padding-primary;
-
-  @include breath-transform();
+  @include breath-transform(1.02);
 
   &__status-code {
     margin: 0;
     font-size: 6rem;
     font-family: $font-secondary;
     color: $color-primary-dim;
+  }
+
+  &__description {
+    margin: auto;
+    max-width: $layout-max-text-width;
   }
 
   &__home-link {

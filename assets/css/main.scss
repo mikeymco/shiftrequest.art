@@ -6,16 +6,14 @@
 // Import SASS partials
 @import "base";
 @import "buttons";
-@import "common";
 @import "error-page";
 @import "footer";
-@import "gallery-grid";
-@import "gallery-media-loading-indicator";
-@import "gallery-media-viewer";
-@import "gallery-music-embed";
-@import "gallery-tile-link";
-@import "gallery-tile-social";
-@import "gallery-tile";
-@import "gateway-access-code";
-@import "gateway-nsfw";
+@import "gallery__media-viewer";
+@import "gallery__music-embed";
+@import "gallery__tile-link";
+@import "gallery__tile-social";
+@import "gallery__tile";
+@import "gallery";
+@import "gateway__access-panel";
+@import "gateway__nsfw-warning";
 @import "overlay";

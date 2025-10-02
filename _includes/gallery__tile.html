@@ -1,0 +1,27 @@
+{% for image in page.images %}
+<a href="#"
+  class="gallery__tile gallery__tile--media"
+  data-image="{{ image }}"
+  data-index="{{ forloop.index0 }}"
+  role="gridcell"
+  aria-label="View {%
+    if page.captions[image] %}
+      {{ page.captions[image] }}
+    {% else %}
+      image {{ forloop.index }} of {{ page.images.size }}
+    {% endif %}
+  ">
+  <img
+    class="gallery__tile__thumbnail"
+    data-caption="{{ page.captions[image] }}."
+    src="thumbs/{% include thumbnail_path.liquid filename=image %}"
+    alt="{{ page.captions[image] }}"
+    title="{{ page.captions[image] }}"
+    loading="lazy"
+  >
+  {% include video_detection.liquid filename=image %}
+  {% if is_video %}
+  <div class="gallery__tile__video-indicator" aria-hidden="true"></div>
+  {% endif %}
+</a>
+{% endfor %}

@@ -1,0 +1,85 @@
+@import 'animations/breath-transform';
+@import 'variables';
+@import 'mixins';
+
+.gateway__access-panel {
+  &__content {
+    // @include diagonal-stripes-background;
+//     position: relative;
+    padding: $padding-primary;
+//     width: 333px;
+//     height: 360px;
+//     box-sizing: border-box;
+//     border: 2px solid #ff0000;
+//     box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+  }
+
+//   &__title {
+//     color: #ff0000;
+//     text-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+//     font-size: 2rem;
+//     margin-top: 0;
+//     margin-bottom: 2rem;
+//   }
+
+//   &__form {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 1.5rem;
+//     align-items: stretch;
+//   }
+
+//   &__label {
+//     color: #cccccc;
+//     font-size: 1.1rem;
+//     margin-bottom: 0.5rem;
+//   }
+
+  // &__submit {
+//     &::before {
+//       content: 'Enter 🔒';
+//     }
+
+//     &--success {
+//       &::before {
+//         content: 'Enter 🔓';
+//       }
+//       background: #00ff00;
+//       color: #000000;
+//       border-color: #00ff00;
+//       text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+//     }
+  // }
+
+//   &__message {
+//     margin-top: 1.5rem;
+//     min-height: 1.5rem;
+//     color: #ff4444;
+//     font-size: 0.9rem;
+//     opacity: 0;
+//     transition: opacity 0.3s ease;
+
+//     &.show {
+//       opacity: 1;
+//     }
+
+//     &--error {
+//       color: #ff0000;
+//       text-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+//     }
+
+//     &--success {
+//       color: #00ff00;
+//       text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+//     }
+
+//     &--love {
+//       font-size: 2rem;
+//       margin-top: 2rem;
+//       text-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+//       &.show {
+//         opacity: 0.9;
+//       }
+//     }
+//   }
+}

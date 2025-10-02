@@ -1,52 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#000000">
-    <meta name="color-scheme" content="dark">
-    <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
-    <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark">
+  <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description"
+    content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 
-    <!-- Favicon and touch icons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon.png' | relative_url }}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ '/favicon-192x192.png' | relative_url }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | relative_url }}">
-    <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
+  <!-- Favicon and touch icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon.png' | relative_url }}">
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ '/favicon-192x192.png' | relative_url }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | relative_url }}">
+  <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
 
-    <!-- SEO tags -->
-    {% seo %}
+  <!-- SEO tags -->
+  {% seo %}
 
-    <!-- Enhanced social sharing -->
-    <meta property="og:image" content="{{ '/social-image.jpg' | absolute_url }}">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:type" content="image/jpeg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="{{ '/social-image.jpg' | absolute_url }}">
-    <meta name="twitter:creator" content="@shiftrequest">
+  <!-- Enhanced social sharing -->
+  <meta property="og:image" content="{{ '/social-image.jpg' | absolute_url }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ '/social-image.jpg' | absolute_url }}">
+  <meta name="twitter:creator" content="@shiftrequest">
 
-    <!-- Jekyll feed -->
-    {% feed_meta %}
+  <!-- Jekyll feed -->
+  {% feed_meta %}
 
 </head>
+
 <body>
-    <main>
-        {{ content }}
-    </main>
-    <footer>
-      <small>
-        <span>&copy; {{ 'now' | date: '%Y' }} - Michael McOrmond - All rights reserved - </span>
-        <a
-          class="github-link"
-          href="https://github.com/mikeymco/shiftrequest.art"
-          target="_blank"
-          rel="noopener"
-        >
-          Source on GitHub
-        </a>
-      </small>
-    </footer>
+  {{ content }}
+  <footer>
+    <small>
+      <span>&copy; {{ 'now' | date: '%Y' }} - Michael McOrmond - All rights reserved - </span>
+      <a class="github-link" href="https://github.com/mikeymco/shiftrequest.art" target="_blank" rel="noopener">
+        Source on GitHub
+      </a>
+    </small>
+  </footer>
 </body>
+
 </html>

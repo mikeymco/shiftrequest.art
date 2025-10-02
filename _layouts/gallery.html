@@ -1,0 +1,29 @@
+---
+layout: default
+# individual pages for each gallery
+header:
+    title: default
+    background: "black"
+---
+
+{% assign gallery = site.data.galleries[page.gallery] %}
+
+{% include gateway__nsfw-warning.html %}
+
+{% include gallery__music-embed.html %}
+
+{% include gallery__media-viewer.html %}
+
+<div
+  class="gallery"
+  {% if gallery.nsfw %}style="display: none;"{% endif %}
+  aria-label="shiftrequest gallery"
+  role="grid"
+>
+  {% include gallery__tile-social.html %}
+
+  {% include gallery__tile-link.html %}
+
+  {% include gallery__tile.html %}
+
+</div>

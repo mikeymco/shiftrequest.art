@@ -1,0 +1,17 @@
+source_dir: _msg  # original images, that will be cropped according to the size_limit, thumbnailed and posted
+title: hallway
+sort_field: "name" # sorting of the galleries on the gallery index page
+
+thumbnail_size:
+  x: 300
+  y: 300
+front_thumb_size:     # best image thumb size for the gallery super-index page
+  x: 300
+  y: 300
+header_thumb_size:    # best image thumb for the header of a gallery index page
+  x: 1200
+  y: 200
+
+scale_method: crop # default for all galleries. could be fit or crop, crop_bottom, crop_right, crop_left, crop_top
+strip_exif: true
+size_limit: 1200 # maximum size, px in either dimension, to limit the images to

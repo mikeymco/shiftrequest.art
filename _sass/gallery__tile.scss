@@ -1,12 +1,14 @@
 @import 'variables';
+@import 'mixins';
 
-.gallery-tile {
+.gallery__tile {
+  aspect-ratio: 1;
   position: relative;
-  line-height: 0;
+  background: $color-bg-primary-dim;
+  overflow: hidden;
 
   &:hover {
     opacity: 0.8;
-    transition: $transition-primary;
   }
 
   &__thumbnail {
@@ -20,7 +22,7 @@
     left: 0;
     bottom: 0;
     margin: 0;
-    padding: 1rem 0.5rem;
+    padding: 0.5rem;
     background: $color-bg-dim;
   }
 

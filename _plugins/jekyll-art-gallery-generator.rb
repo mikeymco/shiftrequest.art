@@ -51,12 +51,12 @@ module Jekyll
       @dir = dir.gsub(/^_/, "")
       @name = "index.html"
       # load gallery configs from the _data/gallery.yml file
-      config = site.data["gallery"] || {}
+      config = site.data["base"] || {}
 
       self.process(@name)
-      gallery_index = File.join(base, "_layouts", "art_gallery_index.html")
+      gallery_index = File.join(base, "_layouts", "galleries-list.html")
       unless File.exists?(gallery_index)
-        gallery_index = File.join(File.dirname(__FILE__), "art_gallery_index.html")
+        gallery_index = File.join(File.dirname(__FILE__), "galleries-list.html")
       end
       self.read_yaml(File.dirname(gallery_index), File.basename(gallery_index))
       self.data["title"] = config["title"] || "Photos"
@@ -78,13 +78,13 @@ module Jekyll
         unless gallery.hidden
           self.data["galleries"].push(gallery.data)
           # site-wide data for use in liquid templates
-          # available to liquid via site.data.gallery.galleries.[name]. subitems are manually defined in gallery.yml, and title, link, description, best_image etc and images array
+          # available to liquid via site.data.gallery.galleries.[name]. subitems are manually defined in galleries.yml, and title, link, description, best_image etc and images array
           # inject additional auto-discovered data back into sitewide gallery object
           gallery_title=gallery.data["title"]
-          if site.data["gallery"]["galleries"].has_key?(gallery_title)
-            site.data["gallery"]["galleries"][gallery_title].merge!(gallery.data)
+          if site.data["galleries"].has_key?(gallery_title)
+            site.data["galleries"][gallery_title].merge!(gallery.data)
           else
-            site.data["gallery"]["galleries"][gallery_title]=gallery.data
+            site.data["galleries"][gallery_title]=gallery.data
           end
           site.data["navigation"].push({"title"=> gallery.data["title"], "url"=> gallery.data["link"], "side"=> "left"})
           site.data["galleries-sorted"].push(gallery.data["title"]) # sorted array to order the galleries hash on the msg (portfolio) page
@@ -110,34 +110,34 @@ module Jekyll
       @hidden = false
 
       # load configs, set defaults
-      config = site.data["gallery"] || {}
+      config = site.data["base"] || {}
       symlink = config["symlink"] || false
       # downcase gallery names, technically duplicating them
       galleries = {}
       (config["galleries"] || {}).each_pair do |k,v|
           galleries.merge!({k.downcase => v})
         end
-      gallery_config = galleries[gallery_name.downcase] || {}
-      #puts "Generating #{gallery_name}: #{gallery_config}"
-      sort_field = gallery_config["sort_field"] || config["sort_field"] || "name"
+      gallery = galleries[gallery_name.downcase] || {}
+      #puts "Generating #{gallery_name}: #{gallery}"
+      sort_field = gallery["sort_field"] || config["sort_field"] || "name"
 
       self.process(@name)
-      gallery_page = File.join(base, "_layouts", "art_gallery_page.html")
+      gallery_page = File.join(base, "_layouts", "gallery.html")
       unless File.exists?(gallery_page)
-        gallery_page = File.join(File.dirname(__FILE__), "art_gallery_page.html")
+        gallery_page = File.join(File.dirname(__FILE__), "gallery.html")
       end
       self.read_yaml(File.dirname(gallery_page), File.basename(gallery_page))
       self.data["gallery"] = gallery_name # aka folder name
-      self.data["description"] = gallery_config["description"]
+      self.data["description"] = gallery["description"]
 
       # prettify gallery name if not set
       gallery_name = gallery_name.gsub("_", " ").gsub(/\w+/) {|word| word.capitalize}
-      gallery_name = gallery_config["title"] || gallery_name
+      gallery_name = gallery["title"] || gallery_name
       self.data["title"] = gallery_name
       self.data["link"] = "/#{@dir}/"
       # thumbnail destination
-      scale_method = gallery_config["scale_method"] || config["scale_method"] || "fit" # each gallery can have it's own scale method, or use the global scale if defined
-      @hidden = gallery_config["hidden"] || false # the gallery can also be hidden by renaming it to start with a dot
+      scale_method = gallery["scale_method"] || config["scale_method"] || "fit" # each gallery can have it's own scale method, or use the global scale if defined
+      @hidden = gallery["hidden"] || false # the gallery can also be hidden by renaming it to start with a dot
       if @hidden
         self.data["sitemap"] = false
         return
@@ -174,22 +174,22 @@ module Jekyll
           # cleanup, watermark and copy the files
           # Strip out the non-ascii character and downcase the final file name
           dest_image=image.gsub(/[^0-9A-Za-z.\-]/, '').downcase
-          
+
           # For videos, adjust the destination filename to use .mp4 extension for proper file comparison
           if is_video?(image_path)
             dest_image = dest_image.gsub(/\.(mov|m4v|avi|mkv)$/i, '.mp4')
           end
-          
+
           dest_image_abs_path = site.in_dest_dir(File.join(@dir, dest_image))
         if File.file?(dest_image_abs_path) == false or File.mtime(image_path) > File.mtime(dest_image_abs_path)
           if is_video?(image_path)
             # For videos: convert to web-compatible MP4 format
             puts "Converting video #{image_path} to web-compatible MP4..."
-            
+
             # dest_image already has .mp4 extension from above adjustment
             # Convert using FFmpeg to H.264 for maximum browser compatibility
             success = system("ffmpeg -i \"#{image_path}\" -c:v libx264 -crf 23 -preset medium -c:a aac -b:a 128k -movflags +faststart -y \"#{dest_image_abs_path}\" 2>/dev/null")
-            
+
             if success
               puts "Successfully converted #{image_path} to #{dest_image}"
             else
@@ -244,9 +244,9 @@ module Jekyll
           end
         end
         # Add file descriptions if defined
-        if gallery_config.has_key?(image)
-          # puts "added ${image} = #{gallery_config[image]}"
-          self.data["captions"][dest_image]=gallery_config[image]
+        if gallery.has_key?(image)
+          # puts "added ${image} = #{gallery[image]}"
+          self.data["captions"][dest_image]=gallery[image]
         else
           # If not defined add a trimmed filename to help with SEO
           self.data["captions"][dest_image]=File.basename(image,File.extname(image)).gsub("_", " ").gsub("\"", "&quot;")
@@ -277,7 +277,7 @@ module Jekyll
         else
           @images.sort!
         end
-        if gallery_config["sort_reverse"]
+        if gallery["sort_reverse"]
           @images.reverse!
         end
       rescue Exception => e
@@ -288,7 +288,7 @@ module Jekyll
       site.static_files = @site.static_files
       self.data["images"] = @images
 
-      best_image = gallery_config["best_image"] || @images[0]
+      best_image = gallery["best_image"] || @images[0]
       best_image.gsub!(/[^0-9A-Za-z.\-]/, '') # renormalize the name - important in case the best image name is specified via config
       best_image.downcase! # two step because mutating gsub returns nil that's unusable in a compound call
       #best_image = File.join(@dir, best_image)
@@ -313,17 +313,17 @@ module Jekyll
     def generate_video_thumb(video_path, thumb_path, thumb_x, thumb_y)
       # Extract frame at 1 second into video
       temp_frame = thumb_path.gsub(/\.[^.]+$/, '_temp.png')
-      
+
       # Use FFmpeg to extract a frame
       system("ffmpeg -i \"#{video_path}\" -ss 00:00:01 -vframes 1 -y \"#{temp_frame}\" 2>/dev/null")
-      
+
       if File.exist?(temp_frame)
         # Use ImageMagick to resize the extracted frame
         m_image = ImageList.new(temp_frame)
         m_image.resize_to_fill!(thumb_x, thumb_y)
         m_image.strip!
         m_image.write(thumb_path)
-        
+
         # Clean up temp file
         File.delete(temp_frame)
         return true
@@ -400,7 +400,7 @@ module Jekyll
     safe true
 
     def generate(site)
-      config = site.data["gallery"] || {}
+      config = site.data["base"] || {}
       dir = config["source_dir"] || "_photos"
       galleries = []
       original_dir = Dir.getwd

@@ -1,0 +1,74 @@
+@import 'variables';
+
+.gallery__media-viewer {
+  &__content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+  }
+
+  &__image,
+  &__video {
+    max-width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
+    cursor: pointer;
+    &:focus {
+      outline: none;
+      border: none;
+    }
+  }
+
+  &__prev,
+  &__next {
+    // @extend .overlay__close;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__prev {
+    left: 20px;
+  }
+
+  &__next {
+    right: 20px;
+  }
+
+  // Hide navigation buttons on small screens
+  // @media (max-width: $layout-min-hide-on-mobile) { // todo: ???
+  //   &__prev,
+  //   &__next {
+  //     display: none;
+  //   }
+  // }
+
+  &__caption {
+    visibility: hidden;
+    max-width: $layout-max-text-width;
+  }
+
+  &__loading-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 10;
+    display: none;
+
+    &--active {
+      display: block;
+    }
+  }
+}
+
+// Loading spinner animation
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}

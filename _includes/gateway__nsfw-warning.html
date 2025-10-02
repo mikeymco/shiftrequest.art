@@ -1,0 +1,45 @@
+{% if gallery.nsfw %}
+
+<script src="{{ '/assets/js/gateway__nsfw-warning.js' | relative_url }}"></script>
+
+<div
+  class="overlay gateway__nsfw-warning overlay--active"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="gateway__nsfw-warning__text__adult-media"
+>
+  <div class="gateway__nsfw-warning__content">
+    <h1 class="gateway__nsfw-warning__heading">⚠️ NinA[rt] + Σ(aspects) ⚠️</h1>
+    <h1 class="gateway__nsfw-warning__heading">📸 Domain & Galleries 🎥</h1>
+    <p class="gateway__nsfw-warning__text gateway__nsfw-warning__text__adult-media">This site contains adult content including:</p>
+    <ul class="gateway__nsfw-warning__text gateway__nsfw-warning__text__descriptions">
+      <li>Artistic nudity and taboo sexual content</li>
+      <li>Explicit, provocative, and heretical ideas</li>
+      <li>Exploration of dark, occult, and esoteric themes</li>
+      <!-- <li>involving alcohol and cannabis</li> -->
+      <!-- <li>Exploration of dark themes, the occult, and esoteric traditions</li> -->
+      <!-- religious kink bdsm irreverent non-conformance transgressive cultural ideas -->
+      <!-- challenging non-conformity expressions transhumanist alternative blasphemous -->
+      <!-- perspectives thought experiments -->
+    </ul>
+    <p class="gateway__nsfw-warning__text gateway__nsfw-warning__text__first-amendment">By entering, you acknowledge that this is artistic expression and protected
+      under First Amendment rights.</p>
+    <h3 class="gateway__nsfw-warning__text gateway__nsfw-warning__text__viewer-discretion">Viewer discretion is advised.</h3>
+
+    <div class="gateway__nsfw-warning__actions">
+      <button onclick="gatewayNsfw.verifyAge(false)">
+        🏰 Leave / Under 18
+      </button>
+      <button onclick="gatewayNsfw.verifyAge(true)" class="btn--green">
+        Over 18+ / Enter ❤️‍🔥
+      </button>
+    </div>
+
+    <p class="gateway__nsfw-warning__text gateway__nsfw-warning__text__age-disclaimer">
+      <small>
+        By clicking "18+ / Enter", you confirm you are 18 or older and legally able to view adult content in your jurisdiction.
+      </small>
+    </p>
+  </div>
+</div>
+{% endif %}

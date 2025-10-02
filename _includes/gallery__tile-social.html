@@ -1,0 +1,21 @@
+{% if site.data.social.links %}
+<div class="gallery__tile gallery__tile-social" role="gridcell" aria-label="Social media links">
+	<h3 class="gallery__tile-social__header">
+		Connect
+	</h3>
+	<div class="gallery__tile-social__links">
+		{% for link in site.data.social.links %}
+		<a
+      class="gallery__tile-social__link"
+      href="{{ link.url }}"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="{{ link.name }}"
+    >
+			<span class="gallery__tile-social__link__icon gallery__tile-social__link__icon--{{ link.icon }}" aria-hidden="true"></span>
+			<span class="gallery__tile-social__link__label">{{ link.name }}</span>
+		</a>
+		{% endfor %}
+	</div>
+</div>
+{% endif %}
