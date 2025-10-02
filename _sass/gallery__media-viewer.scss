@@ -14,19 +14,14 @@
     }
   }
 
+  &__caption {
+    visibility: hidden;
+    max-width: $layout-max-text-width;
+  }
+
   &__prev,
   &__next {
     @extend .overlay__btn;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  &__prev {
-    left: 1.25rem;
-  }
-
-  &__next {
-    right: 1.25rem;
   }
 
   // Hide navigation buttons on small screens
@@ -36,11 +31,6 @@
   //     display: none;
   //   }
   // }
-
-  &__caption {
-    visibility: hidden;
-    max-width: $layout-max-text-width;
-  }
 
   &__loading-indicator {
     position: absolute;

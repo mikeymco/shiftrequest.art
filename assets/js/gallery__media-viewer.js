@@ -6,236 +6,217 @@
 
 class GalleryMediaViewer {
   constructor() {
+    this.mediaViewer = document.querySelector('.overlay.gallery__media-viewer');
+    this.mediaTiles = document.querySelectorAll('.gallery__tile--media'),
+
+    this.image = document.querySelector('.gallery__media-viewer__image'),
+    this.video = document.querySelector('.gallery__media-viewer__video'),
+    this.caption = document.querySelector('.gallery__media-viewer__caption'),
+    this.loadingIndicator = document.querySelector('.gallery__media-viewer__loading-indicator'),
     this.loadingIndicatorActiveClass = 'gallery__media-viewer__loading-indicator--active';
 
-    this.mediaViewer = document.querySelector('.overlay.gallery__media-viewer');
-		this.mediaTiles = document.querySelectorAll('.gallery__tile--media'),
+    this.closeButton = document.querySelector('.gallery__media-viewer__close'),
+    this.nextButton = document.querySelector('.gallery__media-viewer__next'),
+    this.prevButton = document.querySelector('.gallery__media-viewer__prev'),
 
-		this.image = document.querySelector('.gallery__media-viewer__image'),
-		this.video = document.querySelector('.gallery__media-viewer__video'),
-		this.caption = document.querySelector('.gallery__media-viewer__caption'),
-		this.closeBtn = document.querySelector('.gallery__media-viewer__close'),
-		this.nextBtn = document.querySelector('.gallery__media-viewer__next'),
-		this.prevBtn = document.querySelector('.gallery__media-viewer__prev'),
-		this.loadingIndicator = document.querySelector('.gallery__media-viewer__loading-indicator'),
+    // defined as a global in gallery__media-viewer.html - TODO: ???
+    this.mediaList = typeof galleryMedia !== 'undefined' ? galleryMedia : [];
 
-		this.currentIndex = null;
-		this.images = typeof galleryImages !== 'undefined' ? galleryImages : [];
+    if (!this.mediaViewer || this.mediaList.length === 0) {
+      console.error('Gallery media viewer: Missing required elements or gallery data');
+      return;
+    }this.mediaList[
 
-    if (!this.mediaViewer || this.images.length === 0) {
-			console.error('Gallery media viewer: Missing required elements or gallery data');
-			return;
-		}
+    this.bindEvents();
 
-		this.bindEvents();
-		this.initializeFromUrl();
-		this.setInitialHistoryState();
-	}
+    const index = this.getUrlParam();
+    if (index !== null && index < this.mediaList.length) {
+      this.showViewer(index);
+    }
 
-	bindEvents() {
-		// Gallery button clicks
-    this.mediaTiles.forEach((button, index) => {
-      button.addEventListener('click', e => this.showViewer(index, e));
+    // if (!window.history.state) {
+    //   window.history.replaceState({ media: null }, '', window.location);
+    // }
+  }
+
+  bindEvents() {
+    // Gallery tile clicks
+    this.mediaTiles.forEach((tile, index) => {
+      tile.addEventListener('click', e => this.showViewer(index, e));
     });
 
     // Close on background, not content
     this.mediaViewer.addEventListener('click', e => {
-        if (e.target === this.mediaViewer) { // Only background
-            this.hideViewer();
-        }
+      if (e.target === this.mediaViewer) { // Only background
+        this.hideViewer();
+      }
     });
 
-		// Navigation buttons
-		this.nextBtn.addEventListener('click', e => this.nextImage(e));
-		this.prevBtn.addEventListener('click', e => this.prevImage(e) );
-    this.closeBtn.addEventListener('click', e => this.hideViewer(e));
+    // Navigation buttons
+    this.nextButton.addEventListener('click', e => this.nextImage(e));
+    this.prevButton.addEventListener('click', e => this.prevImage(e));
+    this.closeButton.addEventListener('click', e => this.hideViewer(e));
 
-		// Image interactions
-		this.image.addEventListener('click', e => this.handleImageClick(e));
+    // Image interactions
+    this.image.addEventListener('click', e => this.handleImageClick(e));
 
-		// Keyboard navigation
-		document.addEventListener('keydown', e => this.handleKeydown(e));
+    // Keyboard navigation
+    document.addEventListener('keydown', e => this.handleKeydown(e));
 
-		// Browser back/forward
-		window.addEventListener('popstate', e => this.handlePopState(e));
-	}
+    // Browser back/forward
+    window.addEventListener('popstate', e => this.handlePopState(e));
+  }
 
-	setInitialHistoryState() {
-		if (!window.history.state) {
-			window.history.replaceState({ viewer: false, image: null }, '', window.location);
-		}
-	}
+  getUrlParam() {
+    const params = new URLSearchParams(window.location.search);
+    return parseInt(params.get('media'));
+  }
 
-	initializeFromUrl() {
-		const params = this.getUrlParams();
+  setUrlParam(index = null) {
+    const url = new URL(window.location);
 
-		if (params.viewer && params.image !== null && params.image < this.images.length) {
-			this.showViewer(params.image, false);
-		}
-	}
+    if (index !== null) {
+      url.searchParams.set('media', index.toString());
+    } else {
+      url.searchParams.delete('media');
+    }
 
-	getUrlParams() {
-		const params = new URLSearchParams(window.location.search);
-		return {
-			image: parseInt(params.get('image')) || null,
-			viewer: params.get('viewer') === 'true'
-		};
-	}
+    window.history.pushState({ media: index }, '', url);
+  }
 
-	updateUrl(index = null, showViewer = false) {
-		const url = new URL(window.location);
+  showLoading() {
+    this.loadingIndicator.classList.add(this.loadingIndicatorActiveClass);
+  }
 
-		if (showViewer && index !== null) {
-			url.searchParams.set('viewer', 'true');
-			url.searchParams.set('image', index.toString());
-		} else {
-			url.searchParams.delete('viewer');
-			url.searchParams.delete('image');
-		}
+  hideLoading() {
+    this.loadingIndicator.classList.remove(this.loadingIndicatorActiveClass);
+  }
 
-		window.history.pushState({ viewer: showViewer, image: index }, '', url);
-	}
+  showImage(src) {
+    this.showLoading();
+    this.video.style.display = 'none';
 
-	showLoading() {
-		this.loadingIndicator.classList.add(this.loadingIndicatorActiveClass);
-	}
+    const newImage = new Image();
+    newImage.onload = () => {
+      this.image.src = src;
+      this.image.style.display = 'block';
+      this.hideLoading();
+    };
+    newImage.onerror = () => {
+      this.hideLoading();
+      console.error('Failed to load image:', src);
+    };
+    newImage.src = src;
+  }
 
-	hideLoading() {
-		this.loadingIndicator.classList.remove(this.loadingIndicatorActiveClass);
-	}
+  showVideo(src) {
+    this.showLoading();
+    this.image.style.display = 'none';
+    this.video.pause();
+    this.video.src = src;
+    this.video.load();
+    this.video.style.setProperty('display', 'block');
+    this.video.style.maxWidth = '90vw';
+    this.video.style.maxHeight = '85vh';
 
-	showImage(src) {
-		this.showLoading();
-		this.video.style.display = 'none';
+    const hideLoadingWhenReady = () => {
+      this.hideLoading();
+      this.video.removeEventListener('canplay', hideLoadingWhenReady);
+    };
+    this.video.addEventListener('canplay', hideLoadingWhenReady);
 
-		const newImage = new Image();
-		newImage.onload = () => {
-			this.image.src = src;
-			this.image.style.display = 'block';
-			this.hideLoading();
-		};
-		newImage.onerror = () => {
-			this.hideLoading();
-			console.error('Failed to load image:', src);
-		};
-		newImage.src = src;
-	}
+    const playVideoWhenReady = () => {
+      this.video.play().catch(() => {
+        console.log('Auto-play prevented by browser policy');
+      });
+      this.video.removeEventListener('canplay', playVideoWhenReady);
+    };
+    this.video.addEventListener('canplay', playVideoWhenReady);
 
-	showVideo(src) {
-		this.showLoading();
-		this.image.style.display = 'none';
-		this.video.pause();
-		this.video.src = src;
-		this.video.load();
-		this.video.style.setProperty('display', 'block');
-		this.video.style.maxWidth = '90vw';
-		this.video.style.maxHeight = '85vh';
+    const handleVideoError = () => {
+      this.hideLoading();
+      console.error('Failed to load video:', src);
+      this.video.removeEventListener('error', handleVideoError);
+    };
+    this.video.addEventListener('error', handleVideoError);
+  }
 
-		const hideLoadingWhenReady = () => {
-			this.hideLoading();
-			this.video.removeEventListener('canplay', hideLoadingWhenReady);
-		};
-		this.video.addEventListener('canplay', hideLoadingWhenReady);
+  showViewer(index) {
+    if (index < 0) { index = this.mediaList.length - 1; } // loop around to end
+    if (index === this.mediaList.length) { index = 0; } // loop around to start
 
-		const playVideoWhenReady = () => {
-			this.video.play().catch(() => {
-				console.log('Auto-play prevented by browser policy');
-			});
-			this.video.removeEventListener('canplay', playVideoWhenReady);
-		};
-		this.video.addEventListener('canplay', playVideoWhenReady);
+    if (this.mediaList[index].isVideo) {
+      this.showVideo(this.mediaList[index].src);
+    } else {
+      this.showImage(this.mediaList[index].src);
+    }
 
-		const handleVideoError = () => {
-			this.hideLoading();
-			console.error('Failed to load video:', src);
-			this.video.removeEventListener('error', handleVideoError);
-		};
-		this.video.addEventListener('error', handleVideoError);
-	}
+    this.caption.innerHTML = this.mediaList[index].caption;
+    this.mediaViewer.classList.add('overlay--active');
+    this.mediaViewer.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    this.setUrlParam(index);
+  }
 
-	showViewer(index, updateHistory = true) {
-		this.currentIndex = index;
+  hideViewer() {
+    this.hideLoading();
+    // this.closeButton.blur();
+    this.mediaViewer.classList.remove('overlay--active');
+    this.mediaViewer.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    this.setUrlParam();
+  }
 
-		if (this.images[index].isVideo) {
-			this.showVideo(this.images[index].src);
-		} else {
-			this.showImage(this.images[index].src);
-		}
+  nextImage(e) {
+    this.showViewer(this.getUrlParam() + 1);
+  }
 
-		this.caption.innerHTML = this.images[index].caption;
-		this.mediaViewer.classList.add('overlay--active');
-		this.mediaViewer.setAttribute('aria-hidden', 'false');
-		document.body.style.overflow = 'hidden';
+  prevImage(e) {
+    this.showViewer(this.getUrlParam() - 1);
+  }
 
-		if (updateHistory) {
-			this.updateUrl(index, true);
-		}
-	}
+  handleImageClick(e) {
+    const rect = this.image.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const imageWidth = rect.width;
 
-	hideViewer(updateHistory = true) {
-    this.currentIndex = null;
-		this.hideLoading();
-		this.closeBtn.blur();
-		this.mediaViewer.classList.remove('overlay--active');
-		this.mediaViewer.setAttribute('aria-hidden', 'true');
-		document.body.style.overflow = '';
-
-		if (updateHistory) {
-			this.updateUrl(null, false);
-		}
-	}
-
-	nextImage(e) {
-		this.currentIndex = (this.currentIndex + 1) % this.images.length;
-		this.showViewer(this.currentIndex, true);
-	}
-
-	prevImage(e) {
-		this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
-		this.showViewer(this.currentIndex, true);
-	}
-
-	handleImageClick(e) {
-		const rect = this.image.getBoundingClientRect();
-		const clickX = e.clientX - rect.left;
-		const imageWidth = rect.width;
-
-		if (clickX < imageWidth / 2) {
-			this.prevImage();
-		} else {
-			this.nextImage();
-		}
-	}
+    if (clickX < imageWidth / 2) {
+      this.prevImage();
+    } else {
+      this.nextImage();
+    }
+  }
 
   handleKeydown(e) {
-    if (this.currentIndex === null) return;
+    // if (this.currentIndex === null) return;
 
     const actions = {
       'Escape': () => this.hideViewer(),
       'ArrowRight': () => this.nextImage(),
       'ArrowLeft': () => this.prevImage(),
-      ' ': () => this.nextImage()
+      // ' ': () => this.nextImage()
     };
 
     const action = actions[e.key];
     if (action) {
-        e.preventDefault(); // Only prevent when we actually handle it
-        action();
+      e.preventDefault(); // Only prevent when we actually handle it
+      action();
     }
   }
 
-	handlePopState(e) {
-		const state = e.state || {};
+  handlePopState(e) {
+    console.log('popstate', e.state);
+    const state = e.state || {};
 
-		if (state.viewer && state.image !== null && state.image !== undefined) {
-			this.showViewer(state.image, false);
-		} else {
-			this.hideViewer(false);
-		}
-	}
+    if (state.image !== null && state.image !== undefined) {
+      this.showViewer(state.image);
+    } else {
+      this.hideViewer();
+    }
+  }
 
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-	new GalleryMediaViewer();
+  new GalleryMediaViewer();
 });

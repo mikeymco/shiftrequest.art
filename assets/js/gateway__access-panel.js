@@ -21,12 +21,12 @@ class GalleryAccessPanel {
 
 	bindEvents() {
 		this.trigger.addEventListener('click', e => {
-			e.preventDefault();
+			// e.preventDefault();
 			this.showGateway();
 		});
 
 		this.submitButton.addEventListener('click', e => {
-			e.preventDefault();
+			// e.preventDefault();
 			this.handleSubmission();
 		});
 
@@ -38,17 +38,17 @@ class GalleryAccessPanel {
 		// });
 
     // Close on background, not content
-    this.mediaViewer.addEventListener('click', e => {
-        if (e.target === this.mediaViewer) { // Only background
-            this.hideViewer();
-        }
+    this.gateway.addEventListener('click', e => {
+      if (e.target === this.gateway) { // Only background
+        this.hideGateway();
+      }
     });
 
-    this.closeButton.addEventListener('click', () => this.hideOverlay());
+    this.closeButton.addEventListener('click', () => this.hideGateway());
 
 		document.addEventListener('keydown', e => {
 			if (e.key === 'Escape') {
-				this.hideOverlay();
+				this.hideGateway();
 			}
 		});
 	}
@@ -62,7 +62,7 @@ class GalleryAccessPanel {
 		this.showMessage('❤️‍🩹📸❤️‍🔥', 'love');
 	}
 
-	hideOverlay() {
+	hideGateway() {
 		this.gateway.setAttribute('aria-hidden', 'true');
     this.gateway.classList.remove('overlay--active');
 		document.body.style.overflow = '';
