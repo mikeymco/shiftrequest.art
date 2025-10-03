@@ -8,16 +8,14 @@
   }
 
   &__header {
-    margin-top: 0;
-    margin-bottom: clamp(0rem, calc(2vw - 6.4px), .5rem);
+    margin: clamp(0rem, calc(2vw - 6.4px), .3rem) 0;
     font-family: $font-secondary;
     text-transform: uppercase;
     letter-spacing: 1px;
   }
 
   &__links {
-    margin: auto;
-    display: inline-grid;
+    display: grid;
     grid-template: 1fr 1fr / repeat(3, 1fr);
   }
 

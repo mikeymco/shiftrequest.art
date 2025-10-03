@@ -1,6 +1,9 @@
+@import 'mixins/outward-background-wave';
 @import 'variables';
 
 .gallery__media-viewer {
+  @include outward-background-wave;
+
   &__image,
   &__video {
     margin: auto;
@@ -8,6 +11,8 @@
     max-height: 85vh;
     object-fit: contain;
     cursor: pointer;
+
+    @include breath-transform(1, 0.98);
     &:focus {
       outline: none;
       border: none;
@@ -22,15 +27,21 @@
   &__prev,
   &__next {
     @extend .overlay__btn;
+    position: absolute;
+    bottom: 1rem;
+
+    @media (orientation: landscape) {
+      bottom: 50%;
+      transform: translateY(-50%);
+    }
   }
 
-  // Hide navigation buttons on small screens
-  // @media (max-width: $layout-min-hide-on-mobile) { // todo: ???
-  //   &__prev,
-  //   &__next {
-  //     display: none;
-  //   }
-  // }
+  &__prev {
+    left: 1rem;
+  }
+  &__next {
+    right: 1rem;
+  }
 
   &__loading-indicator {
     position: absolute;

@@ -2,7 +2,10 @@
 
 .gallery__tile {
   aspect-ratio: 1;
-  align-content: center;
+  display: grid;
+  grid-template: auto auto / auto;
+  place-items: center;
+  place-content: center;
   overflow: hidden;
   position: relative;
   background: $color-bg-primary-dim;
