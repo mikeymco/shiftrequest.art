@@ -1,13 +1,5 @@
-$grid-template--sm: repeat(auto-fill, minmax(min(32vw, 7.5rem), 1fr));
-// $grid-template--lg: repeat(auto-fill, minmax(max(7.5rem, 14vw), 1fr));
-
 .gallery {
   display: grid;
-  grid-template-columns: $grid-template--sm;
-  gap: 0.125rem;
-
-  // @media (min-width: 920px) { // todo: ???
-  //   grid-template-columns: $grid-template--lg;
-  //   gap: 0.25rem;
-  // }
+  grid-template-columns: repeat(auto-fill, minmax(clamp(6.5rem, 20vw, max(200px, 14vw)), 1fr));
+  gap: clamp(0.125rem, 0.4vw, 0.25rem);
 }
