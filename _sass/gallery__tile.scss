@@ -2,6 +2,7 @@
 
 .gallery__tile {
   aspect-ratio: 1;
+  margin: 0;
   display: grid;
   grid-template: auto auto / auto;
   place-items: center;

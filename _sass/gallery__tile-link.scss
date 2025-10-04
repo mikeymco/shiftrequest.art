@@ -3,8 +3,8 @@
 
   &--locked:before {
     content: '';
-    width: clamp(3rem, 12vw, 6rem);
-    height: clamp(3rem, 12vw, 6rem);
+    width: clamp(4rem, 12vw, 6rem);
+    height: clamp(4rem, 12vw, 6rem);
     display: block;
     background-size: 100%;
     background-repeat: no-repeat;
