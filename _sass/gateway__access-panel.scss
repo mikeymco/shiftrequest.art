@@ -18,6 +18,8 @@
   }
 
   &__submit {
+    @extend .btn--red;
+
     &::after {
       content: ' 🔒';
     }

@@ -67,6 +67,7 @@ class GalleryAccessPanel {
 	showMessage(message = '', type = '') {
 		this.message.textContent = message;
     this.message.className = 'gateway__access-panel__message';
+    this.submitButton.className = 'gateway__access-panel__submit';
 
     this.message.classList.add(`gateway__access-panel__message--${type}`);
     this.submitButton.classList.add(`gateway__access-panel__submit--${type}`);
@@ -89,7 +90,6 @@ class GalleryAccessPanel {
 			if (code === this.trigger.dataset.linkTo) {
 				this.showMessage('💚 Access Granted 😈', 'success');
 				setTimeout(() => {
-          this.hideGateway();
 					window.location.href = '../' + code;
 				}, 1500);
 			} else {
