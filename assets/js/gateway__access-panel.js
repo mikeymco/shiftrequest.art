@@ -1,6 +1,6 @@
 /**
  * Gallery Access Panel Gateway
- * Theatrical but _entirely insecure_
+ * Purely theatrical and _entirely insecure_
  * NSFW gallery access via access code entry
  */
 
@@ -11,31 +11,24 @@ class GalleryAccessPanel {
     if (!this.trigger) return;
 
 		this.gateway = document.querySelector('.overlay.gateway__access-panel');
+		this.form = document.querySelector('.gateway__access-panel__form');
 		this.input = document.querySelector('.gateway__access-panel__input');
-		this.message = document.querySelector('.gateway__access-panel__message');
 		this.submitButton = document.querySelector('.gateway__access-panel__submit');
-		this.closeButton = this.gateway.querySelector('.gateway__access-panel__close');
+		this.message = document.querySelector('.gateway__access-panel__message');
+		this.closeButton = document.querySelector('.gateway__access-panel__close');
 
-		this.bindEvents();
+    this.bindEvents();
 	}
 
 	bindEvents() {
-		this.trigger.addEventListener('click', e => {
-			// e.preventDefault();
+    this.trigger.addEventListener('click', e => {
 			this.showGateway();
 		});
 
-		this.submitButton.addEventListener('click', e => {
-			// e.preventDefault();
-			this.handleSubmission();
+		this.form.addEventListener('submit', e => {
+      e.preventDefault();
+      this.handleSubmission();
 		});
-
-		// this.input.addEventListener('keydown', e => {
-		// 	if (e.key === 'Enter') {
-		// 		e.preventDefault();
-		// 		this.handleSubmission();
-		// 	}
-		// });
 
     // Close on background, not content
     this.gateway.addEventListener('click', e => {
@@ -59,7 +52,7 @@ class GalleryAccessPanel {
 		document.body.style.overflow = 'hidden';
 
     this.input.value = '';
-		this.showMessage('❤️‍🩹📸❤️‍🔥', 'love');
+		this.showMessage('❤️‍🩹📸❤️‍🔥', 'initial');
 	}
 
 	hideGateway() {
@@ -68,17 +61,15 @@ class GalleryAccessPanel {
 		document.body.style.overflow = '';
 
 		this.input.value = '';
-		this.showMessage('', '');
+		this.showMessage('');
 	}
 
 	showMessage(message = '', type = '') {
 		this.message.textContent = message;
     this.message.className = 'gateway__access-panel__message';
 
-		if (type) {
-			this.message.classList.add(`gateway__access-panel__message--${type}`);
-			this.submitButton.classList.add(`gateway__access-panel__submit--${type}`);
-		}
+    this.message.classList.add(`gateway__access-panel__message--${type}`);
+    this.submitButton.classList.add(`gateway__access-panel__submit--${type}`);
 	}
 
 	handleSubmission() {
@@ -90,12 +81,12 @@ class GalleryAccessPanel {
 		}
 
 		this.submitButton.disabled = true;
-		this.showMessage('Checking access...', '');
+		this.showMessage('Checking access...');
 
 		setTimeout(() => {
 			this.submitButton.disabled = false;
 
-			if (code === 'void') {
+			if (code === this.trigger.dataset.linkTo) {
 				this.showMessage('💚 Access Granted 😈', 'success');
 				setTimeout(() => {
 					window.location.href = '../' + code;

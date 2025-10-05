@@ -1,9 +1,7 @@
-@import 'mixins/outward-background-wave';
+@import 'mixins/breath-transform';
 @import 'variables';
 
 .gallery__media-viewer {
-  @include outward-background-wave;
-
   &__image,
   &__video {
     margin: auto;
@@ -27,7 +25,6 @@
   &__prev,
   &__next {
     @extend .overlay__btn;
-    position: absolute;
     bottom: 1rem;
 
     @media (orientation: landscape) {
@@ -54,7 +51,7 @@
     border-top: 3px solid rgba(255, 255, 255, 0.8);
     border-radius: 50%;
     animation: spin 1s linear infinite;
-    z-index: 10;
+    z-index: $z-index-overlay + 1;
     display: none;
 
     &--active {

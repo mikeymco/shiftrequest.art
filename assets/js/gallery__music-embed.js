@@ -10,12 +10,13 @@ class GalleryMusicEmbed {
 		this.closeButton = document.querySelector('.gallery__music-embed__close');
     this.closeButton.addEventListener('click', e => this.hidePlayer(e));
 
-    this.bodyHasMusicClass = 'has-music-embed--' + this.musicEmbed.dataset.musicService;
-    document.body.classList.add(this.bodyHasMusicClass);
+    this.footer = document.querySelector('footer');
+    this.hasMusicClass = 'has-music-embed--' + this.musicEmbed.dataset.musicService;
+    this.footer.classList.add(this.hasMusicClass);
 	}
 
 	hidePlayer(e) {
-		document.body.classList.remove(this.bodyHasMusicClass);
+		this.footer.classList.remove(this.hasMusicClass);
 		this.musicEmbed.style.display = 'none';
 	}
 }

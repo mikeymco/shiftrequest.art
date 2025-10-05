@@ -9,7 +9,7 @@
   place-content: center;
   overflow: hidden;
   position: relative;
-  background: $color-bg-primary-dim;
+  background: $color-bg-soft-dim;
 
   &:hover {
     opacity: 0.8;
@@ -36,7 +36,6 @@
     left: 50%;
     width: 0;
     height: 0;
-    z-index: 1;
     transform: translate(-50%, -50%);
     border-left: 2rem solid $color-bg-opposite;
     border-top: 1rem solid transparent;

@@ -1,0 +1,12 @@
+@import 'mixins/diagonal-stripes-background';
+@import 'variables';
+
+.gateway {
+  margin: auto;
+
+  @include diagonal-stripes-background;
+
+  border: $border-primary;
+  box-sizing: border-box;
+  box-shadow: $box-shadow-primary;
+}

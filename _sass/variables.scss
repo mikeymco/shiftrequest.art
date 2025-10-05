@@ -7,8 +7,8 @@ $color-bg-dim: #222;
 $color-bg-mid: #888;
 $color-bg-opposite: #fff;
 $color-bg-opposite-dim: #ccc;
-$color-bg-primary: rgba(20, 0, 0, 0.95);
-$color-bg-primary-dim: rgba(255, 0, 0, 0.1);
+$color-bg-soft: rgba(20, 0, 0, 0.95);
+$color-bg-soft-dim: rgba(255, 0, 0, 0.1);
 $border-bg: 1px solid $color-bg-dim;
 
 $color-secondary: rgba(0, 255, 0, 1);
@@ -27,12 +27,14 @@ $font-secondary: Arial, Helvetica, sans-serif;
 $transition-primary: all 0.1s ease-in-out;
 
 $padding-primary: 2rem;
-$padding-btns-inputs: 0.8rem 1.2rem;
+$padding-btns-inputs: 0.8rem 1.5rem;
 
-$layout-max-text-width: 600px;
-$layout-min-hide-on-mobile: 600px;
+$layout-max-text-width: 520px;
 
 $state-active-transform: translateY(1px);
+
+$z-index-body: 1;
+$z-index-overlay: 1000;
 
 $color-warning-red: #ff4444;
 $o32c-red: rgba(204, 3, 44, 1); //032c red :)

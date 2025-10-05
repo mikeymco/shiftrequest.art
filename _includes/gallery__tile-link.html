@@ -3,11 +3,12 @@
 
   {% if linked_gallery.nsfw %}
     <button
-      href="javascript:void(0)"
       class="gallery__tile gallery__tile-link gallery__tile-link--locked"
       aria-label="Locked gallery access dialog"
       role="gridcell"
+      data-link-to="{{ page.gallery.link_to }}"
     ></button>
+    <!-- :P - Welcome in, curious mind -->
     {% include gateway__access-panel.html %}
   {% else %}
     <a

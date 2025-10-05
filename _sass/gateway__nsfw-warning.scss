@@ -4,54 +4,61 @@
 .gateway__nsfw-warning {
   cursor: not-allowed;
 
-  &__content {
-    margin: auto;
-    max-width: $layout-max-text-width;
+  &__form {
+    @extend .gateway;
     padding: $padding-primary;
-
     cursor: default;
-    @include breath-transform(1, 0.98);
+    display: grid;
+    gap: 1rem;
 
-    // border: $border-primary;
-    // box-sizing: border-box;
+    @media (min-width: $layout-max-text-width) {
+      @include breath-transform(1, 0.99);
+      padding: 3rem;
+    }
   }
 
   &__heading {
     text-shadow: $text-shadow-primary;
     margin-top: 0;
+    margin-bottom: 0.5rem;
   }
 
-  &__text {
-    &__adult-media {
-      color: $color-bg-opposite;
-    }
+  &__adult-media {
+    color: $color-bg-opposite;
+  }
 
-    &__descriptions {
-      text-align: left;
-      justify-self: center;
-      color: $color-bg-opposite-dim;
-      margin-top: 0;
-    }
+  &__descriptions {
+    text-align: left;
+    justify-self: center;
+    color: $color-bg-opposite-dim;
+  }
 
-    &__first-amendment {
-      color: $color-bg-opposite;
-    }
+  &__first-amendment {
+    max-width: $layout-max-text-width;
+    margin: 0;
+    color: $color-bg-opposite;
+  }
 
-    &__viewer-discretion {
-      color: $color-warning-red;
-      margin-bottom: 2rem;
-      font-weight: normal;
-    }
-
-    &__age-disclaimer {
-      font-style: italic;
-      color: $color-bg-mid;
-      margin-top: 2rem;
-    }
+  &__viewer-discretion {
+    font-size: 1.1rem;
+    font-weight: normal;
+    color: $color-warning-red;
   }
 
   &__actions {
     display: grid;
     gap: 1rem;
+    @media (min-width: $layout-max-text-width) {
+      grid-auto-flow: column;
+      justify-content: center;
+    }
+  }
+
+  &__age-disclaimer {
+    max-width: $layout-max-text-width;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: $color-bg-mid;
   }
 }

@@ -1,9 +1,11 @@
+@import 'variables';
+
 .gallery__music-embed {
 	position: fixed;
 	bottom: -0.5rem;
 	left: 50%;
 	transform: translateX(-50%);
-	z-index: 900;
+	z-index: $z-index-body + 1;
 
   &__close {
     position: absolute;
@@ -39,11 +41,11 @@
 }
 
 // Add bottom padding when music player is visible
-body.has-music-embed {
+footer.has-music-embed {
   &--spotify {
-    padding-bottom: 5rem;
+    padding-bottom: 7rem;
   }
   &--soundcloud {
-    padding-bottom: 10rem;
+    padding-bottom: 12rem;
   }
 }

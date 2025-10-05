@@ -10,6 +10,7 @@ class GatewayNsfw {
     this.gallery = document.querySelector('.gallery');
 
     document.body.style.overflow = 'hidden';
+    this.gallery.style.display = '';
   }
 
   verifyAge(isAdult) {
@@ -23,7 +24,6 @@ class GatewayNsfw {
 
   enterSite() {
     this.gateway.remove();
-    this.gallery.style.display = '';
     document.body.style.overflow = '';
   }
 }

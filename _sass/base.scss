@@ -35,7 +35,7 @@ input {
   padding: $padding-btns-inputs;
   border: 2px inset;
   border-color: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-  background: $color-bg-primary;
+  background: $color-bg-soft;
   text-align: center;
   font-size: 1.1rem;
   letter-spacing: 2px;
@@ -47,4 +47,8 @@ input {
   &::placeholder {
     color: $color-bg-mid;
   }
+}
+
+:focus-visible {
+  outline: $color-bg-soft-dim auto 1px;
 }
