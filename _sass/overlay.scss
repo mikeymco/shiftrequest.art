@@ -32,6 +32,7 @@
     box-shadow: none;
     font-family: $font-secondary;
     cursor: pointer;
+    touch-action: manipulation;
     font-size: 3rem;
     font-weight: bold;
     width: 4rem;
@@ -49,8 +50,13 @@
 
     &--close {
       @extend .overlay__btn;
+      top: 0;
+      right: 0;
+
+      @media (min-width: $layout-max-text-width) {
       top: 0.75rem;
       right: 0.75rem;
+      }
     }
   }
 }
