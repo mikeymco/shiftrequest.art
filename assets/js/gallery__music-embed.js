@@ -8,18 +8,14 @@ class GalleryMusicEmbed {
 	constructor() {
 		this.musicEmbed = document.querySelector('.gallery__music-embed');
 		this.closeButton = document.querySelector('.gallery__music-embed__close');
+    this.closeButton.addEventListener('click', e => this.hidePlayer(e));
 
-    if (!this.musicEmbed) return;
-
-    document.body.classList.add('has-music-embed');
-
-		if (this.closeButton) {
-			this.closeButton.addEventListener('click', e => this.hidePlayer(e));
-		}
+    this.bodyHasMusicClass = 'has-music-embed--' + this.musicEmbed.dataset.musicService;
+    document.body.classList.add(this.bodyHasMusicClass);
 	}
 
 	hidePlayer(e) {
-		document.body.classList.remove('has-music-embed');
+		document.body.classList.remove(this.bodyHasMusicClass);
 		this.musicEmbed.style.display = 'none';
 	}
 }

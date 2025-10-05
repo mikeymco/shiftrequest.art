@@ -1,6 +1,6 @@
 .gallery__music-embed {
 	position: fixed;
-	bottom: 0;
+	bottom: -0.5rem;
 	left: 50%;
 	transform: translateX(-50%);
 	z-index: 900;
@@ -26,46 +26,24 @@
   }
 
   &__spotify {
-    &-container {
-      height: 5rem; /* Minimal track height */
-      border-radius: 0.75rem;
-      overflow: hidden;
-    }
-
-    // &-track {
-    //   width: 18.75rem; /* Minimal track width */
-    //   height: 5rem;
-    //   border: none;
-    // }
-
-    // &-playlist {
-    //   width: 18.75rem;
-    //   height: 9.5rem; /* Compact playlist height */
-    //   border: none;
-    // }
+    height: 5rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
   }
 
   &__soundcloud {
-    &-container {
-      border-radius: 0.5rem;
-      overflow: hidden;
-    }
-
-    // &__soundcloud-track {
-    //   width: 18.75rem;
-    //   height: 10.375rem; /* SoundCloud's visual player height */
-    //   border: none;
-    // }
-
-    // &__soundcloud-playlist {
-    //   width: 18.75rem;
-    //   height: 18.75rem; /* SoundCloud playlist height */
-    //   border: none;
-    // }
+    height: 10rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
   }
 }
 
-// Only add bottom padding when music player is present and visible
+// Add bottom padding when music player is visible
 body.has-music-embed {
-  padding-bottom: 5rem;
+  &--spotify {
+    padding-bottom: 5rem;
+  }
+  &--soundcloud {
+    padding-bottom: 10rem;
+  }
 }

@@ -5,22 +5,23 @@ main:
   scale_method: crop
   link_to: void
   # Optional: Add music for this gallery
-  # spotify_playlist: "6mWnyOevjXsigshH9vPv7J"  # Playlist ID from Spotify share URL
-  # spotify_track: "6w0oCUVyKsBq9AtrdEj3pz"     # Single track ID from Spotify share URL
-  # soundcloud_track: "phuturedoom/thebook"     # Track ID from SoundCloud share URL
-  # soundcloud_playlist: "sets/playlist-name"   # Playlist/set from SoundCloud share URL
+  # music:
+    # spotify: "6w0oCUVyKsBq9AtrdEj3pz"     # Single track ID from Spotify share URL
+    # soundcloud: "phuturedoom/thebook"     # Track ID from SoundCloud share URL
 black:
   title: BLACK # NSFW as fuck! - You're welcome. X_X
   description: transit:CORRUPT:BLACK>?LASTRESORT
   sort_field: apple_photos
   scale_method: crop
   nsfw: true
-  spotify_track: "3DQs678YUdTMJ0FG7EDWzf"
+  music:
+    spotify: "3DQs678YUdTMJ0FG7EDWzf"
 void:
   title: VOID # NSFW as fuck! (NIGHTMARE MODE) - X_X
   description: transit:CORRUPT>VOID>?THISGOD
   sort_field: apple_photos
   scale_method: crop
   nsfw: true
-  soundcloud_track: "phuturedoom/thebook"
+  music:
+    soundcloud: "phuturedoom/thebook"
   link_to: main

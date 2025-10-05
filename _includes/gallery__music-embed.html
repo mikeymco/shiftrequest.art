@@ -1,62 +1,33 @@
-{% if
-  page.gallery.spotify_playlist or
-  page.gallery.spotify_track or
-  page.gallery.soundcloud_track or
-  page.gallery.soundcloud_playlist
-%}
+{% if page.gallery.music %}
 <script src="{{ '/assets/js/gallery__music-embed.js' | relative_url }}"></script>
 
-<div class="gallery__music-embed">
-	<button class="gallery__music-embed__close" aria-label="Close music player">×</button>
+<div class="gallery__music-embed"
+{% if page.gallery.music.spotify %}
+  data-music-service="spotify"
+>
+  <iframe
+    class="gallery__music-embed__spotify"
+    src="https://open.spotify.com/embed/track/{{ page.gallery.music.spotify }}?utm_source=generator&theme=0"
+    frameBorder="0"
+    allowfullscreen=""
+    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+    loading="lazy"
+    title="Gallery Soundtrack">
+  </iframe>
+{% elsif page.gallery.music.soundcloud %}
+  data-music-service="soundcloud"
+>
+  {% assign sc_url = "https%3A//soundcloud.com/" | append: page.gallery.music.soundcloud %}
+  <iframe
+    class="gallery__music-embed__soundcloud"
+    src="https://w.soundcloud.com/player/?url={{ sc_url }}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+    frameBorder="0"
+    allow="autoplay"
+    loading="lazy"
+    title="Gallery Soundtrack">
+  </iframe>
+{% endif %}
 
-	{% if page.gallery.spotify_playlist %}
-	<div class="gallery__music-embed__spotify-container">
-		<iframe class="gallery__music-embed__spotify-playlist" style="border-radius:0.75rem"
-			src="https://open.spotify.com/embed/playlist/{{ page.gallery.spotify_playlist }}?utm_source=generator&theme=0"
-			frameBorder="0"
-			allowfullscreen=""
-			allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-			loading="lazy"
-			title="Gallery Soundtrack">
-		</iframe>
-	</div>
-	{% elsif page.gallery.spotify_track %}
-	<div class="gallery__music-embed__spotify-container">
-		<iframe class="gallery__music-embed__spotify-track" style="border-radius:0.75rem"
-			src="https://open.spotify.com/embed/track/{{ page.gallery.spotify_track }}?utm_source=generator&theme=0"
-			frameBorder="0"
-			allowfullscreen=""
-			allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-			loading="lazy"
-			title="Gallery Soundtrack">
-		</iframe>
-	</div>
-	{% elsif page.gallery.soundcloud_track %}
-	<div class="gallery__music-embed__soundcloud-container">
-		{% comment %} Handle both numeric IDs and permalink formats {% endcomment %}
-		{% if page.gallery.soundcloud_track contains "/" %}
-			{% assign sc_url = "https%3A//soundcloud.com/" | append: page.gallery.soundcloud_track %}
-		{% else %}
-			{% assign sc_url = "https%3A//api.soundcloud.com/tracks/" | append: page.gallery.soundcloud_track %}
-		{% endif %}
-		<iframe class="gallery__music-embed__soundcloud-track"
-			src="https://w.soundcloud.com/player/?url={{ sc_url }}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
-			frameBorder="0"
-			allow="autoplay"
-			loading="lazy"
-			title="Gallery Soundtrack">
-		</iframe>
-	</div>
-	{% elsif page.gallery.soundcloud_playlist %}
-	<div class="gallery__music-embed__soundcloud-container">
-		<iframe class="gallery__music-embed__soundcloud-playlist"
-			src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/{{ page.gallery.soundcloud_playlist }}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
-			frameBorder="0"
-			allow="autoplay"
-			loading="lazy"
-			title="Gallery Soundtrack">
-		</iframe>
-	</div>
-	{% endif %}
+  <button class="gallery__music-embed__close" aria-label="Close music player">×</button>
 </div>
 {% endif %}
