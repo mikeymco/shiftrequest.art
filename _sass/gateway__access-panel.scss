@@ -5,6 +5,7 @@
   &__form {
     @extend .gateway;
     padding: $padding-primary;
+    width: 20rem;
     display: grid;
     gap: 1.5rem;
 
@@ -12,12 +13,8 @@
   }
 
   &__heading {
-    margin: 0 auto;
+    margin: 0;
     text-shadow: $text-shadow-primary;
-  }
-
-  &__input {
-    width: 12rem;
   }
 
   &__submit {
@@ -34,7 +31,7 @@
   }
 
   &__message {
-    width: 12rem;
+    margin: 0;
     height: 3rem;
     color: $color-primary-dim;
 

@@ -89,6 +89,7 @@ class GalleryAccessPanel {
 			if (code === this.trigger.dataset.linkTo) {
 				this.showMessage('💚 Access Granted 😈', 'success');
 				setTimeout(() => {
+          this.hideGateway();
 					window.location.href = '../' + code;
 				}, 1500);
 			} else {

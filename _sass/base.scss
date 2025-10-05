@@ -32,9 +32,12 @@ ul {
 }
 
 input {
+  display: block;
+  width: 100%;
   padding: $padding-btns-inputs;
   border: 2px inset;
   border-color: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  box-sizing: border-box;
   background: $color-bg-soft;
   text-align: center;
   font-size: 1.1rem;
