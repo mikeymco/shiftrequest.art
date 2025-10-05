@@ -12,7 +12,7 @@
     gap: 1rem;
 
     @media (min-width: $layout-max-text-width) {
-      @include breath-transform(1, 0.99);
+      @include breath-transform(1, 0.98);
       padding: 3rem;
     }
   }
