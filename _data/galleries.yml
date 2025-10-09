@@ -4,24 +4,14 @@ main:
   sort_field: apple_photos # rule for sorting images within galleries - parses Apple Photos filename numbers
   scale_method: crop
   link_to: void
-  # Optional: Add music for this gallery
+  # Optional: Show music embed for this gallery
   # music:
     # spotify: "6w0oCUVyKsBq9AtrdEj3pz"     # Single track ID from Spotify share URL
     # soundcloud: "phuturedoom/thebook"     # Track ID from SoundCloud share URL
-black:
-  title: BLACK # NSFW as fuck! - You're welcome. X_X
-  description: transit:CORRUPT:BLACK>?LASTRESORT
-  sort_field: apple_photos
-  scale_method: crop
-  nsfw: true
-  music:
-    spotify: "3DQs678YUdTMJ0FG7EDWzf"
 void:
-  title: VOID # NSFW as fuck! (NIGHTMARE MODE) - X_X
-  description: transit:CORRUPT>VOID>?THISGOD
+  title: VOID # NSFW, unlisted
+  description: shiftrequest.art
   sort_field: apple_photos
   scale_method: crop
   nsfw: true
-  music:
-    soundcloud: "phuturedoom/thebook"
   link_to: main
