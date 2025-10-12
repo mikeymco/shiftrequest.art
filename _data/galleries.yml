@@ -3,13 +3,15 @@ main:
   description: shiftrequest.art
   sort_field: apple_photos # rule for sorting images within galleries - parses Apple Photos filename numbers
   scale_method: crop
+  nsfw: true
   link_to: void
+  sort_reverse: true
   # Optional: Show music embed for this gallery
   # music:
     # spotify: "6w0oCUVyKsBq9AtrdEj3pz"     # Single track ID from Spotify share URL
     # soundcloud: "phuturedoom/thebook"     # Track ID from SoundCloud share URL
 void:
-  title: VOID # NSFW, unlisted
+  title: VOID # NSFW, unlisted - if you find this, you're welcome in
   description: shiftrequest.art
   sort_field: apple_photos
   scale_method: crop
