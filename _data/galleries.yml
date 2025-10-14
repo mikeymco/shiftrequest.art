@@ -1,10 +1,10 @@
 main:
   title: MAIN # name used in the navigation bar and headers
   description: shiftrequest.art
-  sort_field: apple_photos # rule for sorting images within galleries - parses Apple Photos filename numbers
   scale_method: crop
   nsfw: true
   link_to: void
+  sort_field: date_created
   sort_reverse: true
   # Optional: Show music embed for this gallery
   # music:
@@ -13,7 +13,7 @@ main:
 void:
   title: VOID # NSFW, unlisted - if you find this, you're welcome in
   description: shiftrequest.art
-  sort_field: apple_photos
+  sort_field: apple_photos # parses Apple Photos album "sequence export" filename numbers
   scale_method: crop
   nsfw: true
   link_to: main

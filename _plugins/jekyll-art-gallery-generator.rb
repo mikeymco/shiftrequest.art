@@ -158,6 +158,7 @@ module Jekyll
         # process and copy images
       self.data["captions"] = {}
       date_times = {}
+      file_creation_times = {}
       Dir.foreach(dir) do |image|
         next if image.chars.first == "."
         next unless image.downcase().end_with?(*$media_extensions)
@@ -178,6 +179,18 @@ module Jekyll
             # puts "gtot #{date_array} date" + date_times[image].to_s
           rescue Exception => e
             puts "Error getting date_time "+date_times[image]+" for #{image}: #{e}"
+          end
+        end
+
+        # extract file creation date
+        if sort_field == "date_created"
+          begin
+            file_stat = File.stat(image_path)
+            # Use birthtime (creation time) if available, otherwise fall back to mtime
+            file_creation_times[image] = file_stat.respond_to?(:birthtime) ? file_stat.birthtime.to_i : file_stat.mtime.to_i
+          rescue Exception => e
+            puts "Error getting file creation time for #{image}: #{e}"
+            file_creation_times[image] = 0
           end
         end
           # cleanup, watermark and copy the files
@@ -285,6 +298,16 @@ module Jekyll
               filename_a <=> filename_b # do the name if the timestamps match
             else
               date_times[filename_a] <=> date_times[filename_b]
+            end
+          }
+        elsif sort_field == "date_created"
+          @media.sort! {|a,b|
+            filename_a = a["filename"]
+            filename_b = b["filename"]
+            if file_creation_times[filename_a] == file_creation_times[filename_b]
+              filename_a <=> filename_b # do the name if the creation times match
+            else
+              file_creation_times[filename_a] <=> file_creation_times[filename_b]
             end
           }
         elsif sort_field == "apple_photos"
