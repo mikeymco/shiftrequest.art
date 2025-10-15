@@ -174,6 +174,7 @@ class GalleryMediaViewer {
 
   hideViewer() {
     this.hideLoading();
+    this.video.pause();
     this.mediaViewer.classList.remove('overlay--active');
     this.mediaViewer.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
