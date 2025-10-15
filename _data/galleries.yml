@@ -2,10 +2,9 @@ main:
   title: MAIN # name used in the navigation bar and headers
   description: shiftrequest.art
   scale_method: crop
-  nsfw: true
-  link_to: void
-  sort_field: date_created
-  sort_reverse: true
+  link_to: void,hell
+  sort_field: apple_photos # parses Apple Photos album "sequence export" filename numbers
+  # sort_reverse: true
   # Optional: Show music embed for this gallery
   # music:
     # spotify: "6w0oCUVyKsBq9AtrdEj3pz"     # Single track ID from Spotify share URL
@@ -16,4 +15,10 @@ void:
   sort_field: apple_photos # parses Apple Photos album "sequence export" filename numbers
   scale_method: crop
   nsfw: true
-  link_to: main
+hell:
+  title: HELL # NSFW, unlisted - if you find this, you're welcome in
+  description: shiftrequest.art
+  sort_field: date_created
+  sort_reverse: true
+  scale_method: crop
+  nsfw: true

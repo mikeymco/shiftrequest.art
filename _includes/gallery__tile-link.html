@@ -1,23 +1,19 @@
 {% if page.gallery.link_to %}
-  {% assign linked_gallery = site.data.galleries[page.gallery.link_to] %}
-
-  {% if linked_gallery.nsfw %}
-    <button
-      class="gallery__tile gallery__tile-link gallery__tile-link--locked"
-      aria-label="Locked gallery access dialog"
-      role="gridcell"
-      data-link-to="{{ page.gallery.link_to }}"
-    ></button>
-    <!-- :P - Welcome in, curious mind -->
-    {% include gateway__access-panel.html %}
-  {% else %}
-    <a
-      href="../{{ page.gallery.link_to }}/"
-      class="gallery__tile gallery__tile-link"
-      aria-label="Link to {{ linked_gallery.title }} gallery"
-      role="gridcell"
-    >
-      <strong>{{ linked_gallery.title }}</strong>
-    </a>
-  {% endif %}
+  <button
+    class="gallery__tile gallery__tile-link gallery__tile-link--locked"
+    aria-label="Locked gallery access dialog"
+    role="gridcell"
+    data-link-to="{{ page.gallery.link_to }}"
+  ></button>
+  <!-- :P - Welcome in, curious mind -->
+  {% include gateway__access-panel.html %}
+{% else %}
+  <a
+    href="../main"
+    class="gallery__tile gallery__tile-link"
+    aria-label="Link to main gallery"
+    role="gridcell"
+  >
+    <strong>MAIN</strong>
+  </a>
 {% endif %}

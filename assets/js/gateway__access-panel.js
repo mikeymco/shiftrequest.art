@@ -87,10 +87,16 @@ class GalleryAccessPanel {
 		setTimeout(() => {
 			this.submitButton.disabled = false;
 
-			if (code === this.trigger.dataset.linkTo) {
+			// Parse link targets (supports both single string and array)
+			let linkTargets = this.trigger.dataset.linkTo.split(',');
+
+			// Check if code matches any of the target galleries
+			const matchedTarget = linkTargets.find(target => code === target);
+
+			if (matchedTarget) {
 				this.showMessage('💚 Access Granted 😈', 'success');
 				setTimeout(() => {
-					window.location.href = '../' + code;
+					window.location.href = '../' + matchedTarget;
 				}, 1500);
 			} else {
 				this.showMessage('Access denied. This incident will be reported.', 'error');
