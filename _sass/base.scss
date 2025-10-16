@@ -1,5 +1,6 @@
 @import 'mixins/outward-background-wave';
 @import 'mixins/scanline-gradient';
+@import 'mixins/breath-transform';
 @import 'variables';
 
 body {
@@ -54,4 +55,8 @@ input {
 
 :focus-visible {
   outline: $color-bg-soft-dim auto 1px;
+}
+
+.breathe {
+  @include breath-transform(1.02);
 }

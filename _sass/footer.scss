@@ -7,6 +7,7 @@ footer {
 }
 
 .github-link {
+  text-wrap: nowrap;
   &:hover, &:focus {
     text-decoration: underline;
   }
