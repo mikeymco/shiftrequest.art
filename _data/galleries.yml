@@ -2,7 +2,7 @@ main:
   title: MAIN # name used in the navigation bar and headers
   description: shiftrequest.art
   scale_method: crop
-  link_to: void,hell
+  link_to: void,hell,origin
   sort_field: apple_photos # parses Apple Photos album "sequence export" filename numbers
   # sort_reverse: true
   # Optional: Show music embed for this gallery
@@ -22,3 +22,8 @@ hell:
   sort_reverse: true
   scale_method: crop
   nsfw: true
+origin:
+  title: ORIGIN
+  description: shiftrequest.art
+  sort_field: apple_photos
+  scale_method: crop
