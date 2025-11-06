@@ -1,9 +1,9 @@
 main:
   title: MAIN # name used in the navigation bar and headers
   description: shiftrequest.art
+  sort_field: apple_photos # parses Apple Photos album "sequence export" filename numbers
   scale_method: crop
   link_to: void,hell,origin
-  sort_field: apple_photos # parses Apple Photos album "sequence export" filename numbers
   # sort_reverse: true
   # Optional: Show music embed for this gallery
   # music:
@@ -19,11 +19,10 @@ hell:
   title: HELL # NSFW, unlisted - if you find this, you're welcome in
   description: shiftrequest.art
   sort_field: date_created
-  sort_reverse: true
   scale_method: crop
   nsfw: true
 origin:
   title: ORIGIN
   description: shiftrequest.art
-  sort_field: apple_photos
+  sort_field: date_created
   scale_method: crop
