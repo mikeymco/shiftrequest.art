@@ -1,7 +1,7 @@
 main:
   title: MAIN # name used in the navigation bar and headers
   description: shiftrequest.art
-  # sort_field: apple_photos # parses Apple Photos album "sequence export" filename numbers
+  sort_field: apple_photos # parses Apple Photos album "sequence export" filename numbers
   scale_method: crop
   link_to: void,hell,origin
   # sort_reverse: true
