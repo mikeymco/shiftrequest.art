@@ -1,13 +1,4 @@
-{% if page.gallery.link_to %}
-  <button
-    class="gallery__tile gallery__tile-link gallery__tile-link--locked"
-    aria-label="Locked gallery access dialog"
-    role="gridcell"
-    data-link-to="{{ page.gallery.link_to }}"
-  ></button>
-  <!-- :P - Welcome in, curious mind -->
-  {% include gateway__access-panel.html %}
-{% else %}
+{% if page.gallery.link_to == 'main' %}
   <a
     href="../main"
     class="gallery__tile gallery__tile-link"
@@ -16,4 +7,13 @@
   >
     <strong>MAIN</strong>
   </a>
+{% elsif page.gallery.link_to %}
+  <button
+    class="gallery__tile gallery__tile-link gallery__tile-link--locked"
+    aria-label="Locked gallery access dialog"
+    role="gridcell"
+    data-link-to="{{ page.gallery.link_to }}"
+  ></button>
+  <!-- :P - Welcome in, curious mind -->
+  {% include gateway__access-panel.html %}
 {% endif %}
