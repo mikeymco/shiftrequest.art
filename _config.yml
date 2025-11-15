@@ -1,40 +1,13 @@
 # Site settings
 title: shiftrequest
-description: ❤️‍🩹📸❤️‍🔥 - My Domain & Galleries - NinA[rt] + Σ(aspects)
+description: My Domain & Galleries - NinA[rt] + Σ(aspects)
 url: "https://shiftrequest.art"
 baseurl: ""
 
-# Jekyll plugins
-plugins:
-  - jekyll-feed
-  - jekyll-sitemap
-  - jekyll-seo-tag
-
-# Build settings
-markdown: kramdown
-highlighter: rouge
-permalink: /:title/
-
-# Environment (set to production for analytics)
-# JEKYLL_ENV=production bundle exec jekyll build
-environment: development
-
-# Include .well-known directory for Chrome DevTools
-include:
-  - .well-known
-
 # Exclude from processing
 exclude:
+  - README.md
+  - deploy.sh
+  - s3_website.yml
   - Gemfile
   - Gemfile.lock
-  - vendor/
-  - .bundle/
-  - .sass-cache/
-  - .jekyll-cache/
-  - .jekyll-metadata
-
-# Collection settings
-collections:
-  posts:
-    output: true
-    permalink: /:categories/:title/
