@@ -4,6 +4,10 @@ description: My Domain & Galleries - NinA[rt] + Σ(aspects)
 url: "https://shiftrequest.art"
 baseurl: ""
 
+# Include .well-known directory for Chrome DevTools
+include:
+  - .well-known
+
 # Exclude from processing
 exclude:
   - README.md
