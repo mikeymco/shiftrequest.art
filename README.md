@@ -4,7 +4,7 @@ A Jekyll-based art gallery website with automated image processing and gallery g
 
 ## Development
 
-This site is built using Jekyll and can be run locally for development:
+To run locally for development:
 
 ```bash
 # Install dependencies
