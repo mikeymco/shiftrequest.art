@@ -27,7 +27,7 @@ void:
   nsfw: true
 hell:
   title: HELL
-  description: shiftrequest.art
+  description: same-filenames-different-sort
   sort_field: apple_photos
   sort_reverse: true
   scale_method: crop
@@ -35,9 +35,26 @@ hell:
   nsfw: true
 hello:
   title: HELLo
-  description: shiftrequest.art
+  description: same-filenames-different-sort
   sort_field: apple_photos
   sort_reverse: false
   scale_method: crop
   link_to: main
+  nsfw: true
+
+# by request, inaccessible to access panel - ILY
+# NSFW, unlisted, below - if you find this, you're welcome in
+hellyes:
+  title: HELLyes
+  description: quux-snafu-fubarred-baz-bar-foo
+  sort_field: apple_photos
+  scale_method: crop
+  link_to: hellno
+  nsfw: true
+hellno:
+  title: HELLno
+  description: foo-bar-baz-fubarred-snafu-quux
+  sort_field: apple_photos
+  scale_method: crop
+  link_to: hellyes
   nsfw: true
