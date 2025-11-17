@@ -9,6 +9,14 @@ main:
   # music:
     # spotify: "6w0oCUVyKsBq9AtrdEj3pz"     # Single track ID from Spotify share URL
     # soundcloud: "phuturedoom/thebook"     # Track ID from SoundCloud share URL
+origin:
+  title: ORIGIN
+  description: shiftrequest.art
+  sort_field: apple_photos
+  scale_method: crop
+  link_to: main
+  sort_reverse: true
+
 # NSFW, unlisted, below - if you find this, you're welcome in
 void:
   title: VOID
@@ -25,10 +33,3 @@ hell:
   scale_method: crop
   link_to: main
   nsfw: true
-origin:
-  title: ORIGIN
-  description: shiftrequest.art
-  sort_field: apple_photos
-  scale_method: crop
-  link_to: main
-  sort_reverse: true
