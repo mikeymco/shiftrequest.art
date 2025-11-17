@@ -9,17 +9,18 @@ main:
   # music:
     # spotify: "6w0oCUVyKsBq9AtrdEj3pz"     # Single track ID from Spotify share URL
     # soundcloud: "phuturedoom/thebook"     # Track ID from SoundCloud share URL
+# NSFW, unlisted, below - if you find this, you're welcome in
 void:
-  title: VOID # NSFW, unlisted - if you find this, you're welcome in
+  title: VOID
   description: shiftrequest.art
-  sort_field: apple_photos # parses Apple Photos album "sequence export" filename numbers
+  sort_field: apple_photos
   scale_method: crop
   link_to: main
   nsfw: true
 hell:
-  title: HELL # NSFW, unlisted - if you find this, you're welcome in
+  title: HELL
   description: shiftrequest.art
-  sort_field: apple_photos # parses Apple Photos album "sequence export" filename numbers
+  sort_field: apple_photos
   sort_reverse: true
   scale_method: crop
   link_to: main
@@ -27,7 +28,7 @@ hell:
 origin:
   title: ORIGIN
   description: shiftrequest.art
-  sort_field: apple_photos # parses Apple Photos album "sequence export" filename numbers
+  sort_field: apple_photos
   scale_method: crop
   link_to: main
   sort_reverse: true
