@@ -33,3 +33,11 @@ hell:
   scale_method: crop
   link_to: main
   nsfw: true
+hello:
+  title: HELLo
+  description: shiftrequest.art
+  sort_field: apple_photos
+  sort_reverse: false
+  scale_method: crop
+  link_to: main
+  nsfw: true
