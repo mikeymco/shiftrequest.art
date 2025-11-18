@@ -17,7 +17,8 @@ origin:
   link_to: main
   sort_reverse: true
 
-# NSFW, unlisted, below - if you find this, you're welcome in
+# NSFW, unlisted, below
+# if you find this, you're welcome in
 void:
   title: VOID
   description: shiftrequest.art
@@ -27,34 +28,12 @@ void:
   nsfw: true
 hell:
   title: HELL
-  description: same-filenames-different-sort
+  description: aberrant data observed
   sort_field: apple_photos
   sort_reverse: true
   scale_method: crop
   link_to: main
   nsfw: true
-hello:
-  title: HELLo
-  description: same-filenames-different-sort
-  sort_field: apple_photos
-  sort_reverse: false
-  scale_method: crop
-  link_to: main
-  nsfw: true
-
-# by request, inaccessible to access panel - ILY
-# NSFW, unlisted, below - if you find this, you're welcome in
-hellyes:
-  title: HELLyes
-  description: quux-snafu-fubarred-baz-bar-foo
-  sort_field: apple_photos
-  scale_method: crop
-  link_to: hellno
-  nsfw: true
-hellno:
-  title: HELLno
-  description: foo-bar-baz-fubarred-snafu-quux
-  sort_field: apple_photos
-  scale_method: crop
-  link_to: hellyes
-  nsfw: true
+  # anomalies: hell2531.jpeg
+  # sig-files: hell2531.jpeg.sig, thumbs/hell2531.jpeg
+  # reference: hell2531-reference-files/*
