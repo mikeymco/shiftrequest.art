@@ -28,12 +28,16 @@ void:
   nsfw: true
 hell:
   title: HELL
-  description: aberrant data observed
+  description: data abberation observed
   sort_field: apple_photos
   sort_reverse: true
   scale_method: crop
   link_to: main
   nsfw: true
-  # anomalies: hell2531.jpeg
-  # sig-files: hell2531.jpeg.sig, thumbs/hell2531.jpeg
-  # reference: hell2531-reference-files/*
+  # event: hell2531.jpeg
+  # related_files:
+    # hell2531.jpeg.sig
+    # thumbs/hell2531.jpeg
+    # thumbs/hell2531.jpeg.sig
+    # hell2531/IMG_7470.HEIC
+    # hell2531/IMG_7470.HEIC.sig
