@@ -1,7 +1,7 @@
 # Site settings
 title: shiftrequest
 description: My Domain & Galleries - NinA[rt] + Σ(aspects)
-url: "https://shiftrequest.art"
+url: "shiftrequest.art"
 baseurl: ""
 
 # Include .well-known directory for Chrome DevTools
