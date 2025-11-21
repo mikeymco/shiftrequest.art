@@ -11,4 +11,4 @@ INVALIDATION_ID=$(aws cloudfront create-invalidation --distribution-id E1BWJ4WRQ
 
 echo "Created invalidation: $INVALIDATION_ID"
 
-echo "Deployment complete! shiftrequest.art is live & @ bleeding"
+echo "Deployment complete! https://shiftrequest.art"
