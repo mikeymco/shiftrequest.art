@@ -1,6 +1,6 @@
 # shiftrequest.art
 
-A Jekyll-based art gallery website with automated image processing and gallery generation.
+A Jekyll-based art gallery website with image processing and gallery generation.
 
 ## Development
 

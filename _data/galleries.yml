@@ -17,8 +17,7 @@ origin:
   link_to: main
   sort_reverse: true
 
-# NSFW, unlisted, below
-# if you find this, you're welcome in
+# NSFW, unlisted, if you find this, you're welcome in
 void:
   title: VOID
   description: shiftrequest.art
@@ -28,16 +27,9 @@ void:
   nsfw: true
 hell:
   title: HELL
-  description: data abberation observed
+  description: shiftrequest.art
   sort_field: apple_photos
   sort_reverse: true
   scale_method: crop
   link_to: main
   nsfw: true
-  # event: hell2531.jpeg
-  # related_files:
-    # hell2531.jpeg.sig
-    # thumbs/hell2531.jpeg
-    # thumbs/hell2531.jpeg.sig
-    # hell2531/IMG_7470.HEIC
-    # hell2531/IMG_7470.HEIC.sig
